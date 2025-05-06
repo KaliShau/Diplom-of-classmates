@@ -4,6 +4,9 @@
     <Compile Update="Modules\Home\HomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Modules\Inventory\InventoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Modules\SignIn\SignInForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -24,17 +24,16 @@ namespace EduManage.Services.User
             return _repository.Query<UserWithStaffDto>(_sql.signIn, reader => new UserWithStaffDto
             {
                 Id = Convert.ToInt32(reader["ID"]),
-                Login = reader["username"].ToString(),
+                Login = reader["login"].ToString(),
                 Password = reader["password"].ToString(),
                 Role = new RoleDto
                 {
-                    Id = Convert.ToInt32(reader["role_id"]),
                     Name = reader["role_name"].ToString()
                 },
                 StaffInfo = new StaffDto
                 {
-                    FullName = $"{reader["first_name"]} {reader["last_name"]}",
-                    Phone = reader["phone_number"].ToString(),
+                    FullName = $"{reader["full_name"]}",
+                    Phone = reader["phone"].ToString(),
                     Position = reader["position"]?.ToString(),
                     Department = reader["department"]?.ToString(),
                     HireDate = reader["hire_date"] != DBNull.Value ? Convert.ToDateTime(reader["hire_date"]) : DateTime.MinValue,

@@ -21,34 +21,20 @@ namespace EduManage.Shared.Main
         public void SetMainForm(HomeForm homeForm)
         {
             _currentForm = homeForm;
+
         }
 
-        public void OpenForm<TForm>() where TForm : Form
+        public void ClearChildrenPanel(Panel childrenPanel)
         {
-            if (typeof(TForm) == typeof(HomeForm))
-            {
-                if (_currentForm is HomeForm homeForm)
-                {
-                    homeForm.Show();
-                    return;
-                }
-            }
-
-            if (_currentForm is HomeForm)
-            {
-                _currentForm.Hide();
-            }
-            else
-            {
-                _currentForm?.Close();
-            }
-
             _childrenForm?.Close();
 
-            _currentForm = _serviceProvider.GetRequiredService<TForm>();
-
-            _currentForm.Show();
+            _childrenForm.Dock = DockStyle.Fill;
+            _childrenForm.TopLevel = false;
+            _childrenForm.FormBorderStyle = FormBorderStyle.None;
+            childrenPanel.Controls.Clear();
         }
+
+
 
         public void OpenChidrenForm<TForm>(Panel childrenPanel) where TForm : Form
         {

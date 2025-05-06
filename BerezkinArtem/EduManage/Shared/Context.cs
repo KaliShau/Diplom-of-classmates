@@ -10,5 +10,6 @@ namespace EduManage.Shared
     public class Context
     {
         public UserWithStaffDto User { get; set; }
+        public Panel childrenPanel { get; set; }
     }
 }

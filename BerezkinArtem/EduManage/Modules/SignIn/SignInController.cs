@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EduManage.Services.User;
 using EduManage.Shared;
+using EduManage.Shared.Main;
 
 namespace EduManage.Modules.SignIn
 {
@@ -12,10 +13,12 @@ namespace EduManage.Modules.SignIn
     {
         UserService _userService;
         Context _context;
-        public SignInController(UserService userService, Context context)
+        FormManager _formManager;
+        public SignInController(UserService userService, Context context, FormManager formManager)
         {
             _userService = userService;
             _context = context;
+            _formManager = formManager;
         }
 
         public void SignIn(TextBox loginBox, TextBox passwordBox)
@@ -35,6 +38,11 @@ namespace EduManage.Modules.SignIn
             {
                 _context.User = user;
                 MessageBox.Show("Успешный вход!");
+
+                var homeForm = Application.OpenForms.OfType<HomeForm>().FirstOrDefault();
+                homeForm?.UpdateUIAfterLogin();
+
+                _formManager.ClearChildrenPanel(_context.childrenPanel);
             }
 
         }

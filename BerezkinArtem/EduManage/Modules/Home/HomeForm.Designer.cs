@@ -29,21 +29,25 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            groupBox1 = new GroupBox();
+            staffBox = new GroupBox();
+            button1 = new Button();
+            authBox = new GroupBox();
             signinButton = new Button();
             panel4 = new Panel();
             panel2 = new Panel();
             childrenPanel = new Panel();
             label1 = new Label();
             panel1.SuspendLayout();
-            groupBox1.SuspendLayout();
+            staffBox.SuspendLayout();
+            authBox.SuspendLayout();
             childrenPanel.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveCaption;
-            panel1.Controls.Add(groupBox1);
+            panel1.Controls.Add(staffBox);
+            panel1.Controls.Add(authBox);
             panel1.Controls.Add(panel4);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
@@ -51,17 +55,45 @@
             panel1.Size = new Size(218, 690);
             panel1.TabIndex = 0;
             // 
-            // groupBox1
+            // staffBox
             // 
-            groupBox1.Controls.Add(signinButton);
-            groupBox1.Dock = DockStyle.Top;
-            groupBox1.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBox1.Location = new Point(0, 72);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(218, 72);
-            groupBox1.TabIndex = 1;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Авторизация";
+            staffBox.Controls.Add(button1);
+            staffBox.Dock = DockStyle.Top;
+            staffBox.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            staffBox.Location = new Point(0, 144);
+            staffBox.Name = "staffBox";
+            staffBox.Size = new Size(218, 184);
+            staffBox.TabIndex = 2;
+            staffBox.TabStop = false;
+            staffBox.Text = "Техперсонал";
+            staffBox.Visible = false;
+            // 
+            // button1
+            // 
+            button1.BackColor = SystemColors.GradientActiveCaption;
+            button1.Dock = DockStyle.Top;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.Location = new Point(3, 25);
+            button1.Name = "button1";
+            button1.Size = new Size(212, 39);
+            button1.TabIndex = 0;
+            button1.Text = "Инвентарь";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
+            // authBox
+            // 
+            authBox.Controls.Add(signinButton);
+            authBox.Dock = DockStyle.Top;
+            authBox.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            authBox.Location = new Point(0, 72);
+            authBox.Name = "authBox";
+            authBox.Size = new Size(218, 72);
+            authBox.TabIndex = 1;
+            authBox.TabStop = false;
+            authBox.Text = "Авторизация";
             // 
             // signinButton
             // 
@@ -127,7 +159,8 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             panel1.ResumeLayout(false);
-            groupBox1.ResumeLayout(false);
+            staffBox.ResumeLayout(false);
+            authBox.ResumeLayout(false);
             childrenPanel.ResumeLayout(false);
             childrenPanel.PerformLayout();
             ResumeLayout(false);
@@ -140,7 +173,9 @@
         private Panel childrenPanel;
         private Panel panel4;
         private Label label1;
-        private GroupBox groupBox1;
+        private GroupBox authBox;
         private Button signinButton;
+        private GroupBox staffBox;
+        private Button button1;
     }
 }
