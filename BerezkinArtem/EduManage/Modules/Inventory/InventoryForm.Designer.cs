@@ -35,10 +35,11 @@
             openCreateButton = new Button();
             label1 = new Label();
             createPanel = new Panel();
+            drugPanel = new Panel();
+            closeButton = new Button();
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
-            closeButton = new Button();
             createButton = new Button();
             label3 = new Label();
             label2 = new Label();
@@ -53,8 +54,13 @@
             contextMenuStrip1 = new ContextMenuStrip(components);
             deleteToolStripMenuItem = new ToolStripMenuItem();
             updateToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            сменитьСтатусToolStripMenuItem = new ToolStripMenuItem();
+            toolStripStatusBox = new ToolStripComboBox();
+            updateStatusToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)inventoryGrid).BeginInit();
             createPanel.SuspendLayout();
+            drugPanel.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -106,10 +112,10 @@
             // createPanel
             // 
             createPanel.BorderStyle = BorderStyle.FixedSingle;
+            createPanel.Controls.Add(drugPanel);
             createPanel.Controls.Add(label6);
             createPanel.Controls.Add(label5);
             createPanel.Controls.Add(label4);
-            createPanel.Controls.Add(closeButton);
             createPanel.Controls.Add(createButton);
             createPanel.Controls.Add(label3);
             createPanel.Controls.Add(label2);
@@ -123,6 +129,30 @@
             createPanel.Size = new Size(546, 630);
             createPanel.TabIndex = 7;
             createPanel.Visible = false;
+            // 
+            // drugPanel
+            // 
+            drugPanel.Controls.Add(closeButton);
+            drugPanel.Dock = DockStyle.Top;
+            drugPanel.Location = new Point(0, 0);
+            drugPanel.Name = "drugPanel";
+            drugPanel.Size = new Size(544, 32);
+            drugPanel.TabIndex = 6;
+            // 
+            // closeButton
+            // 
+            closeButton.BackColor = SystemColors.ControlLightLight;
+            closeButton.Dock = DockStyle.Right;
+            closeButton.FlatAppearance.BorderSize = 0;
+            closeButton.FlatStyle = FlatStyle.Flat;
+            closeButton.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            closeButton.Location = new Point(509, 0);
+            closeButton.Name = "closeButton";
+            closeButton.Size = new Size(35, 32);
+            closeButton.TabIndex = 5;
+            closeButton.Text = "❌";
+            closeButton.UseVisualStyleBackColor = false;
+            closeButton.Click += closeButton_Click;
             // 
             // label6
             // 
@@ -153,20 +183,6 @@
             label4.Size = new Size(89, 19);
             label4.TabIndex = 5;
             label4.Text = "Количество";
-            // 
-            // closeButton
-            // 
-            closeButton.BackColor = SystemColors.ControlLightLight;
-            closeButton.FlatAppearance.BorderSize = 0;
-            closeButton.FlatStyle = FlatStyle.Flat;
-            closeButton.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            closeButton.Location = new Point(505, 6);
-            closeButton.Name = "closeButton";
-            closeButton.Size = new Size(36, 32);
-            closeButton.TabIndex = 5;
-            closeButton.Text = "❌";
-            closeButton.UseVisualStyleBackColor = false;
-            closeButton.Click += closeButton_Click;
             // 
             // createButton
             // 
@@ -282,23 +298,50 @@
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem, updateToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem, updateToolStripMenuItem, toolStripSeparator1, сменитьСтатусToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(181, 70);
+            contextMenuStrip1.Size = new Size(129, 76);
             // 
             // deleteToolStripMenuItem
             // 
             deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            deleteToolStripMenuItem.Size = new Size(180, 22);
+            deleteToolStripMenuItem.Size = new Size(128, 22);
             deleteToolStripMenuItem.Text = "Удалить";
             deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
             // updateToolStripMenuItem
             // 
             updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            updateToolStripMenuItem.Size = new Size(180, 22);
+            updateToolStripMenuItem.Size = new Size(128, 22);
             updateToolStripMenuItem.Text = "Обновить";
             updateToolStripMenuItem.Click += updateToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(125, 6);
+            // 
+            // сменитьСтатусToolStripMenuItem
+            // 
+            сменитьСтатусToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripStatusBox, updateStatusToolStripMenuItem });
+            сменитьСтатусToolStripMenuItem.Name = "сменитьСтатусToolStripMenuItem";
+            сменитьСтатусToolStripMenuItem.Size = new Size(128, 22);
+            сменитьСтатусToolStripMenuItem.Text = "Статус";
+            // 
+            // toolStripStatusBox
+            // 
+            toolStripStatusBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            toolStripStatusBox.Items.AddRange(new object[] { "Новая", "Нужен ремонт", "Починили", "Утилизация" });
+            toolStripStatusBox.Name = "toolStripStatusBox";
+            toolStripStatusBox.Size = new Size(121, 23);
+            toolStripStatusBox.Sorted = true;
+            // 
+            // updateStatusToolStripMenuItem
+            // 
+            updateStatusToolStripMenuItem.Name = "updateStatusToolStripMenuItem";
+            updateStatusToolStripMenuItem.Size = new Size(181, 22);
+            updateStatusToolStripMenuItem.Text = "Сменить";
+            updateStatusToolStripMenuItem.Click += updateStatusToolStripMenuItem_Click;
             // 
             // InventoryForm
             // 
@@ -319,6 +362,7 @@
             ((System.ComponentModel.ISupportInitialize)inventoryGrid).EndInit();
             createPanel.ResumeLayout(false);
             createPanel.PerformLayout();
+            drugPanel.ResumeLayout(false);
             contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -348,5 +392,11 @@
         private ToolStripMenuItem deleteToolStripMenuItem;
         private Button closeButton;
         private ToolStripMenuItem updateToolStripMenuItem;
+        private Panel drugPanel;
+        private ToolStripComboBox toolStripComboBox1;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem сменитьСтатусToolStripMenuItem;
+        private ToolStripComboBox toolStripStatusBox;
+        private ToolStripMenuItem updateStatusToolStripMenuItem;
     }
 }

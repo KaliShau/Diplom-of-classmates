@@ -48,5 +48,11 @@ namespace EduManage.Services.Inventory
         FROM inventory 
         WHERE id = @id;
         ";
+
+        public string UpdateStatus = @"
+        UPDATE inventory
+        SET status = @status
+        WHERE id = @id;
+        ";
     }
 }

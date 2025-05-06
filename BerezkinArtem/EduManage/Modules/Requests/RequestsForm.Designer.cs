@@ -62,7 +62,6 @@
             deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             deleteToolStripMenuItem.Size = new Size(118, 22);
             deleteToolStripMenuItem.Text = "Удалить";
-            deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
             // searchButton
             // 
@@ -76,6 +75,7 @@
             searchButton.TabIndex = 10;
             searchButton.Text = "Найти";
             searchButton.UseVisualStyleBackColor = false;
+            searchButton.Click += searchButton_Click;
             // 
             // label7
             // 
@@ -161,6 +161,7 @@
             // 
             // inventoryBox
             // 
+            inventoryBox.DropDownStyle = ComboBoxStyle.DropDownList;
             inventoryBox.Font = new Font("Times New Roman", 15.75F);
             inventoryBox.FormattingEnabled = true;
             inventoryBox.Location = new Point(22, 198);

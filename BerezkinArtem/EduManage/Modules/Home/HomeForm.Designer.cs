@@ -29,7 +29,13 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            accountantBox = new GroupBox();
+            button2 = new Button();
+            panel5 = new Panel();
+            openSuppliersButton = new Button();
             staffBox = new GroupBox();
+            openRequestsButton = new Button();
+            panel3 = new Panel();
             button1 = new Button();
             authBox = new GroupBox();
             signinButton = new Button();
@@ -37,9 +43,8 @@
             panel2 = new Panel();
             childrenPanel = new Panel();
             label1 = new Label();
-            panel3 = new Panel();
-            openRequestsButton = new Button();
             panel1.SuspendLayout();
+            accountantBox.SuspendLayout();
             staffBox.SuspendLayout();
             authBox.SuspendLayout();
             childrenPanel.SuspendLayout();
@@ -48,6 +53,7 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveCaption;
+            panel1.Controls.Add(accountantBox);
             panel1.Controls.Add(staffBox);
             panel1.Controls.Add(authBox);
             panel1.Controls.Add(panel4);
@@ -56,6 +62,60 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(218, 690);
             panel1.TabIndex = 0;
+            // 
+            // accountantBox
+            // 
+            accountantBox.Controls.Add(button2);
+            accountantBox.Controls.Add(panel5);
+            accountantBox.Controls.Add(openSuppliersButton);
+            accountantBox.Dock = DockStyle.Top;
+            accountantBox.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            accountantBox.Location = new Point(0, 265);
+            accountantBox.Name = "accountantBox";
+            accountantBox.Size = new Size(218, 121);
+            accountantBox.TabIndex = 3;
+            accountantBox.TabStop = false;
+            accountantBox.Text = "Бухгалтерия";
+            accountantBox.Visible = false;
+            // 
+            // button2
+            // 
+            button2.BackColor = SystemColors.GradientActiveCaption;
+            button2.Dock = DockStyle.Top;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button2.Location = new Point(3, 74);
+            button2.Name = "button2";
+            button2.Size = new Size(212, 39);
+            button2.TabIndex = 2;
+            button2.Text = "Заявки";
+            button2.TextAlign = ContentAlignment.MiddleLeft;
+            button2.UseVisualStyleBackColor = false;
+            // 
+            // panel5
+            // 
+            panel5.Dock = DockStyle.Top;
+            panel5.Location = new Point(3, 64);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(212, 10);
+            panel5.TabIndex = 1;
+            // 
+            // openSuppliersButton
+            // 
+            openSuppliersButton.BackColor = SystemColors.GradientActiveCaption;
+            openSuppliersButton.Dock = DockStyle.Top;
+            openSuppliersButton.FlatAppearance.BorderSize = 0;
+            openSuppliersButton.FlatStyle = FlatStyle.Flat;
+            openSuppliersButton.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            openSuppliersButton.Location = new Point(3, 25);
+            openSuppliersButton.Name = "openSuppliersButton";
+            openSuppliersButton.Size = new Size(212, 39);
+            openSuppliersButton.TabIndex = 0;
+            openSuppliersButton.Text = "Поставщики";
+            openSuppliersButton.TextAlign = ContentAlignment.MiddleLeft;
+            openSuppliersButton.UseVisualStyleBackColor = false;
+            openSuppliersButton.Click += openSuppliersButton_Click;
             // 
             // staffBox
             // 
@@ -66,11 +126,35 @@
             staffBox.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             staffBox.Location = new Point(0, 144);
             staffBox.Name = "staffBox";
-            staffBox.Size = new Size(218, 184);
+            staffBox.Size = new Size(218, 121);
             staffBox.TabIndex = 2;
             staffBox.TabStop = false;
             staffBox.Text = "Техперсонал";
             staffBox.Visible = false;
+            // 
+            // openRequestsButton
+            // 
+            openRequestsButton.BackColor = SystemColors.GradientActiveCaption;
+            openRequestsButton.Dock = DockStyle.Top;
+            openRequestsButton.FlatAppearance.BorderSize = 0;
+            openRequestsButton.FlatStyle = FlatStyle.Flat;
+            openRequestsButton.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            openRequestsButton.Location = new Point(3, 74);
+            openRequestsButton.Name = "openRequestsButton";
+            openRequestsButton.Size = new Size(212, 39);
+            openRequestsButton.TabIndex = 2;
+            openRequestsButton.Text = "Заявки";
+            openRequestsButton.TextAlign = ContentAlignment.MiddleLeft;
+            openRequestsButton.UseVisualStyleBackColor = false;
+            openRequestsButton.Click += openRequestsButton_Click;
+            // 
+            // panel3
+            // 
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(3, 64);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(212, 10);
+            panel3.TabIndex = 1;
             // 
             // button1
             // 
@@ -153,30 +237,6 @@
             label1.TabIndex = 0;
             label1.Text = "Для продолжения войдите в систему!";
             // 
-            // panel3
-            // 
-            panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(3, 64);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(212, 10);
-            panel3.TabIndex = 1;
-            // 
-            // openRequestsButton
-            // 
-            openRequestsButton.BackColor = SystemColors.GradientActiveCaption;
-            openRequestsButton.Dock = DockStyle.Top;
-            openRequestsButton.FlatAppearance.BorderSize = 0;
-            openRequestsButton.FlatStyle = FlatStyle.Flat;
-            openRequestsButton.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            openRequestsButton.Location = new Point(3, 74);
-            openRequestsButton.Name = "openRequestsButton";
-            openRequestsButton.Size = new Size(212, 39);
-            openRequestsButton.TabIndex = 2;
-            openRequestsButton.Text = "Заявки";
-            openRequestsButton.TextAlign = ContentAlignment.MiddleLeft;
-            openRequestsButton.UseVisualStyleBackColor = false;
-            openRequestsButton.Click += openRequestsButton_Click;
-            // 
             // HomeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -189,6 +249,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             panel1.ResumeLayout(false);
+            accountantBox.ResumeLayout(false);
             staffBox.ResumeLayout(false);
             authBox.ResumeLayout(false);
             childrenPanel.ResumeLayout(false);
@@ -209,5 +270,9 @@
         private Button button1;
         private Button openRequestsButton;
         private Panel panel3;
+        private GroupBox accountantBox;
+        private Button button2;
+        private Panel panel5;
+        private Button openSuppliersButton;
     }
 }

@@ -12,6 +12,7 @@
             _controller = controller;
 
             _controller.GetInventory(inventoryGrid);
+
         }
 
         private void openCreateButton_Click(object sender, EventArgs e)
@@ -98,5 +99,21 @@
 
             _controller.GetByIdToUpdate(Convert.ToInt32(_selectedId), nameBox, categoryBox, quantityBox, roomBox, statusBox);
         }
+
+        private void updateStatusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string status = toolStripStatusBox.Text;
+
+            if (string.IsNullOrEmpty(status))
+            {
+                MessageBox.Show("Выберите статус!");
+                return;
+            }
+
+            _controller.ChangeStatus(Convert.ToInt32(_selectedId), status);
+            _controller.GetInventory(inventoryGrid);
+        }
     }
+
+
 }

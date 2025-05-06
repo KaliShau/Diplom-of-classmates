@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EduManage.Services.Inventory;
-using EduManage.Shared.Main;
+﻿using EduManage.Shared.Main;
 using Npgsql;
 
 namespace EduManage.Services.Request
@@ -77,6 +71,26 @@ namespace EduManage.Services.Request
             }).ToArray();
         }
 
+        public RequestDto[] GetAllWithSearch(string searchTerm = null)
+        {
+            NpgsqlParameter[] parameters = new NpgsqlParameter[]
+            {
+        new NpgsqlParameter("@searchTerm", string.IsNullOrEmpty(searchTerm) ? DBNull.Value : searchTerm)
+            };
+
+            return _repository.Query<RequestDto>(_sql.GetAllWithSearch, reader => new RequestDto
+            {
+                Id = Convert.ToInt32(reader["id"]),
+                InventoryId = Convert.ToInt32(reader["inventory_id"]),
+                InventoryName = reader["inventory_name"].ToString(),
+                UserId = Convert.ToInt32(reader["user_id"]),
+                UserName = reader["user_name"].ToString(),
+                Date = Convert.ToDateTime(reader["date"]),
+                Problem = reader["problem"].ToString(),
+                Status = reader["status"].ToString()
+            }, parameters).ToArray();
+        }
+
         public void DeleteRequest(int id)
         {
             NpgsqlParameter[] parameters = new NpgsqlParameter[]
@@ -93,6 +107,32 @@ namespace EduManage.Services.Request
             else
             {
                 MessageBox.Show("Ошибка!");
+            }
+        }
+
+        public void UpdateRequestStatus(int requestId, string newStatus)
+        {
+            try
+            {
+                NpgsqlParameter[] parameters = {
+            new NpgsqlParameter("@requestId", requestId),
+            new NpgsqlParameter("@status", newStatus)
+        };
+
+                int rowsAffected = _repository.Execute(_sql.UpdateStatus, parameters);
+
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show("Статус обновлен!");
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating request status: {ex.Message}");
             }
         }
     }

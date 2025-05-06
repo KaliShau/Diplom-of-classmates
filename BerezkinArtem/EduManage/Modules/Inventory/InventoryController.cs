@@ -71,5 +71,10 @@ namespace EduManage.Modules.Inventory
             roomBox.Text = inventory.Room;
             statusBox.Text = inventory.Status;
         }
+
+        public void ChangeStatus(int id, string status)
+        {
+            _inventoryService.UpdateInventoryStatus(id, status);
+        }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EduManage.Services.Inventory;
+﻿using EduManage.Services.Inventory;
 using EduManage.Services.Request;
 using EduManage.Shared;
 
@@ -40,7 +35,14 @@ namespace EduManage.Modules.Requests
             requestsGrid.DataSource = inventories;
         }
 
-        public void  DeleteRequest(int id)
+        public void GetRequestsSearch(DataGridView requestsGrid, string searchTerm)
+        {
+            var inventories = _requestService.GetAllWithSearch(searchTerm);
+            requestsGrid.AutoGenerateColumns = true;
+            requestsGrid.DataSource = inventories;
+        }
+
+        public void DeleteRequest(int id)
         {
             var request = _requestService.GetById(id);
 
@@ -51,6 +53,37 @@ namespace EduManage.Modules.Requests
             }
 
             _requestService.DeleteRequest(id);
+        }
+
+        public void UpdateStatus(int id, string status)
+        {
+            _requestService.UpdateRequestStatus(id, status);
+        }
+
+        public void AddUpdateStatusToMenuStrip(ContextMenuStrip menu, int id, DataGridView requestsGrid)
+        {
+            menu.Items.Add(new ToolStripSeparator());
+
+            ToolStripMenuItem statusMenu = new ToolStripMenuItem("Статус");
+            menu.Items.Add(statusMenu);
+
+            ToolStripComboBox statusCombo = new ToolStripComboBox("Type Here");
+            statusCombo.Items.AddRange(new string[] { "Новая", "В работе", "Выполнена", "Отклонена" });
+            statusCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            statusMenu.DropDownItems.Add(statusCombo);
+
+            ToolStripMenuItem changeStatusItem = new ToolStripMenuItem("Сменить");
+            changeStatusItem.Click += (sender, e) =>
+            {
+                if (statusCombo.SelectedItem != null)
+                {
+                    string selectedStatus = statusCombo.SelectedItem.ToString();
+                    this.UpdateStatus(id, selectedStatus);
+                    this.GetRequests(requestsGrid);
+                }
+            };
+            statusMenu.DropDownItems.Add(changeStatusItem);
+
         }
     }
 }

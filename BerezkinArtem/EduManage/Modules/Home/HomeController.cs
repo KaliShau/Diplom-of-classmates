@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using EduManage.Modules.Inventory;
 using EduManage.Modules.Requests;
 using EduManage.Modules.SignIn;
+using EduManage.Modules.Suppliers;
 using EduManage.Services.User;
 using EduManage.Shared;
 using EduManage.Shared.Main;
@@ -33,12 +34,17 @@ namespace EduManage.Modules.Home
             _formManger.OpenChidrenForm<InventoryForm>(childrenPanel);
         }
 
+        public void OpenSuppliers(Panel childrenPanel)
+        {
+            _formManger.OpenChidrenForm<SuppliersForm>(childrenPanel);
+        }
+
         public void OpenRequests(Panel childrenPanel)
         {
             _formManger.OpenChidrenForm<RequestsForm>(childrenPanel);
         }
 
-        public void CheckRole(GroupBox authBox, GroupBox staffBox)
+        public void CheckRole(GroupBox authBox, GroupBox staffBox, GroupBox accountantBox)
         {
             string role = _context.User?.Role.Name;
 
@@ -46,9 +52,19 @@ namespace EduManage.Modules.Home
             {
                 authBox.Visible = false;
                 staffBox.Visible = true;
-            } else
+                accountantBox.Visible = true;
+            } 
+            if (role == "Accountant")
             {
-                authBox.Visible = true;
+                authBox.Visible = false;
+                staffBox.Visible = true;
+                accountantBox.Visible = true;
+            }
+            if (role == "Staff")
+            {
+                authBox.Visible = false;
+                staffBox.Visible = true;
+                accountantBox.Visible = false;
             }
 
         }

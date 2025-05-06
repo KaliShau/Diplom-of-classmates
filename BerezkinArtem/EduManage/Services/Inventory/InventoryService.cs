@@ -115,6 +115,33 @@ namespace EduManage.Services.Inventory
                 MessageBox.Show("Ошибка!");
             }
         }
+
+        public void UpdateInventoryStatus(int inventoryId, string newStatus)
+        {
+            NpgsqlParameter[] parameters = new NpgsqlParameter[]
+            {
+        new NpgsqlParameter("@id", inventoryId),
+        new NpgsqlParameter("@status", newStatus)
+            };
+
+            try
+            {
+                int rowsAffected = _repository.Execute(_sql.UpdateStatus, parameters);
+
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show($"Статус инвентаря #{inventoryId} успешно изменен на '{newStatus}'");
+                }
+                else
+                {
+                    MessageBox.Show($"Инвентарь с ID {inventoryId} не найден");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при изменении статуса: {ex.Message}");
+            }
+        }
     }
 }
 

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using EduManage.Shared;
 
 namespace EduManage.Modules.Requests
 {
@@ -14,10 +6,12 @@ namespace EduManage.Modules.Requests
     {
         RequestsController _controller;
         string _selectedId;
-        public RequestsForm(RequestsController controller)
+        Context _context;
+        public RequestsForm(RequestsController controller, Context context)
         {
             InitializeComponent();
             _controller = controller;
+            _context = context;
 
             _controller.GetRequests(requestsGrid);
         }
@@ -62,19 +56,44 @@ namespace EduManage.Modules.Requests
                 if (hitTest.RowIndex >= 0 && hitTest.ColumnIndex >= 0)
                 {
                     requestsGrid.Rows[hitTest.RowIndex].Selected = true;
-
                     _selectedId = requestsGrid.Rows[hitTest.RowIndex].Cells[0].Value?.ToString();
 
+                    contextMenuStrip1.Items.Clear();
+
+                    contextMenuStrip1.Items.Add("Удалить", null, (s, ev) => DeleteRequest());
+
+                    if (_context.User.Role.Name == "Accountant" || _context.User.Role.Name == "Admin")
+                    {
+                        _controller.AddUpdateStatusToMenuStrip(contextMenuStrip1, Convert.ToInt32(_selectedId), requestsGrid);
+                    }
                     contextMenuStrip1.Show(requestsGrid, e.Location);
                 }
             }
         }
 
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+
+
+        private void DeleteRequest()
         {
             _controller.DeleteRequest(Convert.ToInt32(_selectedId));
             _controller.GetRequests(requestsGrid);
             problemBox.Clear();
+
         }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            string searchTerm = searchBox.Text;
+
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                _controller.GetRequests(requestsGrid);
+            }
+            else
+            {
+                _controller.GetRequestsSearch(requestsGrid, searchTerm);
+            }
+        }
+
     }
 }
