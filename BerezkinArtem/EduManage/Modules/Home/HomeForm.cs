@@ -6,7 +6,7 @@ namespace EduManage
     public partial class HomeForm : Form
     {
         HomeController _controller;
-        
+
         public HomeForm(HomeController controller)
         {
             InitializeComponent();
@@ -28,6 +28,11 @@ namespace EduManage
         public void UpdateUIAfterLogin()
         {
             _controller.CheckRole(authBox, staffBox);
+        }
+
+        private void openRequestsButton_Click(object sender, EventArgs e)
+        {
+            _controller.OpenRequests(childrenPanel);
         }
     }
 }

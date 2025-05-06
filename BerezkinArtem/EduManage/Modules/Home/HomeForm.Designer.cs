@@ -37,6 +37,8 @@
             panel2 = new Panel();
             childrenPanel = new Panel();
             label1 = new Label();
+            panel3 = new Panel();
+            openRequestsButton = new Button();
             panel1.SuspendLayout();
             staffBox.SuspendLayout();
             authBox.SuspendLayout();
@@ -57,6 +59,8 @@
             // 
             // staffBox
             // 
+            staffBox.Controls.Add(openRequestsButton);
+            staffBox.Controls.Add(panel3);
             staffBox.Controls.Add(button1);
             staffBox.Dock = DockStyle.Top;
             staffBox.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -80,6 +84,7 @@
             button1.Size = new Size(212, 39);
             button1.TabIndex = 0;
             button1.Text = "Инвентарь";
+            button1.TextAlign = ContentAlignment.MiddleLeft;
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
@@ -107,6 +112,7 @@
             signinButton.Size = new Size(212, 39);
             signinButton.TabIndex = 0;
             signinButton.Text = "Вход";
+            signinButton.TextAlign = ContentAlignment.MiddleLeft;
             signinButton.UseVisualStyleBackColor = false;
             signinButton.Click += signinButton_Click;
             // 
@@ -147,6 +153,30 @@
             label1.TabIndex = 0;
             label1.Text = "Для продолжения войдите в систему!";
             // 
+            // panel3
+            // 
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(3, 64);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(212, 10);
+            panel3.TabIndex = 1;
+            // 
+            // openRequestsButton
+            // 
+            openRequestsButton.BackColor = SystemColors.GradientActiveCaption;
+            openRequestsButton.Dock = DockStyle.Top;
+            openRequestsButton.FlatAppearance.BorderSize = 0;
+            openRequestsButton.FlatStyle = FlatStyle.Flat;
+            openRequestsButton.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            openRequestsButton.Location = new Point(3, 74);
+            openRequestsButton.Name = "openRequestsButton";
+            openRequestsButton.Size = new Size(212, 39);
+            openRequestsButton.TabIndex = 2;
+            openRequestsButton.Text = "Заявки";
+            openRequestsButton.TextAlign = ContentAlignment.MiddleLeft;
+            openRequestsButton.UseVisualStyleBackColor = false;
+            openRequestsButton.Click += openRequestsButton_Click;
+            // 
             // HomeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -177,5 +207,7 @@
         private Button signinButton;
         private GroupBox staffBox;
         private Button button1;
+        private Button openRequestsButton;
+        private Panel panel3;
     }
 }

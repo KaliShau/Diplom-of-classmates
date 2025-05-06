@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EduManage.Modules.Inventory;
+using EduManage.Modules.Requests;
 using EduManage.Modules.SignIn;
 using EduManage.Services.User;
 using EduManage.Shared;
@@ -30,6 +31,11 @@ namespace EduManage.Modules.Home
         public void OpenInventory(Panel childrenPanel)
         {
             _formManger.OpenChidrenForm<InventoryForm>(childrenPanel);
+        }
+
+        public void OpenRequests(Panel childrenPanel)
+        {
+            _formManger.OpenChidrenForm<RequestsForm>(childrenPanel);
         }
 
         public void CheckRole(GroupBox authBox, GroupBox staffBox)
