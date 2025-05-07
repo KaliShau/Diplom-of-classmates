@@ -29,29 +29,33 @@ namespace EduManage.Modules.Inventory
             inventoryGrid.DataSource = inventories;
         }
 
-        public void CreateInventory(TextBox nameBox, TextBox categortBox, TextBox quantityBox, TextBox roomBox, ComboBox statusBox)
+        public void CreateInventory(TextBox nameBox, TextBox categortBox, NumericUpDown quantity, TextBox unitBox, TextBox roomBox, ComboBox statusBox)
         {
-            if (string.IsNullOrEmpty(nameBox.Text) || string.IsNullOrEmpty(categortBox.Text) || string.IsNullOrEmpty(quantityBox.Text) || string.IsNullOrEmpty(roomBox.Text) || string.IsNullOrEmpty(statusBox.Text))
+            if (string.IsNullOrEmpty(nameBox.Text) || string.IsNullOrEmpty(categortBox.Text) || string.IsNullOrEmpty(unitBox.Text) || string.IsNullOrEmpty(roomBox.Text) || string.IsNullOrEmpty(statusBox.Text))
             {
                 MessageBox.Show("Заполните поля!");
                 return;
             }
-            _inventoryService.CreateInventiry(nameBox.Text, categortBox.Text, quantityBox.Text, roomBox.Text, statusBox.Text);
+
+
+
+            _inventoryService.CreateInventiry(nameBox.Text, categortBox.Text, Convert.ToInt16(quantity.Value), unitBox.Text, roomBox.Text, statusBox.Text);
 
             nameBox.Clear();
             categortBox.Clear();
-            quantityBox.Clear();
             roomBox.Clear();
         }
 
-        public void UpdateInventory(int id,TextBox nameBox, TextBox categortBox, TextBox quantityBox, TextBox roomBox, ComboBox statusBox)
+        public void UpdateInventory(int id, TextBox nameBox, TextBox categortBox, NumericUpDown quantity, TextBox unitBox, TextBox roomBox, ComboBox statusBox)
         {
-            if (string.IsNullOrEmpty(nameBox.Text) || string.IsNullOrEmpty(categortBox.Text) || string.IsNullOrEmpty(quantityBox.Text) || string.IsNullOrEmpty(roomBox.Text) || string.IsNullOrEmpty(statusBox.Text))
+            if (string.IsNullOrEmpty(nameBox.Text) || string.IsNullOrEmpty(categortBox.Text) || string.IsNullOrEmpty(unitBox.Text) || string.IsNullOrEmpty(roomBox.Text) || string.IsNullOrEmpty(statusBox.Text))
             {
                 MessageBox.Show("Заполните поля!");
                 return;
             }
-            _inventoryService.UpdateInventiry(id, nameBox.Text, categortBox.Text, quantityBox.Text, roomBox.Text, statusBox.Text);
+
+
+            _inventoryService.UpdateInventiry(id, nameBox.Text, categortBox.Text, Convert.ToInt16(quantity.Value), unitBox.Text, roomBox.Text, statusBox.Text);
 
         }
 
@@ -60,13 +64,15 @@ namespace EduManage.Modules.Inventory
             _inventoryService.DeleteInventory(id);
         }
 
-        public void GetByIdToUpdate(int id, TextBox nameBox, TextBox categortBox, TextBox quantityBox, TextBox roomBox, ComboBox statusBox)
+        public void GetByIdToUpdate(int id, TextBox nameBox, TextBox categortBox, NumericUpDown quantity, TextBox unitBox, TextBox roomBox, ComboBox statusBox)
         {
             var inventory = _inventoryService.GetById(id);  
 
             nameBox.Text = inventory.Name;
             categortBox.Text = inventory.Category;
-            quantityBox.Text = inventory.Quantity;
+            quantity.Value = inventory.Quantity;
+            unitBox.Text = inventory.Unit;
+
             roomBox.Text = inventory.Room;
             statusBox.Text = inventory.Status;
         }

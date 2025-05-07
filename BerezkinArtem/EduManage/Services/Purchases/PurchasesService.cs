@@ -26,7 +26,9 @@ namespace EduManage.Services.Purchases
                 NpgsqlParameter[] parameters = {
                     new NpgsqlParameter("@supplierId", purchase.SupplierId),
                     new NpgsqlParameter("@itemName", purchase.ItemName),
-                    new NpgsqlParameter("@amount", purchase.Amount),
+                    new NpgsqlParameter("@quantity", purchase.Quantity),
+                    new NpgsqlParameter("@unit", purchase.Unit),
+                    new NpgsqlParameter("@status", purchase.Status),
                 };
 
                 var rowsAffected = _repository.Execute(_sql.Create, parameters);
@@ -34,6 +36,32 @@ namespace EduManage.Services.Purchases
                 if (rowsAffected > 0)
                 {
                     MessageBox.Show("Заявка добавлена!");
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при создании закупки: {ex.Message}");
+            }
+        }
+
+        public void UpdateStatus(int id, string status)
+        {
+            try
+            {
+                NpgsqlParameter[] parameters = {
+                    new NpgsqlParameter("@id", id),
+                    new NpgsqlParameter("@status", status),
+                };
+
+                var rowsAffected = _repository.Execute(_sql.UpdateStatus, parameters);
+
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show("Заявка обновлена!");
                 }
                 else
                 {
@@ -54,7 +82,9 @@ namespace EduManage.Services.Purchases
                 SupplierId = Convert.ToInt32(reader["supplier_id"]),
                 SupplierName = reader["supplier_name"].ToString(),
                 ItemName = reader["item_name"].ToString(),
-                Amount = reader["amount"].ToString(),
+                Quantity = Convert.ToInt16(reader["quantity"]),
+                Unit = Convert.ToString(reader["unit"]),
+                Status = Convert.ToString(reader["status"]),
                 Date = Convert.ToDateTime(reader["date"])
             }, new NpgsqlParameter("@id", id)).SingleOrDefault();
         }
@@ -67,7 +97,9 @@ namespace EduManage.Services.Purchases
                 SupplierId = Convert.ToInt32(reader["supplier_id"]),
                 SupplierName = reader["supplier_name"].ToString(),
                 ItemName = reader["item_name"].ToString(),
-                Amount = reader["amount"].ToString(),
+                Quantity = Convert.ToInt16(reader["quantity"]),
+                Unit = Convert.ToString(reader["unit"]),
+                Status = Convert.ToString(reader["status"]),
                 Date = Convert.ToDateTime(reader["date"])
             }).ToArray();
         }
@@ -80,35 +112,14 @@ namespace EduManage.Services.Purchases
                 SupplierId = Convert.ToInt32(reader["supplier_id"]),
                 SupplierName = reader["supplier_name"].ToString(),
                 ItemName = reader["item_name"].ToString(),
-                Amount = reader["amount"].ToString(),
+                Quantity = Convert.ToInt16(reader["quantity"]),
+                Unit = Convert.ToString(reader["unit"]),
+                Status = Convert.ToString(reader["status"]),
                 Date = Convert.ToDateTime(reader["date"])
             }, new NpgsqlParameter("@searchTerm", searchTerm)).ToArray();
         }
 
-        public void UpdatePurchase(PurchaseDto purchase)
-        {
-            try
-            {
-                NpgsqlParameter[] parameters = {
-                    new NpgsqlParameter("@id", purchase.Id),
-                    new NpgsqlParameter("@supplierId", purchase.SupplierId),
-                    new NpgsqlParameter("@itemName", purchase.ItemName),
-                    new NpgsqlParameter("@amount", purchase.Amount),
-                    new NpgsqlParameter("@date", purchase.Date)
-                };
-
-                int rowsAffected = _repository.Execute(_sql.Update, parameters);
-
-                if (rowsAffected > 0)
-                    MessageBox.Show("Закупка успешно обновлена!");
-                else
-                    MessageBox.Show("Не удалось обновить закупку!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при обновлении закупки: {ex.Message}");
-            }
-        }
+        
 
         public void DeletePurchase(int id)
         {

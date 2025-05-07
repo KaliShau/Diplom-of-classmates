@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             inventoryGrid = new DataGridView();
             openCreateButton = new Button();
             label1 = new Label();
             createPanel = new Panel();
+            statusBox = new ComboBox();
             drugPanel = new Panel();
             closeButton = new Button();
             label6 = new Label();
@@ -44,7 +45,7 @@
             label3 = new Label();
             label2 = new Label();
             roomBox = new TextBox();
-            quantityBox = new TextBox();
+            unitBox = new TextBox();
             categoryBox = new TextBox();
             nameBox = new TextBox();
             searchBox = new TextBox();
@@ -57,17 +58,19 @@
             сменитьСтатусToolStripMenuItem = new ToolStripMenuItem();
             toolStripStatusBox = new ToolStripComboBox();
             updateStatusToolStripMenuItem = new ToolStripMenuItem();
-            statusBox = new ComboBox();
+            numericUpDown = new NumericUpDown();
+            label8 = new Label();
             ((System.ComponentModel.ISupportInitialize)inventoryGrid).BeginInit();
             createPanel.SuspendLayout();
             drugPanel.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown).BeginInit();
             SuspendLayout();
             // 
             // inventoryGrid
             // 
-            dataGridViewCellStyle1.BackColor = SystemColors.ControlLightLight;
-            inventoryGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = SystemColors.ControlLightLight;
+            inventoryGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             inventoryGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             inventoryGrid.BackgroundColor = SystemColors.ControlLightLight;
             inventoryGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -77,8 +80,8 @@
             inventoryGrid.Name = "inventoryGrid";
             inventoryGrid.ReadOnly = true;
             inventoryGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.BackColor = SystemColors.GradientActiveCaption;
-            inventoryGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = SystemColors.GradientActiveCaption;
+            inventoryGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
             inventoryGrid.RowTemplate.DefaultCellStyle.BackColor = SystemColors.GradientActiveCaption;
             inventoryGrid.RowTemplate.DefaultCellStyle.ForeColor = Color.Black;
             inventoryGrid.Size = new Size(1032, 539);
@@ -112,16 +115,18 @@
             // createPanel
             // 
             createPanel.BorderStyle = BorderStyle.FixedSingle;
+            createPanel.Controls.Add(numericUpDown);
             createPanel.Controls.Add(statusBox);
             createPanel.Controls.Add(drugPanel);
             createPanel.Controls.Add(label6);
             createPanel.Controls.Add(label5);
+            createPanel.Controls.Add(label8);
             createPanel.Controls.Add(label4);
             createPanel.Controls.Add(createButton);
             createPanel.Controls.Add(label3);
             createPanel.Controls.Add(label2);
             createPanel.Controls.Add(roomBox);
-            createPanel.Controls.Add(quantityBox);
+            createPanel.Controls.Add(unitBox);
             createPanel.Controls.Add(categoryBox);
             createPanel.Controls.Add(nameBox);
             createPanel.Location = new Point(461, 48);
@@ -129,6 +134,17 @@
             createPanel.Size = new Size(546, 630);
             createPanel.TabIndex = 7;
             createPanel.Visible = false;
+            // 
+            // statusBox
+            // 
+            statusBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            statusBox.Font = new Font("Times New Roman", 15.75F);
+            statusBox.FormattingEnabled = true;
+            statusBox.Items.AddRange(new object[] { "Новая", "Нужен ремонт", "Починили", "Утилизация" });
+            statusBox.Location = new Point(22, 329);
+            statusBox.Name = "statusBox";
+            statusBox.Size = new Size(503, 31);
+            statusBox.TabIndex = 10;
             // 
             // drugPanel
             // 
@@ -178,11 +194,11 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(22, 172);
+            label4.Location = new Point(267, 172);
             label4.Name = "label4";
-            label4.Size = new Size(89, 19);
+            label4.Size = new Size(145, 19);
             label4.TabIndex = 5;
-            label4.Text = "Количество";
+            label4.Text = "Единица измерения";
             // 
             // createButton
             // 
@@ -227,14 +243,14 @@
             roomBox.Size = new Size(503, 32);
             roomBox.TabIndex = 4;
             // 
-            // quantityBox
+            // unitBox
             // 
-            quantityBox.BorderStyle = BorderStyle.FixedSingle;
-            quantityBox.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            quantityBox.Location = new Point(22, 196);
-            quantityBox.Name = "quantityBox";
-            quantityBox.Size = new Size(503, 32);
-            quantityBox.TabIndex = 4;
+            unitBox.BorderStyle = BorderStyle.FixedSingle;
+            unitBox.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            unitBox.Location = new Point(267, 196);
+            unitBox.Name = "unitBox";
+            unitBox.Size = new Size(258, 32);
+            unitBox.TabIndex = 4;
             // 
             // categoryBox
             // 
@@ -334,16 +350,23 @@
             updateStatusToolStripMenuItem.Text = "Сменить";
             updateStatusToolStripMenuItem.Click += updateStatusToolStripMenuItem_Click;
             // 
-            // statusBox
+            // numericUpDown
             // 
-            statusBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            statusBox.Font = new Font("Times New Roman", 15.75F);
-            statusBox.FormattingEnabled = true;
-            statusBox.Items.AddRange(new object[] { "Новая", "Нужен ремонт", "Починили", "Утилизация" });
-            statusBox.Location = new Point(22, 329);
-            statusBox.Name = "statusBox";
-            statusBox.Size = new Size(503, 31);
-            statusBox.TabIndex = 10;
+            numericUpDown.Font = new Font("Times New Roman", 15.75F);
+            numericUpDown.Location = new Point(22, 196);
+            numericUpDown.Name = "numericUpDown";
+            numericUpDown.Size = new Size(221, 32);
+            numericUpDown.TabIndex = 8;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(22, 174);
+            label8.Name = "label8";
+            label8.Size = new Size(89, 19);
+            label8.TabIndex = 5;
+            label8.Text = "Количество";
             // 
             // InventoryForm
             // 
@@ -366,6 +389,7 @@
             createPanel.PerformLayout();
             drugPanel.ResumeLayout(false);
             contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)numericUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -382,7 +406,7 @@
         private Label label3;
         private Label label2;
         private TextBox roomBox;
-        private TextBox quantityBox;
+        private TextBox unitBox;
         private TextBox categoryBox;
         private TextBox nameBox;
         private Label label6;
@@ -400,5 +424,7 @@
         private ToolStripComboBox toolStripStatusBox;
         private ToolStripMenuItem updateStatusToolStripMenuItem;
         private ComboBox statusBox;
+        private NumericUpDown numericUpDown;
+        private Label label8;
     }
 }

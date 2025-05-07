@@ -23,7 +23,13 @@ namespace EduManage.Services.Purchases
         public string ItemName { get; set; }
 
         [DisplayName("Количество")]
-        public string Amount { get; set; }
+        public int Quantity { get; set; }
+
+        [DisplayName("Единица измерения")]
+        public string Unit{ get; set; }
+
+        [DisplayName("Статус")]
+        public string Status { get; set; }
 
         [DisplayName("Дата закупки")]
         public DateTime Date { get; set; }

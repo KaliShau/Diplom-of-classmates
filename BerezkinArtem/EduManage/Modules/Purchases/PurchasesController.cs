@@ -1,6 +1,7 @@
 ﻿using EduManage.Services.Inventory;
 using EduManage.Services.Purchases;
 using EduManage.Services.Suppliers;
+using Npgsql;
 
 namespace EduManage.Modules.Purchases
 {
@@ -8,10 +9,12 @@ namespace EduManage.Modules.Purchases
     {
         PurchaseService _purchaseService;
         SuppliersService _suppliersService;
-        public PurchasesController(PurchaseService purchaseService, SuppliersService suppliersService)
+        InventoryService _inventoryService;
+        public PurchasesController(PurchaseService purchaseService, SuppliersService suppliersService, InventoryService inventoryService)
         {
             _purchaseService = purchaseService;
             _suppliersService = suppliersService;
+            _inventoryService = inventoryService;
         }
 
         public void AddSuppliersToComboBox(ComboBox supplierBox)
@@ -21,9 +24,9 @@ namespace EduManage.Modules.Purchases
             supplierBox.ValueMember = "id";
         }
 
-        public void CreatePurchases(TextBox nameBox, TextBox amountBox, ComboBox supplierBox)
+        public void CreatePurchases(TextBox nameBox, NumericUpDown quantitu, TextBox unit, ComboBox supplierBox)
         {
-            if (string.IsNullOrEmpty(nameBox.Text) || string.IsNullOrEmpty(amountBox.Text) || string.IsNullOrEmpty(supplierBox.Text))
+            if (string.IsNullOrEmpty(nameBox.Text) || string.IsNullOrEmpty(unit.Text) || string.IsNullOrEmpty(supplierBox.Text))
             {
                 MessageBox.Show("Заполните поля!");
                 return;
@@ -32,8 +35,10 @@ namespace EduManage.Modules.Purchases
             _purchaseService.CreatePurchase(new PurchaseDto
             {
                 ItemName = nameBox.Text,
-                Amount = amountBox.Text,
-                SupplierId = Convert.ToInt16(supplierBox.SelectedValue)
+                Unit = unit.Text,
+                Quantity = Convert.ToInt32(quantitu.Value),
+                SupplierId = Convert.ToInt16(supplierBox.SelectedValue),
+                Status  = "Новая"
             });
         }
         public void GetPurchases(DataGridView purchasesGrid)
@@ -53,6 +58,24 @@ namespace EduManage.Modules.Purchases
         public void DeletePurchase(int id)
         {
             _purchaseService.DeletePurchase(id);
+        }
+
+        public void AddPurchaseToInventory(int purchaseId) 
+        {
+            var purchase = _purchaseService.GetPurchase(purchaseId);
+
+            var existtingInventory = _inventoryService.GetInventoryByNameAndUnit(purchase.ItemName, purchase.Unit);
+
+            _purchaseService.UpdateStatus(purchase.Id, "Отправлено на склад");
+
+            if (existtingInventory != null)
+            {
+                _inventoryService.UpdateInventiryQuantity(existtingInventory.Id, existtingInventory.Quantity, purchase.Quantity);
+            }
+            else
+            {
+                _inventoryService.CreateInventiry(purchase.ItemName, "Закупка", purchase.Quantity, purchase.Unit,"Склад", "На складе");
+            }
         }
 
     }

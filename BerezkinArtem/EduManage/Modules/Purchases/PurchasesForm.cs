@@ -31,7 +31,7 @@ namespace EduManage.Modules.Purchases
         private void openCreateButton_Click(object sender, EventArgs e)
         {
             nameBox.Clear();
-            amountBox.Clear();
+            unitBox.Clear();
 
             if (createPanel.Visible == true)
             {
@@ -61,7 +61,7 @@ namespace EduManage.Modules.Purchases
 
         private void createButton_Click(object sender, EventArgs e)
         {
-            _controller.CreatePurchases(nameBox, amountBox, supplierBox);
+            _controller.CreatePurchases(nameBox, numericUpDown, unitBox, supplierBox);
             _controller.GetPurchases(purchasesGrid);
         }
 
@@ -85,6 +85,12 @@ namespace EduManage.Modules.Purchases
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _controller.DeletePurchase(Convert.ToInt32(_selectedId));
+            _controller.GetPurchases(purchasesGrid);
+        }
+
+        private void addToInventoruToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.AddPurchaseToInventory(Convert.ToInt32(_selectedId));
             _controller.GetPurchases(purchasesGrid);
         }
     }

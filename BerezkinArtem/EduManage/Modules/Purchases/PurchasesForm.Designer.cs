@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             searchButton = new Button();
             searchBox = new TextBox();
             contextMenuStrip1 = new ContextMenuStrip(components);
@@ -40,19 +40,23 @@
             drugPanel = new Panel();
             closeButton = new Button();
             createButton = new Button();
-            label3 = new Label();
             label2 = new Label();
-            amountBox = new TextBox();
             createPanel = new Panel();
+            numericUpDown = new NumericUpDown();
             supplierBox = new ComboBox();
+            label8 = new Label();
+            label3 = new Label();
             label4 = new Label();
+            unitBox = new TextBox();
             nameBox = new TextBox();
             label1 = new Label();
             openCreateButton = new Button();
             purchasesGrid = new DataGridView();
+            addToInventoruToolStripMenuItem = new ToolStripMenuItem();
             contextMenuStrip1.SuspendLayout();
             drugPanel.SuspendLayout();
             createPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)purchasesGrid).BeginInit();
             SuspendLayout();
             // 
@@ -81,21 +85,21 @@
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem, toolStripSeparator1 });
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem, toolStripSeparator1, addToInventoruToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(181, 54);
+            contextMenuStrip1.Size = new Size(196, 76);
             // 
             // deleteToolStripMenuItem
             // 
             deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            deleteToolStripMenuItem.Size = new Size(180, 22);
+            deleteToolStripMenuItem.Size = new Size(195, 22);
             deleteToolStripMenuItem.Text = "Удалить";
             deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(177, 6);
+            toolStripSeparator1.Size = new Size(192, 6);
             // 
             // label7
             // 
@@ -145,16 +149,6 @@
             createButton.UseVisualStyleBackColor = false;
             createButton.Click += createButton_Click;
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(22, 101);
-            label3.Name = "label3";
-            label3.Size = new Size(89, 19);
-            label3.TabIndex = 5;
-            label3.Text = "Количество";
-            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -165,31 +159,32 @@
             label2.TabIndex = 5;
             label2.Text = "Название";
             // 
-            // amountBox
-            // 
-            amountBox.BorderStyle = BorderStyle.FixedSingle;
-            amountBox.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            amountBox.Location = new Point(22, 125);
-            amountBox.Name = "amountBox";
-            amountBox.Size = new Size(943, 32);
-            amountBox.TabIndex = 4;
-            // 
             // createPanel
             // 
             createPanel.BorderStyle = BorderStyle.FixedSingle;
+            createPanel.Controls.Add(numericUpDown);
             createPanel.Controls.Add(supplierBox);
+            createPanel.Controls.Add(label8);
+            createPanel.Controls.Add(label3);
             createPanel.Controls.Add(label4);
+            createPanel.Controls.Add(unitBox);
             createPanel.Controls.Add(drugPanel);
             createPanel.Controls.Add(createButton);
-            createPanel.Controls.Add(label3);
             createPanel.Controls.Add(label2);
-            createPanel.Controls.Add(amountBox);
             createPanel.Controls.Add(nameBox);
             createPanel.Location = new Point(22, 44);
             createPanel.Name = "createPanel";
             createPanel.Size = new Size(985, 336);
             createPanel.TabIndex = 14;
             createPanel.Visible = false;
+            // 
+            // numericUpDown
+            // 
+            numericUpDown.Font = new Font("Times New Roman", 15.75F);
+            numericUpDown.Location = new Point(22, 128);
+            numericUpDown.Name = "numericUpDown";
+            numericUpDown.Size = new Size(428, 32);
+            numericUpDown.TabIndex = 18;
             // 
             // supplierBox
             // 
@@ -201,6 +196,26 @@
             supplierBox.Size = new Size(943, 31);
             supplierBox.TabIndex = 9;
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(22, 104);
+            label8.Name = "label8";
+            label8.Size = new Size(89, 19);
+            label8.TabIndex = 16;
+            label8.Text = "Количество";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(519, 106);
+            label3.Name = "label3";
+            label3.Size = new Size(145, 19);
+            label3.TabIndex = 17;
+            label3.Text = "Единица измерения";
+            // 
             // label4
             // 
             label4.AutoSize = true;
@@ -210,6 +225,15 @@
             label4.Size = new Size(84, 19);
             label4.TabIndex = 8;
             label4.Text = "Поставщик";
+            // 
+            // unitBox
+            // 
+            unitBox.BorderStyle = BorderStyle.FixedSingle;
+            unitBox.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            unitBox.Location = new Point(519, 128);
+            unitBox.Name = "unitBox";
+            unitBox.Size = new Size(446, 32);
+            unitBox.TabIndex = 15;
             // 
             // nameBox
             // 
@@ -246,8 +270,8 @@
             // 
             // purchasesGrid
             // 
-            dataGridViewCellStyle1.BackColor = SystemColors.ControlLightLight;
-            purchasesGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = SystemColors.ControlLightLight;
+            purchasesGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             purchasesGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             purchasesGrid.BackgroundColor = SystemColors.ControlLightLight;
             purchasesGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -257,13 +281,20 @@
             purchasesGrid.Name = "purchasesGrid";
             purchasesGrid.ReadOnly = true;
             purchasesGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.BackColor = SystemColors.GradientActiveCaption;
-            purchasesGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = SystemColors.GradientActiveCaption;
+            purchasesGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
             purchasesGrid.RowTemplate.DefaultCellStyle.BackColor = SystemColors.GradientActiveCaption;
             purchasesGrid.RowTemplate.DefaultCellStyle.ForeColor = Color.Black;
             purchasesGrid.Size = new Size(1032, 539);
             purchasesGrid.TabIndex = 8;
             purchasesGrid.MouseClick += purchasesGrid_MouseClick;
+            // 
+            // addToInventoruToolStripMenuItem
+            // 
+            addToInventoruToolStripMenuItem.Name = "addToInventoruToolStripMenuItem";
+            addToInventoruToolStripMenuItem.Size = new Size(195, 22);
+            addToInventoruToolStripMenuItem.Text = "Добавить в инвентарь";
+            addToInventoruToolStripMenuItem.Click += addToInventoruToolStripMenuItem_Click;
             // 
             // PurchasesForm
             // 
@@ -285,6 +316,7 @@
             drugPanel.ResumeLayout(false);
             createPanel.ResumeLayout(false);
             createPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)purchasesGrid).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -303,12 +335,10 @@
         private Label label6;
         private Label label5;
         private Button createButton;
-        private Label label3;
         private Label label2;
         private TextBox statusBox;
         private TextBox roomBox;
         private TextBox quantityBox;
-        private TextBox amountBox;
         private Panel createPanel;
         private TextBox nameBox;
         private Label label1;
@@ -316,5 +346,10 @@
         private DataGridView purchasesGrid;
         private ComboBox supplierBox;
         private Label label4;
+        private NumericUpDown numericUpDown;
+        private Label label8;
+        private Label label3;
+        private TextBox unitBox;
+        private ToolStripMenuItem addToInventoruToolStripMenuItem;
     }
 }

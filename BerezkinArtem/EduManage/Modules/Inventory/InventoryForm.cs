@@ -19,7 +19,7 @@
         {
             nameBox.Clear();
             categoryBox.Clear();
-            quantityBox.Clear();
+            unitBox.Clear();
             roomBox.Clear();
 
             if (createPanel.Visible == true)
@@ -38,12 +38,12 @@
         {
             if (_typeAction == Action.Create)
             {
-                _controller.CreateInventory(nameBox, categoryBox, quantityBox, roomBox, statusBox);
+                _controller.CreateInventory(nameBox, categoryBox, numericUpDown, unitBox, roomBox, statusBox);
                 _controller.GetInventory(inventoryGrid);
             }
             if (_typeAction == Action.Update)
             {
-                _controller.UpdateInventory(Convert.ToInt32(_selectedId), nameBox, categoryBox, quantityBox, roomBox, statusBox);
+                _controller.UpdateInventory(Convert.ToInt32(_selectedId), nameBox, categoryBox, numericUpDown, unitBox, roomBox, statusBox);
                 _controller.GetInventory(inventoryGrid);
             }
         }
@@ -96,7 +96,7 @@
             createPanel.Visible = true;
             createButton.Text = "Обновить";
 
-            _controller.GetByIdToUpdate(Convert.ToInt32(_selectedId), nameBox, categoryBox, quantityBox, roomBox, statusBox);
+            _controller.GetByIdToUpdate(Convert.ToInt32(_selectedId), nameBox, categoryBox, numericUpDown, unitBox, roomBox, statusBox);
         }
 
         private void updateStatusToolStripMenuItem_Click(object sender, EventArgs e)

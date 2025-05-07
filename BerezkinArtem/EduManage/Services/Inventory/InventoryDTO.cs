@@ -19,7 +19,10 @@ namespace EduManage.Services.Inventory
         public string Category { get; set; }
 
         [DisplayName("Количество")]
-        public string Quantity { get; set; }
+        public int Quantity { get; set; }
+
+        [DisplayName("Единица измерения")]
+        public string Unit { get; set; }
 
         [DisplayName("Комната")]
         public string? Room { get; set; }
