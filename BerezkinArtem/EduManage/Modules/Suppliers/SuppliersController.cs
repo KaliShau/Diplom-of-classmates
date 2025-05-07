@@ -38,5 +38,17 @@ namespace EduManage.Modules.Suppliers
             suppliersGrid.AutoGenerateColumns = true;
             suppliersGrid.DataSource = suppliers;
         }
+
+        public void GetSuppliersSearch(DataGridView suppliersGrid, string searchTerm)
+        {
+            var suppliers = _suppliersService.GetAllWithSearch(searchTerm);
+            suppliersGrid.AutoGenerateColumns = true;
+            suppliersGrid.DataSource = suppliers;
+        }
+
+        public void DeleteSuplier(int id)
+        {
+            _suppliersService.DeleteSupplier(id);
+        }
     }
 }

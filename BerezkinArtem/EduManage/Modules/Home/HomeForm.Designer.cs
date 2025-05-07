@@ -247,7 +247,7 @@
             Controls.Add(panel1);
             Name = "HomeForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "EduManage";
             panel1.ResumeLayout(false);
             accountantBox.ResumeLayout(false);
             staffBox.ResumeLayout(false);

@@ -166,6 +166,7 @@
             deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             deleteToolStripMenuItem.Size = new Size(118, 22);
             deleteToolStripMenuItem.Text = "Удалить";
+            deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
             // searchButton
             // 
@@ -179,6 +180,7 @@
             searchButton.TabIndex = 17;
             searchButton.Text = "Найти";
             searchButton.UseVisualStyleBackColor = false;
+            searchButton.Click += searchButton_Click;
             // 
             // label7
             // 
@@ -242,6 +244,7 @@
             suppliersGrid.RowTemplate.DefaultCellStyle.ForeColor = Color.Black;
             suppliersGrid.Size = new Size(1032, 539);
             suppliersGrid.TabIndex = 15;
+            suppliersGrid.MouseClick += suppliersGrid_MouseClick;
             // 
             // SuppliersForm
             // 
