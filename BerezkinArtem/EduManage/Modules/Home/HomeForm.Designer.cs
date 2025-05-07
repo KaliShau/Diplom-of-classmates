@@ -29,7 +29,13 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            adminBox = new GroupBox();
+            openUsersButton = new Button();
+            panel8 = new Panel();
+            openRolesButton = new Button();
             accountantBox = new GroupBox();
+            openStaffButton = new Button();
+            panel6 = new Panel();
             openPurchasesButton = new Button();
             panel5 = new Panel();
             openSuppliersButton = new Button();
@@ -44,6 +50,7 @@
             childrenPanel = new Panel();
             label1 = new Label();
             panel1.SuspendLayout();
+            adminBox.SuspendLayout();
             accountantBox.SuspendLayout();
             staffBox.SuspendLayout();
             authBox.SuspendLayout();
@@ -53,6 +60,7 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveCaption;
+            panel1.Controls.Add(adminBox);
             panel1.Controls.Add(accountantBox);
             panel1.Controls.Add(staffBox);
             panel1.Controls.Add(authBox);
@@ -63,8 +71,65 @@
             panel1.Size = new Size(218, 690);
             panel1.TabIndex = 0;
             // 
+            // adminBox
+            // 
+            adminBox.Controls.Add(openUsersButton);
+            adminBox.Controls.Add(panel8);
+            adminBox.Controls.Add(openRolesButton);
+            adminBox.Dock = DockStyle.Top;
+            adminBox.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            adminBox.Location = new Point(0, 435);
+            adminBox.Name = "adminBox";
+            adminBox.Size = new Size(218, 120);
+            adminBox.TabIndex = 4;
+            adminBox.TabStop = false;
+            adminBox.Text = "Администрация";
+            adminBox.Visible = false;
+            // 
+            // openUsersButton
+            // 
+            openUsersButton.BackColor = SystemColors.GradientActiveCaption;
+            openUsersButton.Dock = DockStyle.Top;
+            openUsersButton.FlatAppearance.BorderSize = 0;
+            openUsersButton.FlatStyle = FlatStyle.Flat;
+            openUsersButton.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            openUsersButton.Location = new Point(3, 74);
+            openUsersButton.Name = "openUsersButton";
+            openUsersButton.Size = new Size(212, 39);
+            openUsersButton.TabIndex = 2;
+            openUsersButton.Text = "Пользователи";
+            openUsersButton.TextAlign = ContentAlignment.MiddleLeft;
+            openUsersButton.UseVisualStyleBackColor = false;
+            openUsersButton.Click += openUsersButton_Click;
+            // 
+            // panel8
+            // 
+            panel8.Dock = DockStyle.Top;
+            panel8.Location = new Point(3, 64);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(212, 10);
+            panel8.TabIndex = 1;
+            // 
+            // openRolesButton
+            // 
+            openRolesButton.BackColor = SystemColors.GradientActiveCaption;
+            openRolesButton.Dock = DockStyle.Top;
+            openRolesButton.FlatAppearance.BorderSize = 0;
+            openRolesButton.FlatStyle = FlatStyle.Flat;
+            openRolesButton.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            openRolesButton.Location = new Point(3, 25);
+            openRolesButton.Name = "openRolesButton";
+            openRolesButton.Size = new Size(212, 39);
+            openRolesButton.TabIndex = 0;
+            openRolesButton.Text = "Роли";
+            openRolesButton.TextAlign = ContentAlignment.MiddleLeft;
+            openRolesButton.UseVisualStyleBackColor = false;
+            openRolesButton.Click += openRolesButton_Click;
+            // 
             // accountantBox
             // 
+            accountantBox.Controls.Add(openStaffButton);
+            accountantBox.Controls.Add(panel6);
             accountantBox.Controls.Add(openPurchasesButton);
             accountantBox.Controls.Add(panel5);
             accountantBox.Controls.Add(openSuppliersButton);
@@ -72,11 +137,35 @@
             accountantBox.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             accountantBox.Location = new Point(0, 265);
             accountantBox.Name = "accountantBox";
-            accountantBox.Size = new Size(218, 121);
+            accountantBox.Size = new Size(218, 170);
             accountantBox.TabIndex = 3;
             accountantBox.TabStop = false;
             accountantBox.Text = "Бухгалтерия";
             accountantBox.Visible = false;
+            // 
+            // openStaffButton
+            // 
+            openStaffButton.BackColor = SystemColors.GradientActiveCaption;
+            openStaffButton.Dock = DockStyle.Top;
+            openStaffButton.FlatAppearance.BorderSize = 0;
+            openStaffButton.FlatStyle = FlatStyle.Flat;
+            openStaffButton.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            openStaffButton.Location = new Point(3, 123);
+            openStaffButton.Name = "openStaffButton";
+            openStaffButton.Size = new Size(212, 39);
+            openStaffButton.TabIndex = 4;
+            openStaffButton.Text = "Персонал";
+            openStaffButton.TextAlign = ContentAlignment.MiddleLeft;
+            openStaffButton.UseVisualStyleBackColor = false;
+            openStaffButton.Click += openStaffButton_Click;
+            // 
+            // panel6
+            // 
+            panel6.Dock = DockStyle.Top;
+            panel6.Location = new Point(3, 113);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(212, 10);
+            panel6.TabIndex = 3;
             // 
             // openPurchasesButton
             // 
@@ -250,6 +339,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "EduManage";
             panel1.ResumeLayout(false);
+            adminBox.ResumeLayout(false);
             accountantBox.ResumeLayout(false);
             staffBox.ResumeLayout(false);
             authBox.ResumeLayout(false);
@@ -275,5 +365,11 @@
         private Button openPurchasesButton;
         private Panel panel5;
         private Button openSuppliersButton;
+        private Button openStaffButton;
+        private Panel panel6;
+        private GroupBox adminBox;
+        private Button openUsersButton;
+        private Panel panel8;
+        private Button openRolesButton;
     }
 }

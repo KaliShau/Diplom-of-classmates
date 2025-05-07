@@ -13,10 +13,19 @@
     <Compile Update="Modules\Requests\RequestsForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Modules\Roles\RolesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Modules\SignIn\SignInForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Modules\Staff\StaffForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Modules\Suppliers\SuppliersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Modules\Users\UsersForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

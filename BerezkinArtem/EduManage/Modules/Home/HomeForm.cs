@@ -12,7 +12,7 @@ namespace EduManage
             InitializeComponent();
             _controller = controller;
 
-            _controller.CheckRole(authBox, staffBox, accountantBox);
+            _controller.CheckRole(authBox, staffBox, accountantBox, adminBox);
         }
 
         private void signinButton_Click(object sender, EventArgs e)
@@ -27,7 +27,7 @@ namespace EduManage
 
         public void UpdateUIAfterLogin()
         {
-            _controller.CheckRole(authBox, staffBox, accountantBox);
+            _controller.CheckRole(authBox, staffBox, accountantBox, adminBox);
         }
 
         private void openRequestsButton_Click(object sender, EventArgs e)
@@ -43,6 +43,21 @@ namespace EduManage
         private void openPurchasesButton_Click(object sender, EventArgs e)
         {
             _controller.OpenPurchases(childrenPanel);
+        }
+
+        private void openStaffButton_Click(object sender, EventArgs e)
+        {
+            _controller.OpenStaff(childrenPanel);
+        }
+
+        private void openRolesButton_Click(object sender, EventArgs e)
+        {
+            _controller.OpenRoles(childrenPanel);
+        }
+
+        private void openUsersButton_Click(object sender, EventArgs e)
+        {
+            _controller.OpenUsers(childrenPanel);
         }
     }
 }

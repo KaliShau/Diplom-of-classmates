@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 using EduManage.Modules.Inventory;
 using EduManage.Modules.Purchases;
 using EduManage.Modules.Requests;
+using EduManage.Modules.Roles;
 using EduManage.Modules.SignIn;
+using EduManage.Modules.Staff;
 using EduManage.Modules.Suppliers;
+using EduManage.Modules.Users;
 using EduManage.Services.User;
 using EduManage.Shared;
 using EduManage.Shared.Main;
@@ -44,13 +47,26 @@ namespace EduManage.Modules.Home
         {
             _formManger.OpenChidrenForm<RequestsForm>(childrenPanel);
         }
+        public void OpenUsers(Panel childrenPanel)
+        {
+            _formManger.OpenChidrenForm<UsersForm>(childrenPanel);
+        }
+        public void OpenRoles(Panel childrenPanel)
+        {
+            _formManger.OpenChidrenForm<RolesForm>(childrenPanel);
+        }
 
         public void OpenPurchases(Panel childrenPanel)
         {
             _formManger.OpenChidrenForm<PurchasesForm>(childrenPanel);
         }
 
-        public void CheckRole(GroupBox authBox, GroupBox staffBox, GroupBox accountantBox)
+        public void OpenStaff(Panel childrenPanel)
+        {
+            _formManger.OpenChidrenForm<StaffForm>(childrenPanel);
+        }
+
+        public void CheckRole(GroupBox authBox, GroupBox staffBox, GroupBox accountantBox, GroupBox adminBox)
         {
             string role = _context.User?.Role.Name;
 
@@ -59,18 +75,21 @@ namespace EduManage.Modules.Home
                 authBox.Visible = false;
                 staffBox.Visible = true;
                 accountantBox.Visible = true;
+                adminBox.Visible = true;
             } 
             if (role == "Accountant")
             {
                 authBox.Visible = false;
                 staffBox.Visible = true;
                 accountantBox.Visible = true;
+                adminBox.Visible= false;
             }
             if (role == "Staff")
             {
                 authBox.Visible = false;
                 staffBox.Visible = true;
                 accountantBox.Visible = false;
+                adminBox.Visible= false;
             }
 
         }
