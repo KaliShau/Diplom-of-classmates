@@ -43,7 +43,6 @@
             createButton = new Button();
             label3 = new Label();
             label2 = new Label();
-            statusBox = new TextBox();
             roomBox = new TextBox();
             quantityBox = new TextBox();
             categoryBox = new TextBox();
@@ -58,6 +57,7 @@
             сменитьСтатусToolStripMenuItem = new ToolStripMenuItem();
             toolStripStatusBox = new ToolStripComboBox();
             updateStatusToolStripMenuItem = new ToolStripMenuItem();
+            statusBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)inventoryGrid).BeginInit();
             createPanel.SuspendLayout();
             drugPanel.SuspendLayout();
@@ -112,6 +112,7 @@
             // createPanel
             // 
             createPanel.BorderStyle = BorderStyle.FixedSingle;
+            createPanel.Controls.Add(statusBox);
             createPanel.Controls.Add(drugPanel);
             createPanel.Controls.Add(label6);
             createPanel.Controls.Add(label5);
@@ -119,7 +120,6 @@
             createPanel.Controls.Add(createButton);
             createPanel.Controls.Add(label3);
             createPanel.Controls.Add(label2);
-            createPanel.Controls.Add(statusBox);
             createPanel.Controls.Add(roomBox);
             createPanel.Controls.Add(quantityBox);
             createPanel.Controls.Add(categoryBox);
@@ -217,15 +217,6 @@
             label2.Size = new Size(73, 19);
             label2.TabIndex = 5;
             label2.Text = "Название";
-            // 
-            // statusBox
-            // 
-            statusBox.BorderStyle = BorderStyle.FixedSingle;
-            statusBox.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            statusBox.Location = new Point(22, 331);
-            statusBox.Name = "statusBox";
-            statusBox.Size = new Size(503, 32);
-            statusBox.TabIndex = 4;
             // 
             // roomBox
             // 
@@ -343,6 +334,17 @@
             updateStatusToolStripMenuItem.Text = "Сменить";
             updateStatusToolStripMenuItem.Click += updateStatusToolStripMenuItem_Click;
             // 
+            // statusBox
+            // 
+            statusBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            statusBox.Font = new Font("Times New Roman", 15.75F);
+            statusBox.FormattingEnabled = true;
+            statusBox.Items.AddRange(new object[] { "Новая", "Нужен ремонт", "Починили", "Утилизация" });
+            statusBox.Location = new Point(22, 329);
+            statusBox.Name = "statusBox";
+            statusBox.Size = new Size(503, 31);
+            statusBox.TabIndex = 10;
+            // 
             // InventoryForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -384,7 +386,6 @@
         private TextBox categoryBox;
         private TextBox nameBox;
         private Label label6;
-        private TextBox statusBox;
         private TextBox searchBox;
         private Label label7;
         private Button searchButton;
@@ -398,5 +399,6 @@
         private ToolStripMenuItem сменитьСтатусToolStripMenuItem;
         private ToolStripComboBox toolStripStatusBox;
         private ToolStripMenuItem updateStatusToolStripMenuItem;
+        private ComboBox statusBox;
     }
 }

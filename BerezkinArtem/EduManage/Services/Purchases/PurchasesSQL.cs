@@ -4,7 +4,7 @@
     {
         public string Create = @"
         INSERT INTO purchases (supplier_id, item_name, amount, date)
-        VALUES (@supplierId, @itemName, @amount, @date)
+        VALUES (@supplierId, @itemName, @amount, CURRENT_DATE)
         RETURNING id;
     ";
 

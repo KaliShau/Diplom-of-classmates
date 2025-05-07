@@ -29,7 +29,7 @@ namespace EduManage.Modules.Inventory
             inventoryGrid.DataSource = inventories;
         }
 
-        public void CreateInventory(TextBox nameBox, TextBox categortBox, TextBox quantityBox, TextBox roomBox, TextBox statusBox)
+        public void CreateInventory(TextBox nameBox, TextBox categortBox, TextBox quantityBox, TextBox roomBox, ComboBox statusBox)
         {
             if (string.IsNullOrEmpty(nameBox.Text) || string.IsNullOrEmpty(categortBox.Text) || string.IsNullOrEmpty(quantityBox.Text) || string.IsNullOrEmpty(roomBox.Text) || string.IsNullOrEmpty(statusBox.Text))
             {
@@ -42,10 +42,9 @@ namespace EduManage.Modules.Inventory
             categortBox.Clear();
             quantityBox.Clear();
             roomBox.Clear();
-            statusBox.Clear();
         }
 
-        public void UpdateInventory(int id,TextBox nameBox, TextBox categortBox, TextBox quantityBox, TextBox roomBox, TextBox statusBox)
+        public void UpdateInventory(int id,TextBox nameBox, TextBox categortBox, TextBox quantityBox, TextBox roomBox, ComboBox statusBox)
         {
             if (string.IsNullOrEmpty(nameBox.Text) || string.IsNullOrEmpty(categortBox.Text) || string.IsNullOrEmpty(quantityBox.Text) || string.IsNullOrEmpty(roomBox.Text) || string.IsNullOrEmpty(statusBox.Text))
             {
@@ -61,7 +60,7 @@ namespace EduManage.Modules.Inventory
             _inventoryService.DeleteInventory(id);
         }
 
-        public void GetByIdToUpdate(int id, TextBox nameBox, TextBox categortBox, TextBox quantityBox, TextBox roomBox, TextBox statusBox)
+        public void GetByIdToUpdate(int id, TextBox nameBox, TextBox categortBox, TextBox quantityBox, TextBox roomBox, ComboBox statusBox)
         {
             var inventory = _inventoryService.GetById(id);  
 

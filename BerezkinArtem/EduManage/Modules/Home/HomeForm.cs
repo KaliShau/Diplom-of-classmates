@@ -39,5 +39,10 @@ namespace EduManage
         {
             _controller.OpenSuppliers(childrenPanel);
         }
+
+        private void openPurchasesButton_Click(object sender, EventArgs e)
+        {
+            _controller.OpenPurchases(childrenPanel);
+        }
     }
 }

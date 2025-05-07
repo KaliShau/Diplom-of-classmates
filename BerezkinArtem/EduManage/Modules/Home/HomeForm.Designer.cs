@@ -30,7 +30,7 @@
         {
             panel1 = new Panel();
             accountantBox = new GroupBox();
-            button2 = new Button();
+            openPurchasesButton = new Button();
             panel5 = new Panel();
             openSuppliersButton = new Button();
             staffBox = new GroupBox();
@@ -65,7 +65,7 @@
             // 
             // accountantBox
             // 
-            accountantBox.Controls.Add(button2);
+            accountantBox.Controls.Add(openPurchasesButton);
             accountantBox.Controls.Add(panel5);
             accountantBox.Controls.Add(openSuppliersButton);
             accountantBox.Dock = DockStyle.Top;
@@ -78,20 +78,21 @@
             accountantBox.Text = "Бухгалтерия";
             accountantBox.Visible = false;
             // 
-            // button2
+            // openPurchasesButton
             // 
-            button2.BackColor = SystemColors.GradientActiveCaption;
-            button2.Dock = DockStyle.Top;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.Location = new Point(3, 74);
-            button2.Name = "button2";
-            button2.Size = new Size(212, 39);
-            button2.TabIndex = 2;
-            button2.Text = "Заявки";
-            button2.TextAlign = ContentAlignment.MiddleLeft;
-            button2.UseVisualStyleBackColor = false;
+            openPurchasesButton.BackColor = SystemColors.GradientActiveCaption;
+            openPurchasesButton.Dock = DockStyle.Top;
+            openPurchasesButton.FlatAppearance.BorderSize = 0;
+            openPurchasesButton.FlatStyle = FlatStyle.Flat;
+            openPurchasesButton.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            openPurchasesButton.Location = new Point(3, 74);
+            openPurchasesButton.Name = "openPurchasesButton";
+            openPurchasesButton.Size = new Size(212, 39);
+            openPurchasesButton.TabIndex = 2;
+            openPurchasesButton.Text = "Закупки";
+            openPurchasesButton.TextAlign = ContentAlignment.MiddleLeft;
+            openPurchasesButton.UseVisualStyleBackColor = false;
+            openPurchasesButton.Click += openPurchasesButton_Click;
             // 
             // panel5
             // 
@@ -271,7 +272,7 @@
         private Button openRequestsButton;
         private Panel panel3;
         private GroupBox accountantBox;
-        private Button button2;
+        private Button openPurchasesButton;
         private Panel panel5;
         private Button openSuppliersButton;
     }

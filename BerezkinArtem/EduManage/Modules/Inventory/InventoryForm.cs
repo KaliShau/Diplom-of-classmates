@@ -21,7 +21,6 @@
             categoryBox.Clear();
             quantityBox.Clear();
             roomBox.Clear();
-            statusBox.Clear();
 
             if (createPanel.Visible == true)
             {

@@ -27,7 +27,6 @@ namespace EduManage.Services.Purchases
                     new NpgsqlParameter("@supplierId", purchase.SupplierId),
                     new NpgsqlParameter("@itemName", purchase.ItemName),
                     new NpgsqlParameter("@amount", purchase.Amount),
-                    new NpgsqlParameter("@date", purchase.Date)
                 };
 
                 var rowsAffected = _repository.Execute(_sql.Create, parameters);

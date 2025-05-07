@@ -25,3 +25,4 @@ C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\obj\Debug\ne
 C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\obj\Debug\net8.0-windows\EduManage.Modules.Inventory.InventoryForm.resources
 C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\obj\Debug\net8.0-windows\EduManage.Modules.Requests.RequestsForm.resources
 C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\obj\Debug\net8.0-windows\EduManage.Modules.Suppliers.SuppliersForm.resources
+C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\obj\Debug\net8.0-windows\EduManage.Modules.Purchases.PurchasesForm.resources

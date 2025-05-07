@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EduManage.Modules.Inventory;
+using EduManage.Modules.Purchases;
 using EduManage.Modules.Requests;
 using EduManage.Modules.SignIn;
 using EduManage.Modules.Suppliers;
@@ -42,6 +43,11 @@ namespace EduManage.Modules.Home
         public void OpenRequests(Panel childrenPanel)
         {
             _formManger.OpenChidrenForm<RequestsForm>(childrenPanel);
+        }
+
+        public void OpenPurchases(Panel childrenPanel)
+        {
+            _formManger.OpenChidrenForm<PurchasesForm>(childrenPanel);
         }
 
         public void CheckRole(GroupBox authBox, GroupBox staffBox, GroupBox accountantBox)
