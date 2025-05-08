@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EduManage.Services.Request;
+﻿using System.Windows.Forms;
 using EduManage.Services.Suppliers;
-using System.Windows.Forms;
 
 namespace EduManage.Modules.Suppliers
 {
@@ -47,9 +41,29 @@ namespace EduManage.Modules.Suppliers
             suppliersGrid.DataSource = suppliers;
         }
 
-        public void DeleteSuplier(int id)
+        public void DeleteSupplier(int id)
         {
             _suppliersService.DeleteSupplier(id);
+        }
+
+        public void GetUpdatedSupplier(int id, TextBox nameBox, TextBox contactBox, TextBox phoneBox)
+        {
+            var supplier = _suppliersService.GetById(id);
+
+            nameBox.Text = supplier.Name;
+            contactBox.Text = supplier.Contact;
+            phoneBox.Text = supplier.Phone;
+        }
+
+        public void UpdateSupplier(int id, TextBox nameBox, TextBox contactBox, TextBox phoneBox)
+        {
+            if (string.IsNullOrEmpty(nameBox.Text) || string.IsNullOrEmpty(contactBox.Text) || string.IsNullOrEmpty(phoneBox.Text))
+            {
+                MessageBox.Show("Заполните поля!");
+                return;
+            }
+
+            _suppliersService.UpdateSupplier(new SupplierDto { Id = id, Contact = contactBox.Text, Name = nameBox.Text, Phone = phoneBox.Text });
         }
     }
 }

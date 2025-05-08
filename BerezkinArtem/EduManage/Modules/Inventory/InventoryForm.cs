@@ -1,6 +1,4 @@
-﻿using EduManage.Modules.Home;
-using EduManage.Shared.Main;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace EduManage.Modules.Inventory
@@ -11,6 +9,7 @@ namespace EduManage.Modules.Inventory
         InventoryController _controller;
         string _selectedId;
         Action _typeAction;
+
         public InventoryForm(InventoryController controller)
         {
             InitializeComponent();

@@ -31,8 +31,8 @@ namespace EduManage.Modules.Users
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openCreateButton = new System.Windows.Forms.Button();
             this.createPanel = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
@@ -50,6 +50,7 @@ namespace EduManage.Modules.Users
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.usersGrid = new System.Windows.Forms.DataGridView();
+            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createPanel.SuspendLayout();
             this.drugPanel.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -62,7 +63,7 @@ namespace EduManage.Modules.Users
             this.openCreateButton.FlatAppearance.BorderSize = 0;
             this.openCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.openCreateButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openCreateButton.Location = new System.Drawing.Point(1015, 13);
+            this.openCreateButton.Location = new System.Drawing.Point(1015, 14);
             this.openCreateButton.Name = "openCreateButton";
             this.openCreateButton.Size = new System.Drawing.Size(128, 27);
             this.openCreateButton.TabIndex = 19;
@@ -83,7 +84,7 @@ namespace EduManage.Modules.Users
             this.createPanel.Controls.Add(this.passwordBox);
             this.createPanel.Controls.Add(this.loginBox);
             this.createPanel.Controls.Add(this.staffBox);
-            this.createPanel.Location = new System.Drawing.Point(16, 42);
+            this.createPanel.Location = new System.Drawing.Point(16, 47);
             this.createPanel.Name = "createPanel";
             this.createPanel.Size = new System.Drawing.Size(1127, 445);
             this.createPanel.TabIndex = 21;
@@ -218,21 +219,22 @@ namespace EduManage.Modules.Users
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteToolStripMenuItem.Text = "Удалить";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteToolStripMenuItem});
+            this.deleteToolStripMenuItem,
+            this.updateToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(119, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
             // 
             // usersGrid
             // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.usersGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.usersGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.usersGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.usersGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.usersGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -242,13 +244,20 @@ namespace EduManage.Modules.Users
             this.usersGrid.Name = "usersGrid";
             this.usersGrid.ReadOnly = true;
             this.usersGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.usersGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.usersGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.usersGrid.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.usersGrid.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.usersGrid.Size = new System.Drawing.Size(1155, 626);
             this.usersGrid.TabIndex = 15;
             this.usersGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.usersGrid_MouseClick);
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.updateToolStripMenuItem.Text = "Обновить";
+            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
             // 
             // UsersForm
             // 
@@ -292,5 +301,6 @@ namespace EduManage.Modules.Users
         private Label label4;
         private ComboBox roleBox;
         private Label label8;
+        private ToolStripMenuItem updateToolStripMenuItem;
     }
 }

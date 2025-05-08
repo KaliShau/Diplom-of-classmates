@@ -29,13 +29,11 @@
 
         public string Update = @"
             UPDATE staff
-            SET user_id = @user_id,
-                full_name = @full_name,
+            SET full_name = @full_name,
                 position = @position,
                 department = @department,
                 phone = @phone,
-                hire_date = @hire_date,
-                is_active = @is_active
+                hire_date = @hire_date
             WHERE id = @id;
         ";
 

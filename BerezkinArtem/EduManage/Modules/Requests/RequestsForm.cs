@@ -4,11 +4,14 @@ using EduManage.Shared;
 
 namespace EduManage.Modules.Requests
 {
+    enum Action { Update, Create }
     public partial class RequestsForm : Form
     {
         RequestsController _controller;
         string _selectedId;
         Context _context;
+        Action _typeAction;
+
         public RequestsForm(RequestsController controller, Context context)
         {
             InitializeComponent();
@@ -16,6 +19,7 @@ namespace EduManage.Modules.Requests
             _context = context;
 
             _controller.GetRequests(requestsGrid);
+            _controller.AddInventoryToComboBox(inventoryBox);
         }
 
         private void openCreateButton_Click(object sender, EventArgs e)
@@ -26,7 +30,9 @@ namespace EduManage.Modules.Requests
             }
             else
             {
-                _controller.AddInventoryToComboBox(inventoryBox);
+                problemBox.Clear();
+
+                _typeAction = Action.Create;
                 createPanel.Visible = true;
                 createButton.Text = "Добавить";
             }
@@ -39,14 +45,18 @@ namespace EduManage.Modules.Requests
 
         private void createButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(problemBox.Text))
+            if (_typeAction == Action.Create)
             {
-                MessageBox.Show("Заполните поля!");
-                return;
 
-            }
-            _controller.CreateRequests(Convert.ToInt16(inventoryBox.SelectedValue), problemBox.Text);
+            _controller.CreateRequests(problemBox, inventoryBox);
             _controller.GetRequests(requestsGrid);
+            }
+
+            if (_typeAction == Action.Update)
+            {
+                _controller.UpdateRequest(Convert.ToInt32(_selectedId), problemBox, inventoryBox);
+                _controller.GetRequests(requestsGrid);
+            }
         }
 
         private void requestsGrid_MouseClick(object sender, MouseEventArgs e)
@@ -63,6 +73,7 @@ namespace EduManage.Modules.Requests
                     contextMenuStrip1.Items.Clear();
 
                     contextMenuStrip1.Items.Add("Удалить", null, (s, ev) => DeleteRequest());
+                    contextMenuStrip1.Items.Add("Обновить", null, (s, ev) => UpdateRequest());
 
                     if (_context.User.Role.Name == "Accountant" || _context.User.Role.Name == "Admin")
                     {
@@ -73,14 +84,28 @@ namespace EduManage.Modules.Requests
             }
         }
 
-
-
         private void DeleteRequest()
         {
             _controller.DeleteRequest(Convert.ToInt32(_selectedId));
             _controller.GetRequests(requestsGrid);
             problemBox.Clear();
 
+        }
+        private void UpdateRequest()
+        {
+            if (createPanel.Visible == true)
+            {
+                createPanel.Visible = false;
+            }
+            else
+            {
+                problemBox.Clear();
+
+                _controller.GetUpdatedRequest(Convert.ToInt32(_selectedId), problemBox, inventoryBox);
+                _typeAction = Action.Update;
+                createPanel.Visible = true;
+                createButton.Text = "Обновить";
+            }
         }
 
         private void searchButton_Click(object sender, EventArgs e)
@@ -96,6 +121,5 @@ namespace EduManage.Modules.Requests
                 _controller.GetRequestsSearch(requestsGrid, searchTerm);
             }
         }
-
     }
 }

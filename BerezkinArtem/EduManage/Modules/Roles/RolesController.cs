@@ -1,6 +1,5 @@
-﻿using EduManage.Services.Role;
-using EduManage.Services.Staff;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using EduManage.Services.Role;
 
 namespace EduManage.Modules.Roles
 {
@@ -28,12 +27,31 @@ namespace EduManage.Modules.Roles
                 return;
             }
 
-            _roleService.CreateRole(new RoleDto{ Name = nameBox.Text, Description = descriptionBox.Text});
+            _roleService.CreateRole(new RoleDto { Name = nameBox.Text, Description = descriptionBox.Text });
         }
 
         public void DeleteRole(int id)
         {
             _roleService.DeleteRole(id);
+        }
+
+        public void GetUpdatedRole(int id, TextBox nameBox, TextBox descriptionBox)
+        {
+            var role = _roleService.GetRole(id);
+
+            nameBox.Text = role.Name;
+            descriptionBox.Text = role.Description;
+        }
+
+        public void UpdateRole(int id, TextBox nameBox, TextBox descriptionBox)
+        {
+            if (string.IsNullOrEmpty(nameBox.Text) || string.IsNullOrEmpty(descriptionBox.Text))
+            {
+                MessageBox.Show("Заполните поля!");
+                return;
+            }
+
+            _roleService.UpdateRole(new RoleDto { Id = id, Name = nameBox.Text, Description = descriptionBox.Text });
         }
     }
 }

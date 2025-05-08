@@ -50,6 +50,7 @@ namespace EduManage.Modules.Suppliers
             this.label1 = new System.Windows.Forms.Label();
             this.openCreateButton = new System.Windows.Forms.Button();
             this.suppliersGrid = new System.Windows.Forms.DataGridView();
+            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createPanel.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.suppliersGrid)).BeginInit();
@@ -66,7 +67,7 @@ namespace EduManage.Modules.Suppliers
             this.createPanel.Controls.Add(this.nameBox);
             this.createPanel.Controls.Add(this.closeButton);
             this.createPanel.Controls.Add(this.createButton);
-            this.createPanel.Location = new System.Drawing.Point(648, 49);
+            this.createPanel.Location = new System.Drawing.Point(648, 47);
             this.createPanel.Name = "createPanel";
             this.createPanel.Size = new System.Drawing.Size(495, 364);
             this.createPanel.TabIndex = 21;
@@ -98,9 +99,9 @@ namespace EduManage.Modules.Suppliers
             this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(26, 10);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 19);
+            this.label4.Size = new System.Drawing.Size(77, 19);
             this.label4.TabIndex = 13;
-            this.label4.Text = "Имя";
+            this.label4.Text = "Название ";
             // 
             // phoneBox
             // 
@@ -160,14 +161,15 @@ namespace EduManage.Modules.Suppliers
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteToolStripMenuItem});
+            this.deleteToolStripMenuItem,
+            this.updateToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(119, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteToolStripMenuItem.Text = "Удалить";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -220,7 +222,7 @@ namespace EduManage.Modules.Suppliers
             this.openCreateButton.FlatAppearance.BorderSize = 0;
             this.openCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.openCreateButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openCreateButton.Location = new System.Drawing.Point(1015, 17);
+            this.openCreateButton.Location = new System.Drawing.Point(1015, 14);
             this.openCreateButton.Name = "openCreateButton";
             this.openCreateButton.Size = new System.Drawing.Size(128, 27);
             this.openCreateButton.TabIndex = 19;
@@ -248,6 +250,13 @@ namespace EduManage.Modules.Suppliers
             this.suppliersGrid.Size = new System.Drawing.Size(1155, 626);
             this.suppliersGrid.TabIndex = 15;
             this.suppliersGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.suppliersGrid_MouseClick);
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.updateToolStripMenuItem.Text = "Обновить";
+            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
             // 
             // SuppliersForm
             // 
@@ -293,5 +302,6 @@ namespace EduManage.Modules.Suppliers
         private TextBox phoneBox;
         private TextBox contactBox;
         private TextBox nameBox;
+        private ToolStripMenuItem updateToolStripMenuItem;
     }
 }

@@ -56,6 +56,10 @@ namespace EduManage.Modules.Purchases
             this.label1 = new System.Windows.Forms.Label();
             this.openCreateButton = new System.Windows.Forms.Button();
             this.purchasesGrid = new System.Windows.Forms.DataGridView();
+            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.статусToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateStatustoolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.updateStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.drugPanel.SuspendLayout();
             this.createPanel.SuspendLayout();
@@ -90,10 +94,12 @@ namespace EduManage.Modules.Purchases
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem,
+            this.updateToolStripMenuItem,
             this.toolStripSeparator1,
-            this.addToInventoruToolStripMenuItem});
+            this.addToInventoruToolStripMenuItem,
+            this.статусToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(196, 54);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(196, 120);
             // 
             // deleteToolStripMenuItem
             // 
@@ -185,7 +191,7 @@ namespace EduManage.Modules.Purchases
             this.createPanel.Controls.Add(this.createButton);
             this.createPanel.Controls.Add(this.label2);
             this.createPanel.Controls.Add(this.nameBox);
-            this.createPanel.Location = new System.Drawing.Point(16, 40);
+            this.createPanel.Location = new System.Drawing.Point(20, 47);
             this.createPanel.Name = "createPanel";
             this.createPanel.Size = new System.Drawing.Size(1127, 291);
             this.createPanel.TabIndex = 14;
@@ -273,7 +279,7 @@ namespace EduManage.Modules.Purchases
             this.openCreateButton.FlatAppearance.BorderSize = 0;
             this.openCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.openCreateButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openCreateButton.Location = new System.Drawing.Point(1014, 11);
+            this.openCreateButton.Location = new System.Drawing.Point(1015, 14);
             this.openCreateButton.Name = "openCreateButton";
             this.openCreateButton.Size = new System.Drawing.Size(128, 27);
             this.openCreateButton.TabIndex = 12;
@@ -301,6 +307,39 @@ namespace EduManage.Modules.Purchases
             this.purchasesGrid.Size = new System.Drawing.Size(1155, 626);
             this.purchasesGrid.TabIndex = 8;
             this.purchasesGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.purchasesGrid_MouseClick);
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.updateToolStripMenuItem.Text = "Обновить";
+            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
+            // 
+            // статусToolStripMenuItem
+            // 
+            this.статусToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.updateStatustoolStripComboBox,
+            this.updateStatusToolStripMenuItem});
+            this.статусToolStripMenuItem.Name = "статусToolStripMenuItem";
+            this.статусToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.статусToolStripMenuItem.Text = "Статус";
+            // 
+            // updateStatustoolStripComboBox
+            // 
+            this.updateStatustoolStripComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.updateStatustoolStripComboBox.Items.AddRange(new object[] {
+            "Новая",
+            "Отклонена",
+            "Отправлено на склад"});
+            this.updateStatustoolStripComboBox.Name = "updateStatustoolStripComboBox";
+            this.updateStatustoolStripComboBox.Size = new System.Drawing.Size(121, 23);
+            // 
+            // updateStatusToolStripMenuItem
+            // 
+            this.updateStatusToolStripMenuItem.Name = "updateStatusToolStripMenuItem";
+            this.updateStatusToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.updateStatusToolStripMenuItem.Text = "Обновить";
+            this.updateStatusToolStripMenuItem.Click += new System.EventHandler(this.updateStatusToolStripMenuItem_Click);
             // 
             // PurchasesForm
             // 
@@ -358,5 +397,9 @@ namespace EduManage.Modules.Purchases
         private Label label3;
         private TextBox unitBox;
         private ToolStripMenuItem addToInventoruToolStripMenuItem;
+        private ToolStripMenuItem updateToolStripMenuItem;
+        private ToolStripMenuItem статусToolStripMenuItem;
+        private ToolStripComboBox updateStatustoolStripComboBox;
+        private ToolStripMenuItem updateStatusToolStripMenuItem;
     }
 }

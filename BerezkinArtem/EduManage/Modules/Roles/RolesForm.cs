@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EduManage.Modules.Roles
 {
+    enum Action { Update, Create }
     public partial class RolesForm : Form
     {
         RolesController _controller;
         string _selectedId;
+        Action _typeAction;
+
         public RolesForm(RolesController controller)
         {
             InitializeComponent();
@@ -29,6 +25,8 @@ namespace EduManage.Modules.Roles
 
         private void openCreateButton_Click(object sender, EventArgs e)
         {
+            nameBox.Clear();
+            descriptionBox.Clear();
 
             if (createPanel.Visible == true)
             {
@@ -36,6 +34,7 @@ namespace EduManage.Modules.Roles
             }
             else
             {
+                _typeAction = Action.Create;
                 createPanel.Visible = true;
                 createButton.Text = "Добавить";
             }
@@ -43,8 +42,17 @@ namespace EduManage.Modules.Roles
 
         private void createButton_Click(object sender, EventArgs e)
         {
-            _controller.CreateRole(nameBox, descriptionBox);
-            _controller.GetRoles(rolesGrid);
+            if (_typeAction == Action.Create)
+            {
+
+                _controller.CreateRole(nameBox, descriptionBox);
+                _controller.GetRoles(rolesGrid);
+            }
+            if (_typeAction == Action.Update)
+            {
+                _controller.UpdateRole(Convert.ToInt32(_selectedId), nameBox, descriptionBox);
+                _controller.GetRoles(rolesGrid);
+            }
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -67,6 +75,25 @@ namespace EduManage.Modules.Roles
 
                     contextMenuStrip1.Show(rolesGrid, e.Location);
                 }
+            }
+        }
+
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            nameBox.Clear();
+            descriptionBox.Clear();
+
+            if (createPanel.Visible == true)
+            {
+                createPanel.Visible = false;
+            }
+            else
+            {
+                _controller.GetUpdatedRole(Convert.ToInt32(_selectedId), nameBox, descriptionBox);
+
+                _typeAction = Action.Update;
+                createPanel.Visible = true;
+                createButton.Text = "Обновить";
             }
         }
     }

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 using EduManage.Shared.Main;
 using Npgsql;
-using System.Windows.Forms;
 
 
 namespace EduManage.Services.Staff
@@ -60,7 +57,7 @@ namespace EduManage.Services.Staff
                     new NpgsqlParameter("@department", staff.Department),
                     new NpgsqlParameter("@phone", staff.Phone ?? (object)DBNull.Value),
                     new NpgsqlParameter("@hire_date", staff.HireDate),
-                    new NpgsqlParameter("@is_active", staff.IsActive)
+                    new NpgsqlParameter("@id", staff.Id)
                 };
 
                 var rowsAffected = _repository.Execute(_sql.Update, parameters);
@@ -80,7 +77,7 @@ namespace EduManage.Services.Staff
             }
         }
 
-        public StaffDto GetStaff(int id)
+        public StaffDto GetStaffById(int id)
         {
             return _repository.Query<StaffDto>(_sql.GetById, reader => new StaffDto
             {

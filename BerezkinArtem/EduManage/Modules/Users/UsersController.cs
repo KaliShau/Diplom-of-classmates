@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EduManage.Services.Inventory;
-using EduManage.Services.Request;
+using System.Windows.Forms;
 using EduManage.Services.Role;
 using EduManage.Services.Staff;
 using EduManage.Services.User;
-using EduManage.Shared;
-using System.Windows.Forms;
 
 namespace EduManage.Modules.Users
 {
@@ -18,13 +11,11 @@ namespace EduManage.Modules.Users
         UserService _userService;
         RoleService _roleService;
         StaffService _staffService;
-        Context _context;
-        public UsersController(Context context, UserService userService, RoleService roleService, StaffService staffService)
+        public UsersController(UserService userService, RoleService roleService, StaffService staffService)
         {
             _userService = userService;
             _roleService = roleService;
             _staffService = staffService;
-            _context = context;
         }
 
         public void AddRolesToComboBox(ComboBox rolesBox)
@@ -49,23 +40,38 @@ namespace EduManage.Modules.Users
                 return;
             }
 
-            _userService.CreateUser(new UserCreateDto{Login = loginBox.Text, Password = passwordBox.Text, RoleId = Convert.ToInt16(roleBox.SelectedValue), StaffId = Convert.ToInt16(staffBox.SelectedValue) });
+            _userService.CreateUser(new UserCreateDto { Login = loginBox.Text, Password = passwordBox.Text, RoleId = Convert.ToInt16(roleBox.SelectedValue), StaffId = Convert.ToInt16(staffBox.SelectedValue) });
         }
-
         public void GetUsers(DataGridView usersGrid)
         {
             var users = _userService.GetAll();
             usersGrid.AutoGenerateColumns = true;
             usersGrid.DataSource = users;
         }
-
-        
-
         public void DeleteRequest(int id)
         {
             _userService.DeleteUser(id);
         }
 
-        
+        public void GetUpdatedUser(int id, TextBox loginBox, TextBox passwordBox, ComboBox roleBox, ComboBox staffBox)
+        {
+            var user = _userService.GetById(id);
+
+            loginBox.Text = user.Login;
+            passwordBox.Text = user.Password;
+            roleBox.SelectedValue = user.RoleId;
+            staffBox.SelectedValue = user.StaffId;
+        }
+
+        public void UpdateUser(int id, TextBox loginBox, TextBox passwordBox, ComboBox roleBox, ComboBox staffBox)
+        {
+            if (string.IsNullOrEmpty(loginBox.Text) || string.IsNullOrEmpty(passwordBox.Text) || string.IsNullOrEmpty(roleBox.Text) || string.IsNullOrEmpty(staffBox.Text))
+            {
+                MessageBox.Show("Заполните поля!");
+                return;
+            }
+
+            _userService.UpdateUser(new UserUpdateDto { Id = id, Login = loginBox.Text, Password = passwordBox.Text, RoleId = Convert.ToInt32(roleBox.SelectedValue), StaffId = Convert.ToInt32(staffBox.SelectedValue) });
+        }
     }
 }

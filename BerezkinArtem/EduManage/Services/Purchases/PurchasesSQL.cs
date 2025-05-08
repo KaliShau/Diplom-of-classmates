@@ -29,8 +29,7 @@
         SET supplier_id = @supplierId,
             item_name = @itemName,
             quantity = @quantity,
-            unit = @unit,
-            date = @date
+            unit = @unit
         WHERE id = @id;
     ";
 

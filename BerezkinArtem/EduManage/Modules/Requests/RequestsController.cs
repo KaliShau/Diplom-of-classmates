@@ -1,6 +1,7 @@
 ﻿using EduManage.Services.Inventory;
 using EduManage.Services.Request;
 using EduManage.Shared;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -25,9 +26,16 @@ namespace EduManage.Modules.Requests
             inventoruBox.ValueMember = "id";
         }
 
-        public void CreateRequests(int inventoryId, string problem)
+        public void CreateRequests(TextBox problemBox, ComboBox inventoryBox)
         {
-            _requestService.CreateRequest(inventoryId, _context.User.Id, problem);
+            if (string.IsNullOrEmpty(problemBox.Text) || string.IsNullOrEmpty(inventoryBox.Text))
+            {
+                MessageBox.Show("Заполните поля!");
+                return;
+
+            }
+
+            _requestService.CreateRequest(Convert.ToInt32(inventoryBox.SelectedValue), _context.User.Id, problemBox.Text);
         }
 
         public void GetRequests(DataGridView requestsGrid)
@@ -86,6 +94,24 @@ namespace EduManage.Modules.Requests
             };
             statusMenu.DropDownItems.Add(changeStatusItem);
 
+        }
+
+        public void GetUpdatedRequest(int id, TextBox problemBox, ComboBox inventoryBox)
+        {
+            var request = _requestService.GetById(id);
+
+            problemBox.Text = request.Problem;
+            inventoryBox.SelectedValue = request.InventoryId;
+        }
+
+        public void UpdateRequest(int id, TextBox problemBox, ComboBox inventoryBox)
+        {
+            if (string.IsNullOrEmpty(problemBox.Text) || string.IsNullOrEmpty(inventoryBox.Text))
+            {
+                MessageBox.Show("Заполните поля!");
+            }
+
+            _requestService.UpdateRequest(id, problemBox.Text, Convert.ToInt32(inventoryBox.SelectedValue));
         }
     }
 }

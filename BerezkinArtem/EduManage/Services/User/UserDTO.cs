@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EduManage.Services.Role;
 using EduManage.Services.Staff;
 
@@ -63,14 +59,12 @@ namespace EduManage.Services.User
         [DisplayName("Пароль")]
         public string Password { get; set; }
 
-        // Role fields
         [DisplayName("ID роли")]
         public int RoleId { get; set; }
 
         [DisplayName("Роль")]
         public string RoleName { get; set; }
 
-        // Staff fields
         [DisplayName("ID сотрудника")]
         public int? StaffId { get; set; }
 
@@ -91,5 +85,14 @@ namespace EduManage.Services.User
 
         [DisplayName("Активен")]
         public bool? StaffIsActive { get; set; }
+    }
+
+    public class UserUpdateDto
+    {
+        public int Id { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public int RoleId { get; set; }
+        public int? StaffId { get; set; }
     }
 }

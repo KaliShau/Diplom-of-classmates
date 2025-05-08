@@ -1,9 +1,8 @@
-﻿using EduManage.Services.Inventory;
+﻿using System;
+using System.Windows.Forms;
+using EduManage.Services.Inventory;
 using EduManage.Services.Purchases;
 using EduManage.Services.Suppliers;
-using Npgsql;
-using System;
-using System.Windows.Forms;
 
 namespace EduManage.Modules.Purchases
 {
@@ -40,7 +39,7 @@ namespace EduManage.Modules.Purchases
                 Unit = unit.Text,
                 Quantity = Convert.ToInt32(quantitu.Value),
                 SupplierId = Convert.ToInt16(supplierBox.SelectedValue),
-                Status  = "Новая"
+                Status = "Новая"
             });
         }
         public void GetPurchases(DataGridView purchasesGrid)
@@ -62,7 +61,7 @@ namespace EduManage.Modules.Purchases
             _purchaseService.DeletePurchase(id);
         }
 
-        public void AddPurchaseToInventory(int purchaseId) 
+        public void AddPurchaseToInventory(int purchaseId)
         {
             var purchase = _purchaseService.GetPurchase(purchaseId);
 
@@ -76,9 +75,40 @@ namespace EduManage.Modules.Purchases
             }
             else
             {
-                _inventoryService.CreateInventiry(purchase.ItemName, "Закупка", purchase.Quantity, purchase.Unit,"Склад", "На складе");
+                _inventoryService.CreateInventiry(purchase.ItemName, "Закупка", purchase.Quantity, purchase.Unit, "Склад", "На складе");
             }
         }
 
+        public void GetUpdatedPurchase(int id, TextBox nameBox, NumericUpDown quantitu, TextBox unit, ComboBox supplierBox)
+        {
+            var purchase = _purchaseService.GetPurchase(id);
+
+            nameBox.Text = purchase.ItemName;
+            quantitu.Value = purchase.Quantity;
+            unit.Text = purchase.Unit;
+            supplierBox.SelectedValue = purchase.SupplierId;
+        }
+
+        public void UpdatePurchase(int id, TextBox nameBox, NumericUpDown quantitu, TextBox unit, ComboBox supplierBox)
+        {
+            if (string.IsNullOrEmpty(nameBox.Text) || string.IsNullOrEmpty(unit.Text) || string.IsNullOrEmpty(supplierBox.Text))
+            {
+                MessageBox.Show("Заполните поля!");
+                return;
+            }
+
+            _purchaseService.UpdatePurchase(new PurchaseDto { ItemName = nameBox.Text, Quantity = Convert.ToInt32(quantitu.Value), Unit = unit.Text, SupplierId = Convert.ToInt32(supplierBox.SelectedValue), Id = id });
+        }
+
+        public void UpdateStatus(int id, ToolStripComboBox statusBox)
+        {
+            if (string.IsNullOrEmpty(statusBox.Text))
+            {
+                MessageBox.Show("Выберите статус");
+                return;
+            }
+
+            _purchaseService.UpdateStatus(id, statusBox.Text);
+        }
     }
 }

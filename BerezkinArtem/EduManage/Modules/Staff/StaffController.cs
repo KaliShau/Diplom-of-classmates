@@ -1,16 +1,16 @@
-﻿using EduManage.Services.Staff;
+﻿using System.Windows.Forms;
+using EduManage.Services.Staff;
 using EduManage.Shared;
-using System.Windows.Forms;
 
 namespace EduManage.Modules.Staff
 {
     public class StaffController
     {
-        StaffService _staffServicel;
+        StaffService _staffService;
         Context _context;
         public StaffController(StaffService staffService, Context context)
         {
-            _staffServicel = staffService;
+            _staffService = staffService;
             _context = context;
         }
 
@@ -19,13 +19,13 @@ namespace EduManage.Modules.Staff
             if (_context.User.Role.Name == "Admin")
             {
 
-                var staffs = _staffServicel.GetAllStaff();
+                var staffs = _staffService.GetAllStaff();
                 staffGrid.AutoGenerateColumns = true;
                 staffGrid.DataSource = staffs;
             }
             else
             {
-                var staffs = _staffServicel.GetStaffForAccountant();
+                var staffs = _staffService.GetStaffForAccountant();
                 staffGrid.AutoGenerateColumns = true;
                 staffGrid.DataSource = staffs;
             }
@@ -36,13 +36,13 @@ namespace EduManage.Modules.Staff
             if (_context.User.Role.Name == "Admin")
             {
 
-                var staffs = _staffServicel.SearchStaff(searchTerm);
+                var staffs = _staffService.SearchStaff(searchTerm);
                 staffGrid.AutoGenerateColumns = true;
                 staffGrid.DataSource = staffs;
             }
             else
             {
-                var staffs = _staffServicel.SearchStaffForAccountant(searchTerm);
+                var staffs = _staffService.SearchStaffForAccountant(searchTerm);
                 staffGrid.AutoGenerateColumns = true;
                 staffGrid.DataSource = staffs;
             }
@@ -56,19 +56,34 @@ namespace EduManage.Modules.Staff
                 return;
             }
 
-
-
-            _staffServicel.CreateStaff(new StaffDto { FullName = nameBox.Text, Position = positionBox.Text, Department = departmentBox.Text, Phone = phoneBox.Text, HireDate = hireDatePicker.Value });
-
-
+            _staffService.CreateStaff(new StaffDto { FullName = nameBox.Text, Position = positionBox.Text, Department = departmentBox.Text, Phone = phoneBox.Text, HireDate = hireDatePicker.Value });
         }
-
 
         public void DeleteStaff(int id)
         {
-            _staffServicel.DeleteStaff(id);
+            _staffService.DeleteStaff(id);
         }
 
+        public void GetUpdatedStaff(int id, TextBox nameBox, TextBox positionBox, TextBox departmentBox, TextBox phoneBox, DateTimePicker hireDatePicker)
+        {
+            var staff = _staffService.GetStaffById(id);
 
+            nameBox.Text = staff.FullName;
+            positionBox.Text = staff.Position;
+            departmentBox.Text = staff.Department;
+            phoneBox.Text = staff.Phone;
+            hireDatePicker.Value = staff.HireDate;
+        }
+
+        public void UpdateStaff(int id, TextBox nameBox, TextBox positionBox, TextBox departmentBox, TextBox phoneBox, DateTimePicker hireDatePicker)
+        {
+            if (string.IsNullOrEmpty(nameBox.Text) || string.IsNullOrEmpty(positionBox.Text) || string.IsNullOrEmpty(departmentBox.Text) || string.IsNullOrEmpty(phoneBox.Text) || string.IsNullOrEmpty(hireDatePicker.Text))
+            {
+                MessageBox.Show("Заполните поля!");
+                return;
+            }
+
+            _staffService.UpdateStaff(new StaffDto { FullName = nameBox.Text, Position = positionBox.Text, Department = departmentBox.Text, Phone = phoneBox.Text, HireDate = hireDatePicker.Value, Id = id });
+        }
     }
 }

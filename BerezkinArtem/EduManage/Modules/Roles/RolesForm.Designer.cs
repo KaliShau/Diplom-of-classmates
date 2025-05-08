@@ -32,8 +32,8 @@ namespace EduManage.Modules.Roles
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.rolesGrid = new System.Windows.Forms.DataGridView();
             this.createPanel = new System.Windows.Forms.Panel();
@@ -45,9 +45,9 @@ namespace EduManage.Modules.Roles
             this.descriptionBox = new System.Windows.Forms.TextBox();
             this.nameBox = new System.Windows.Forms.TextBox();
             this.openCreateButton = new System.Windows.Forms.Button();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.rolesGrid)).BeginInit();
             this.createPanel.SuspendLayout();
             this.drugPanel.SuspendLayout();
@@ -66,8 +66,8 @@ namespace EduManage.Modules.Roles
             // 
             // rolesGrid
             // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.rolesGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.rolesGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.rolesGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.rolesGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.rolesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -77,8 +77,8 @@ namespace EduManage.Modules.Roles
             this.rolesGrid.Name = "rolesGrid";
             this.rolesGrid.ReadOnly = true;
             this.rolesGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.rolesGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.rolesGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.rolesGrid.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.rolesGrid.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.rolesGrid.Size = new System.Drawing.Size(1155, 626);
@@ -94,7 +94,7 @@ namespace EduManage.Modules.Roles
             this.createPanel.Controls.Add(this.label2);
             this.createPanel.Controls.Add(this.descriptionBox);
             this.createPanel.Controls.Add(this.nameBox);
-            this.createPanel.Location = new System.Drawing.Point(820, 42);
+            this.createPanel.Location = new System.Drawing.Point(820, 47);
             this.createPanel.Name = "createPanel";
             this.createPanel.Size = new System.Drawing.Size(323, 445);
             this.createPanel.TabIndex = 21;
@@ -182,7 +182,7 @@ namespace EduManage.Modules.Roles
             this.openCreateButton.FlatAppearance.BorderSize = 0;
             this.openCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.openCreateButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openCreateButton.Location = new System.Drawing.Point(1015, 13);
+            this.openCreateButton.Location = new System.Drawing.Point(1015, 14);
             this.openCreateButton.Name = "openCreateButton";
             this.openCreateButton.Size = new System.Drawing.Size(128, 27);
             this.openCreateButton.TabIndex = 19;
@@ -190,15 +190,10 @@ namespace EduManage.Modules.Roles
             this.openCreateButton.UseVisualStyleBackColor = false;
             this.openCreateButton.Click += new System.EventHandler(this.openCreateButton_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(115, 6);
-            // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteToolStripMenuItem.Text = "Удалить";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -206,9 +201,16 @@ namespace EduManage.Modules.Roles
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem,
-            this.toolStripSeparator1});
+            this.updateToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(119, 32);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.updateToolStripMenuItem.Text = "Обновить";
+            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
             // 
             // RolesForm
             // 
@@ -246,8 +248,8 @@ namespace EduManage.Modules.Roles
         private TextBox descriptionBox;
         private TextBox nameBox;
         private Button openCreateButton;
-        private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem deleteToolStripMenuItem;
         private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem updateToolStripMenuItem;
     }
 }
