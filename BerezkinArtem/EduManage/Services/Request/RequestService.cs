@@ -1,5 +1,11 @@
-﻿using EduManage.Shared.Main;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using EduManage.Shared.Main;
 using Npgsql;
+using System.Windows.Forms;
 
 namespace EduManage.Services.Request
 {
@@ -75,7 +81,7 @@ namespace EduManage.Services.Request
         {
             NpgsqlParameter[] parameters = new NpgsqlParameter[]
             {
-        new NpgsqlParameter("@searchTerm", string.IsNullOrEmpty(searchTerm) ? DBNull.Value : searchTerm)
+        new NpgsqlParameter("@searchTerm", searchTerm)
             };
 
             return _repository.Query<RequestDto>(_sql.GetAllWithSearch, reader => new RequestDto

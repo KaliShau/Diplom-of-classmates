@@ -1,4 +1,7 @@
-﻿namespace EduManage.Modules.Purchases
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace EduManage.Modules.Purchases
 {
     partial class PurchasesForm
     {
@@ -28,298 +31,302 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            searchButton = new Button();
-            searchBox = new TextBox();
-            contextMenuStrip1 = new ContextMenuStrip(components);
-            deleteToolStripMenuItem = new ToolStripMenuItem();
-            toolStripSeparator1 = new ToolStripSeparator();
-            addToInventoruToolStripMenuItem = new ToolStripMenuItem();
-            label7 = new Label();
-            drugPanel = new Panel();
-            closeButton = new Button();
-            createButton = new Button();
-            label2 = new Label();
-            createPanel = new Panel();
-            numericUpDown = new NumericUpDown();
-            supplierBox = new ComboBox();
-            label8 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            unitBox = new TextBox();
-            nameBox = new TextBox();
-            label1 = new Label();
-            openCreateButton = new Button();
-            purchasesGrid = new DataGridView();
-            contextMenuStrip1.SuspendLayout();
-            drugPanel.SuspendLayout();
-            createPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)purchasesGrid).BeginInit();
-            SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.searchBox = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.addToInventoruToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label7 = new System.Windows.Forms.Label();
+            this.drugPanel = new System.Windows.Forms.Panel();
+            this.closeButton = new System.Windows.Forms.Button();
+            this.createButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.createPanel = new System.Windows.Forms.Panel();
+            this.numericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.supplierBox = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.unitBox = new System.Windows.Forms.TextBox();
+            this.nameBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.openCreateButton = new System.Windows.Forms.Button();
+            this.purchasesGrid = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1.SuspendLayout();
+            this.drugPanel.SuspendLayout();
+            this.createPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.purchasesGrid)).BeginInit();
+            this.SuspendLayout();
             // 
             // searchButton
             // 
-            searchButton.BackColor = SystemColors.GradientActiveCaption;
-            searchButton.FlatAppearance.BorderSize = 0;
-            searchButton.FlatStyle = FlatStyle.Flat;
-            searchButton.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            searchButton.Location = new Point(284, 82);
-            searchButton.Name = "searchButton";
-            searchButton.Size = new Size(149, 32);
-            searchButton.TabIndex = 10;
-            searchButton.Text = "Найти";
-            searchButton.UseVisualStyleBackColor = false;
-            searchButton.Click += searchButton_Click;
+            this.searchButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.searchButton.FlatAppearance.BorderSize = 0;
+            this.searchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.searchButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchButton.Location = new System.Drawing.Point(359, 75);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(128, 32);
+            this.searchButton.TabIndex = 10;
+            this.searchButton.Text = "Найти";
+            this.searchButton.UseVisualStyleBackColor = false;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // searchBox
             // 
-            searchBox.BorderStyle = BorderStyle.FixedSingle;
-            searchBox.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            searchBox.Location = new Point(12, 82);
-            searchBox.Name = "searchBox";
-            searchBox.Size = new Size(256, 32);
-            searchBox.TabIndex = 9;
+            this.searchBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchBox.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchBox.Location = new System.Drawing.Point(16, 75);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(337, 32);
+            this.searchBox.TabIndex = 9;
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem, toolStripSeparator1, addToInventoruToolStripMenuItem });
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(196, 54);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.addToInventoruToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(196, 54);
             // 
             // deleteToolStripMenuItem
             // 
-            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            deleteToolStripMenuItem.Size = new Size(195, 22);
-            deleteToolStripMenuItem.Text = "Удалить";
-            deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.deleteToolStripMenuItem.Text = "Удалить";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(192, 6);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(192, 6);
             // 
             // addToInventoruToolStripMenuItem
             // 
-            addToInventoruToolStripMenuItem.Name = "addToInventoruToolStripMenuItem";
-            addToInventoruToolStripMenuItem.Size = new Size(195, 22);
-            addToInventoruToolStripMenuItem.Text = "Добавить в инвентарь";
-            addToInventoruToolStripMenuItem.Click += addToInventoruToolStripMenuItem_Click;
+            this.addToInventoruToolStripMenuItem.Name = "addToInventoruToolStripMenuItem";
+            this.addToInventoruToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.addToInventoruToolStripMenuItem.Text = "Добавить в инвентарь";
+            this.addToInventoruToolStripMenuItem.Click += new System.EventHandler(this.addToInventoruToolStripMenuItem_Click);
             // 
             // label7
             // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(12, 58);
-            label7.Name = "label7";
-            label7.Size = new Size(51, 19);
-            label7.TabIndex = 11;
-            label7.Text = "Поиск";
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(16, 49);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(51, 19);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Поиск";
             // 
             // drugPanel
             // 
-            drugPanel.Controls.Add(closeButton);
-            drugPanel.Dock = DockStyle.Top;
-            drugPanel.Location = new Point(0, 0);
-            drugPanel.Name = "drugPanel";
-            drugPanel.Size = new Size(983, 32);
-            drugPanel.TabIndex = 6;
+            this.drugPanel.Controls.Add(this.closeButton);
+            this.drugPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.drugPanel.Location = new System.Drawing.Point(0, 0);
+            this.drugPanel.Name = "drugPanel";
+            this.drugPanel.Size = new System.Drawing.Size(1125, 28);
+            this.drugPanel.TabIndex = 6;
             // 
             // closeButton
             // 
-            closeButton.BackColor = SystemColors.ControlLightLight;
-            closeButton.Dock = DockStyle.Right;
-            closeButton.FlatAppearance.BorderSize = 0;
-            closeButton.FlatStyle = FlatStyle.Flat;
-            closeButton.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            closeButton.Location = new Point(948, 0);
-            closeButton.Name = "closeButton";
-            closeButton.Size = new Size(35, 32);
-            closeButton.TabIndex = 5;
-            closeButton.Text = "❌";
-            closeButton.UseVisualStyleBackColor = false;
-            closeButton.Click += closeButton_Click;
+            this.closeButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.closeButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.closeButton.FlatAppearance.BorderSize = 0;
+            this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closeButton.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.closeButton.Location = new System.Drawing.Point(1095, 0);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(30, 28);
+            this.closeButton.TabIndex = 5;
+            this.closeButton.Text = "❌";
+            this.closeButton.UseVisualStyleBackColor = false;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
             // createButton
             // 
-            createButton.BackColor = SystemColors.GradientActiveCaption;
-            createButton.FlatAppearance.BorderSize = 0;
-            createButton.FlatStyle = FlatStyle.Flat;
-            createButton.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            createButton.Location = new Point(366, 259);
-            createButton.Name = "createButton";
-            createButton.Size = new Size(210, 49);
-            createButton.TabIndex = 5;
-            createButton.Text = "Добавить";
-            createButton.UseVisualStyleBackColor = false;
-            createButton.Click += createButton_Click;
+            this.createButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.createButton.FlatAppearance.BorderSize = 0;
+            this.createButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.createButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createButton.Location = new System.Drawing.Point(484, 227);
+            this.createButton.Name = "createButton";
+            this.createButton.Size = new System.Drawing.Size(180, 42);
+            this.createButton.TabIndex = 5;
+            this.createButton.Text = "Добавить";
+            this.createButton.UseVisualStyleBackColor = false;
+            this.createButton.Click += new System.EventHandler(this.createButton_Click);
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(22, 35);
-            label2.Name = "label2";
-            label2.Size = new Size(73, 19);
-            label2.TabIndex = 5;
-            label2.Text = "Название";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(19, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(73, 19);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Название";
             // 
             // createPanel
             // 
-            createPanel.BorderStyle = BorderStyle.FixedSingle;
-            createPanel.Controls.Add(numericUpDown);
-            createPanel.Controls.Add(supplierBox);
-            createPanel.Controls.Add(label8);
-            createPanel.Controls.Add(label3);
-            createPanel.Controls.Add(label4);
-            createPanel.Controls.Add(unitBox);
-            createPanel.Controls.Add(drugPanel);
-            createPanel.Controls.Add(createButton);
-            createPanel.Controls.Add(label2);
-            createPanel.Controls.Add(nameBox);
-            createPanel.Location = new Point(22, 44);
-            createPanel.Name = "createPanel";
-            createPanel.Size = new Size(985, 336);
-            createPanel.TabIndex = 14;
-            createPanel.Visible = false;
+            this.createPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.createPanel.Controls.Add(this.numericUpDown);
+            this.createPanel.Controls.Add(this.supplierBox);
+            this.createPanel.Controls.Add(this.label8);
+            this.createPanel.Controls.Add(this.label3);
+            this.createPanel.Controls.Add(this.label4);
+            this.createPanel.Controls.Add(this.unitBox);
+            this.createPanel.Controls.Add(this.drugPanel);
+            this.createPanel.Controls.Add(this.createButton);
+            this.createPanel.Controls.Add(this.label2);
+            this.createPanel.Controls.Add(this.nameBox);
+            this.createPanel.Location = new System.Drawing.Point(16, 40);
+            this.createPanel.Name = "createPanel";
+            this.createPanel.Size = new System.Drawing.Size(1127, 291);
+            this.createPanel.TabIndex = 14;
+            this.createPanel.Visible = false;
             // 
             // numericUpDown
             // 
-            numericUpDown.Font = new Font("Times New Roman", 15.75F);
-            numericUpDown.Location = new Point(22, 128);
-            numericUpDown.Name = "numericUpDown";
-            numericUpDown.Size = new Size(428, 32);
-            numericUpDown.TabIndex = 18;
+            this.numericUpDown.Font = new System.Drawing.Font("Times New Roman", 15.75F);
+            this.numericUpDown.Location = new System.Drawing.Point(19, 111);
+            this.numericUpDown.Name = "numericUpDown";
+            this.numericUpDown.Size = new System.Drawing.Size(489, 32);
+            this.numericUpDown.TabIndex = 18;
             // 
             // supplierBox
             // 
-            supplierBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            supplierBox.Font = new Font("Times New Roman", 15.75F);
-            supplierBox.FormattingEnabled = true;
-            supplierBox.Location = new Point(22, 199);
-            supplierBox.Name = "supplierBox";
-            supplierBox.Size = new Size(943, 31);
-            supplierBox.TabIndex = 9;
+            this.supplierBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.supplierBox.Font = new System.Drawing.Font("Times New Roman", 15.75F);
+            this.supplierBox.FormattingEnabled = true;
+            this.supplierBox.Location = new System.Drawing.Point(19, 172);
+            this.supplierBox.Name = "supplierBox";
+            this.supplierBox.Size = new System.Drawing.Size(1083, 31);
+            this.supplierBox.TabIndex = 9;
             // 
             // label8
             // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(22, 104);
-            label8.Name = "label8";
-            label8.Size = new Size(89, 19);
-            label8.TabIndex = 16;
-            label8.Text = "Количество";
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(19, 85);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(89, 19);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Количество";
             // 
             // label3
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(519, 104);
-            label3.Name = "label3";
-            label3.Size = new Size(145, 19);
-            label3.TabIndex = 17;
-            label3.Text = "Единица измерения";
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(581, 85);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(145, 19);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Единица измерения";
             // 
             // label4
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(22, 172);
-            label4.Name = "label4";
-            label4.Size = new Size(84, 19);
-            label4.TabIndex = 8;
-            label4.Text = "Поставщик";
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(19, 144);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(84, 19);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Поставщик";
             // 
             // unitBox
             // 
-            unitBox.BorderStyle = BorderStyle.FixedSingle;
-            unitBox.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            unitBox.Location = new Point(519, 128);
-            unitBox.Name = "unitBox";
-            unitBox.Size = new Size(446, 32);
-            unitBox.TabIndex = 15;
+            this.unitBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.unitBox.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.unitBox.Location = new System.Drawing.Point(585, 111);
+            this.unitBox.Name = "unitBox";
+            this.unitBox.Size = new System.Drawing.Size(517, 32);
+            this.unitBox.TabIndex = 15;
             // 
             // nameBox
             // 
-            nameBox.BorderStyle = BorderStyle.FixedSingle;
-            nameBox.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            nameBox.Location = new Point(22, 59);
-            nameBox.Name = "nameBox";
-            nameBox.Size = new Size(943, 32);
-            nameBox.TabIndex = 4;
+            this.nameBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.nameBox.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameBox.Location = new System.Drawing.Point(19, 51);
+            this.nameBox.Name = "nameBox";
+            this.nameBox.Size = new System.Drawing.Size(1083, 32);
+            this.nameBox.TabIndex = 4;
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Times New Roman", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(12, 5);
-            label1.Name = "label1";
-            label1.Size = new Size(125, 32);
-            label1.TabIndex = 13;
-            label1.Text = "Закупки";
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(10, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(125, 32);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Закупки";
             // 
             // openCreateButton
             // 
-            openCreateButton.BackColor = SystemColors.GradientActiveCaption;
-            openCreateButton.FlatAppearance.BorderSize = 0;
-            openCreateButton.FlatStyle = FlatStyle.Flat;
-            openCreateButton.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            openCreateButton.Location = new Point(858, 10);
-            openCreateButton.Name = "openCreateButton";
-            openCreateButton.Size = new Size(149, 31);
-            openCreateButton.TabIndex = 12;
-            openCreateButton.Text = "Добавить";
-            openCreateButton.UseVisualStyleBackColor = false;
-            openCreateButton.Click += openCreateButton_Click;
+            this.openCreateButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.openCreateButton.FlatAppearance.BorderSize = 0;
+            this.openCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.openCreateButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openCreateButton.Location = new System.Drawing.Point(1014, 11);
+            this.openCreateButton.Name = "openCreateButton";
+            this.openCreateButton.Size = new System.Drawing.Size(128, 27);
+            this.openCreateButton.TabIndex = 12;
+            this.openCreateButton.Text = "Добавить";
+            this.openCreateButton.UseVisualStyleBackColor = false;
+            this.openCreateButton.Click += new System.EventHandler(this.openCreateButton_Click);
             // 
             // purchasesGrid
             // 
-            dataGridViewCellStyle1.BackColor = SystemColors.ControlLightLight;
-            purchasesGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            purchasesGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            purchasesGrid.BackgroundColor = SystemColors.ControlLightLight;
-            purchasesGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            purchasesGrid.Dock = DockStyle.Bottom;
-            purchasesGrid.GridColor = SystemColors.GradientActiveCaption;
-            purchasesGrid.Location = new Point(0, 151);
-            purchasesGrid.Name = "purchasesGrid";
-            purchasesGrid.ReadOnly = true;
-            purchasesGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.BackColor = SystemColors.GradientActiveCaption;
-            purchasesGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            purchasesGrid.RowTemplate.DefaultCellStyle.BackColor = SystemColors.GradientActiveCaption;
-            purchasesGrid.RowTemplate.DefaultCellStyle.ForeColor = Color.Black;
-            purchasesGrid.Size = new Size(1032, 539);
-            purchasesGrid.TabIndex = 8;
-            purchasesGrid.MouseClick += purchasesGrid_MouseClick;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.purchasesGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.purchasesGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.purchasesGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.purchasesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.purchasesGrid.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.purchasesGrid.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.purchasesGrid.Location = new System.Drawing.Point(0, 135);
+            this.purchasesGrid.Name = "purchasesGrid";
+            this.purchasesGrid.ReadOnly = true;
+            this.purchasesGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.purchasesGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.purchasesGrid.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.purchasesGrid.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+            this.purchasesGrid.Size = new System.Drawing.Size(1155, 626);
+            this.purchasesGrid.TabIndex = 8;
+            this.purchasesGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.purchasesGrid_MouseClick);
             // 
             // PurchasesForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLightLight;
-            ClientSize = new Size(1032, 690);
-            Controls.Add(createPanel);
-            Controls.Add(searchButton);
-            Controls.Add(searchBox);
-            Controls.Add(label7);
-            Controls.Add(label1);
-            Controls.Add(openCreateButton);
-            Controls.Add(purchasesGrid);
-            FormBorderStyle = FormBorderStyle.None;
-            Name = "PurchasesForm";
-            Text = "PurchasesForm";
-            contextMenuStrip1.ResumeLayout(false);
-            drugPanel.ResumeLayout(false);
-            createPanel.ResumeLayout(false);
-            createPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)purchasesGrid).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ClientSize = new System.Drawing.Size(1155, 761);
+            this.Controls.Add(this.createPanel);
+            this.Controls.Add(this.searchButton);
+            this.Controls.Add(this.searchBox);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.openCreateButton);
+            this.Controls.Add(this.purchasesGrid);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "PurchasesForm";
+            this.Text = "PurchasesForm";
+            this.contextMenuStrip1.ResumeLayout(false);
+            this.drugPanel.ResumeLayout(false);
+            this.createPanel.ResumeLayout(false);
+            this.createPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.purchasesGrid)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion

@@ -1,5 +1,7 @@
 using EduManage.Modules.Home;
 using EduManage.Shared.Main;
+using System;
+using System.Windows.Forms;
 
 namespace EduManage
 {

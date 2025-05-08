@@ -1,32 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <Compile Update="Modules\Home\HomeForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Modules\Inventory\InventoryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Modules\Purchases\PurchasesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Modules\Requests\RequestsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Modules\Roles\RolesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Modules\SignIn\SignInForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Modules\Staff\StaffForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Modules\Suppliers\SuppliersForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Modules\Users\UsersForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-  </ItemGroup>
+  <PropertyGroup>
+    <ProjectView>ProjectFiles</ProjectView>
+  </PropertyGroup>
 </Project>

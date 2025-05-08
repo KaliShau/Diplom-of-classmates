@@ -1,4 +1,7 @@
-﻿namespace EduManage.Modules.SignIn
+﻿using System.Windows.Forms;
+using System.Drawing;
+
+namespace EduManage.Modules.SignIn
 {
     partial class SignInForm
     {
@@ -28,93 +31,94 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            loginBox = new TextBox();
-            label2 = new Label();
-            passwordBox = new TextBox();
-            label3 = new Label();
-            signinButton = new Button();
-            SuspendLayout();
+            this.label1 = new System.Windows.Forms.Label();
+            this.loginBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.passwordBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.signinButton = new System.Windows.Forms.Button();
+            this.SuspendLayout();
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Times New Roman", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(12, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(329, 32);
-            label1.TabIndex = 1;
-            label1.Text = "Введите логин и пароль";
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(10, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(329, 32);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Введите логин и пароль";
             // 
             // loginBox
             // 
-            loginBox.BorderStyle = BorderStyle.FixedSingle;
-            loginBox.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            loginBox.Location = new Point(302, 94);
-            loginBox.Name = "loginBox";
-            loginBox.Size = new Size(371, 32);
-            loginBox.TabIndex = 2;
+            this.loginBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.loginBox.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginBox.Location = new System.Drawing.Point(335, 94);
+            this.loginBox.Name = "loginBox";
+            this.loginBox.Size = new System.Drawing.Size(484, 32);
+            this.loginBox.TabIndex = 2;
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(302, 70);
-            label2.Name = "label2";
-            label2.Size = new Size(52, 19);
-            label2.TabIndex = 3;
-            label2.Text = "Логин";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(335, 70);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 19);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Логин";
             // 
             // passwordBox
             // 
-            passwordBox.BorderStyle = BorderStyle.FixedSingle;
-            passwordBox.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            passwordBox.Location = new Point(302, 169);
-            passwordBox.Name = "passwordBox";
-            passwordBox.Size = new Size(371, 32);
-            passwordBox.TabIndex = 2;
+            this.passwordBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.passwordBox.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordBox.Location = new System.Drawing.Point(335, 159);
+            this.passwordBox.Name = "passwordBox";
+            this.passwordBox.Size = new System.Drawing.Size(484, 32);
+            this.passwordBox.TabIndex = 2;
             // 
             // label3
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(302, 145);
-            label3.Name = "label3";
-            label3.Size = new Size(58, 19);
-            label3.TabIndex = 3;
-            label3.Text = "Пароль";
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(335, 135);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(58, 19);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Пароль";
             // 
             // signinButton
             // 
-            signinButton.BackColor = SystemColors.GradientActiveCaption;
-            signinButton.FlatAppearance.BorderSize = 0;
-            signinButton.FlatStyle = FlatStyle.Flat;
-            signinButton.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            signinButton.Location = new Point(373, 245);
-            signinButton.Name = "signinButton";
-            signinButton.Size = new Size(212, 39);
-            signinButton.TabIndex = 4;
-            signinButton.Text = "Войти";
-            signinButton.UseVisualStyleBackColor = false;
-            signinButton.Click += signinButton_Click;
+            this.signinButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.signinButton.FlatAppearance.BorderSize = 0;
+            this.signinButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.signinButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.signinButton.Location = new System.Drawing.Point(396, 225);
+            this.signinButton.Name = "signinButton";
+            this.signinButton.Size = new System.Drawing.Size(348, 34);
+            this.signinButton.TabIndex = 4;
+            this.signinButton.Text = "Войти";
+            this.signinButton.UseVisualStyleBackColor = false;
+            this.signinButton.Click += new System.EventHandler(this.signinButton_Click);
             // 
             // SignInForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLightLight;
-            ClientSize = new Size(1032, 690);
-            Controls.Add(signinButton);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(passwordBox);
-            Controls.Add(loginBox);
-            Controls.Add(label1);
-            FormBorderStyle = FormBorderStyle.None;
-            Name = "SignInForm";
-            Text = "SignInForm";
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ClientSize = new System.Drawing.Size(1155, 761);
+            this.Controls.Add(this.signinButton);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.passwordBox);
+            this.Controls.Add(this.loginBox);
+            this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "SignInForm";
+            this.Text = "SignInForm";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion

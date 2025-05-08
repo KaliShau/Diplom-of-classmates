@@ -2,6 +2,8 @@
 using EduManage.Services.Purchases;
 using EduManage.Services.Suppliers;
 using Npgsql;
+using System;
+using System.Windows.Forms;
 
 namespace EduManage.Modules.Purchases
 {
