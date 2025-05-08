@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EduManage.Services.Request;
 using EduManage.Services.Suppliers;
+using System.Windows.Forms;
 
 namespace EduManage.Modules.Suppliers
 {

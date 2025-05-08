@@ -1,6 +1,8 @@
 ﻿using EduManage.Services.Inventory;
 using EduManage.Services.Request;
 using EduManage.Shared;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace EduManage.Modules.Requests
 {

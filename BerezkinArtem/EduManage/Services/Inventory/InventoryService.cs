@@ -1,5 +1,8 @@
 ﻿using EduManage.Shared.Main;
 using Npgsql;
+using System;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace EduManage.Services.Inventory
 {

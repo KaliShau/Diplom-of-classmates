@@ -1,4 +1,9 @@
-﻿namespace EduManage.Modules.Inventory
+﻿using EduManage.Modules.Home;
+using EduManage.Shared.Main;
+using System;
+using System.Windows.Forms;
+
+namespace EduManage.Modules.Inventory
 {
     enum Action { Update, Create }
     public partial class InventoryForm : Form

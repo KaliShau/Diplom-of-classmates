@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EduManage.Shared.Main;
 using Npgsql;
+using System.Windows.Forms;
 
 namespace EduManage.Services.Purchases
 {
