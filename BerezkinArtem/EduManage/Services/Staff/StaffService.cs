@@ -76,6 +76,33 @@ namespace EduManage.Services.Staff
                 MessageBox.Show($"Ошибка при обновлении данных сотрудника: {ex.Message}");
             }
         }
+        public void UpdateIsActive(int id)
+        {
+            try
+            {
+                var staff = this.GetStaffById(id);
+
+                NpgsqlParameter[] parameters = {
+                    new NpgsqlParameter("@is_active", !staff.IsActive),
+                    new NpgsqlParameter("@id", id)
+                };
+
+                var rowsAffected = _repository.Execute(_sql.UpdateIsActive, parameters);
+
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show("Активность обновлена!");
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка обновления!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при обновлении данных сотрудника: {ex.Message}");
+            }
+        }
 
         public StaffDto GetStaffById(int id)
         {

@@ -32,8 +32,8 @@ namespace EduManage.Modules.Roles
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.rolesGrid = new System.Windows.Forms.DataGridView();
             this.createPanel = new System.Windows.Forms.Panel();
@@ -48,6 +48,7 @@ namespace EduManage.Modules.Roles
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToDocxButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.rolesGrid)).BeginInit();
             this.createPanel.SuspendLayout();
             this.drugPanel.SuspendLayout();
@@ -66,8 +67,8 @@ namespace EduManage.Modules.Roles
             // 
             // rolesGrid
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.rolesGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.rolesGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.rolesGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.rolesGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.rolesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -77,8 +78,8 @@ namespace EduManage.Modules.Roles
             this.rolesGrid.Name = "rolesGrid";
             this.rolesGrid.ReadOnly = true;
             this.rolesGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.rolesGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.rolesGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.rolesGrid.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.rolesGrid.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.rolesGrid.Size = new System.Drawing.Size(1155, 626);
@@ -193,7 +194,7 @@ namespace EduManage.Modules.Roles
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.deleteToolStripMenuItem.Text = "Удалить";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -203,14 +204,28 @@ namespace EduManage.Modules.Roles
             this.deleteToolStripMenuItem,
             this.updateToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(129, 48);
             // 
             // updateToolStripMenuItem
             // 
             this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.updateToolStripMenuItem.Text = "Обновить";
             this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
+            // 
+            // saveToDocxButton
+            // 
+            this.saveToDocxButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.saveToDocxButton.FlatAppearance.BorderSize = 0;
+            this.saveToDocxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveToDocxButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveToDocxButton.Location = new System.Drawing.Point(815, 14);
+            this.saveToDocxButton.Name = "saveToDocxButton";
+            this.saveToDocxButton.Size = new System.Drawing.Size(194, 27);
+            this.saveToDocxButton.TabIndex = 22;
+            this.saveToDocxButton.Text = "Сохранить данные";
+            this.saveToDocxButton.UseVisualStyleBackColor = false;
+            this.saveToDocxButton.Click += new System.EventHandler(this.saveToDocxButton_Click);
             // 
             // RolesForm
             // 
@@ -218,6 +233,7 @@ namespace EduManage.Modules.Roles
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1155, 761);
+            this.Controls.Add(this.saveToDocxButton);
             this.Controls.Add(this.createPanel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rolesGrid);
@@ -251,5 +267,6 @@ namespace EduManage.Modules.Roles
         private ToolStripMenuItem deleteToolStripMenuItem;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem updateToolStripMenuItem;
+        private Button saveToDocxButton;
     }
 }

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using EduManage.Modules.Inventory;
+using EduManage.Services.Inventory;
 using EduManage.Services.Role;
 using EduManage.Services.Staff;
 using EduManage.Services.User;
@@ -11,11 +14,13 @@ namespace EduManage.Modules.Users
         UserService _userService;
         RoleService _roleService;
         StaffService _staffService;
+        DocumentGenerator _documentGenerator;
         public UsersController(UserService userService, RoleService roleService, StaffService staffService)
         {
             _userService = userService;
             _roleService = roleService;
             _staffService = staffService;
+            _documentGenerator = new DocumentGenerator();
         }
 
         public void AddRolesToComboBox(ComboBox rolesBox)
@@ -72,6 +77,30 @@ namespace EduManage.Modules.Users
             }
 
             _userService.UpdateUser(new UserUpdateDto { Id = id, Login = loginBox.Text, Password = passwordBox.Text, RoleId = Convert.ToInt32(roleBox.SelectedValue), StaffId = Convert.ToInt32(staffBox.SelectedValue) });
+        }
+
+        public void ExportToDocx(DataGridView grid)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "Word Documents (*.docx)|*.docx";
+                saveFileDialog.Title = "Сохранить пользователей как DOCX";
+                saveFileDialog.FileName = $"Пользователи_{DateTime.Now:yyyyMMdd}.docx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var dataSource = grid.DataSource as IEnumerable<InventoryDto>;
+                    if (dataSource != null)
+                    {
+                        string description = "Данный документ содержит полный перечень пользователей в этой ифнормационной системе.";
+                        _documentGenerator.SaveToDocx(
+                            saveFileDialog.FileName,
+                            "Список пользователей",
+                            description,
+                            dataSource);
+                    }
+                }
+            }
         }
     }
 }

@@ -1,4 +1,8 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using EduManage.Modules.Inventory;
+using EduManage.Services.Inventory;
 using EduManage.Services.Staff;
 using EduManage.Shared;
 
@@ -8,10 +12,12 @@ namespace EduManage.Modules.Staff
     {
         StaffService _staffService;
         Context _context;
+        DocumentGenerator _documentGenerator;
         public StaffController(StaffService staffService, Context context)
         {
             _staffService = staffService;
             _context = context;
+            _documentGenerator = new DocumentGenerator();
         }
 
         public void GetStaff(DataGridView staffGrid)
@@ -84,6 +90,35 @@ namespace EduManage.Modules.Staff
             }
 
             _staffService.UpdateStaff(new StaffDto { FullName = nameBox.Text, Position = positionBox.Text, Department = departmentBox.Text, Phone = phoneBox.Text, HireDate = hireDatePicker.Value, Id = id });
+        }
+
+        public void ChangeActive(int id)
+        {
+            _staffService.UpdateIsActive(id);
+        }
+
+        public void ExportToDocx(DataGridView grid)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "Word Documents (*.docx)|*.docx";
+                saveFileDialog.Title = "Сохранить персонал как DOCX";
+                saveFileDialog.FileName = $"Персонал_{DateTime.Now:yyyyMMdd}.docx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var dataSource = grid.DataSource as IEnumerable<InventoryDto>;
+                    if (dataSource != null)
+                    {
+                        string description = "Данный документ содержит полный перечень персонала образовательного учреждения.";
+                        _documentGenerator.SaveToDocx(
+                            saveFileDialog.FileName,
+                            "Список персонала",
+                            description,
+                            dataSource);
+                    }
+                }
+            }
         }
     }
 }

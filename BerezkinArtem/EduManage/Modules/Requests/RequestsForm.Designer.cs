@@ -32,8 +32,8 @@ namespace EduManage.Modules.Requests
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +50,7 @@ namespace EduManage.Modules.Requests
             this.label1 = new System.Windows.Forms.Label();
             this.openCreateButton = new System.Windows.Forms.Button();
             this.requestsGrid = new System.Windows.Forms.DataGridView();
+            this.saveToDocxButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.createPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.requestsGrid)).BeginInit();
@@ -217,8 +218,8 @@ namespace EduManage.Modules.Requests
             // 
             // requestsGrid
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.requestsGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.requestsGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.requestsGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.requestsGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.requestsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -228,13 +229,27 @@ namespace EduManage.Modules.Requests
             this.requestsGrid.Name = "requestsGrid";
             this.requestsGrid.ReadOnly = true;
             this.requestsGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.requestsGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.requestsGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.requestsGrid.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.requestsGrid.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.requestsGrid.Size = new System.Drawing.Size(1155, 626);
             this.requestsGrid.TabIndex = 8;
             this.requestsGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.requestsGrid_MouseClick);
+            // 
+            // saveToDocxButton
+            // 
+            this.saveToDocxButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.saveToDocxButton.FlatAppearance.BorderSize = 0;
+            this.saveToDocxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveToDocxButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveToDocxButton.Location = new System.Drawing.Point(815, 14);
+            this.saveToDocxButton.Name = "saveToDocxButton";
+            this.saveToDocxButton.Size = new System.Drawing.Size(194, 27);
+            this.saveToDocxButton.TabIndex = 16;
+            this.saveToDocxButton.Text = "Сохранить данные";
+            this.saveToDocxButton.UseVisualStyleBackColor = false;
+            this.saveToDocxButton.Click += new System.EventHandler(this.saveToDocxButton_Click);
             // 
             // RequestsForm
             // 
@@ -242,6 +257,7 @@ namespace EduManage.Modules.Requests
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1155, 761);
+            this.Controls.Add(this.saveToDocxButton);
             this.Controls.Add(this.createPanel);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.label7);
@@ -278,5 +294,6 @@ namespace EduManage.Modules.Requests
         private Label label3;
         private TextBox problemBox;
         private ToolStripMenuItem updateToolStripMenuItem;
+        private Button saveToDocxButton;
     }
 }

@@ -96,5 +96,10 @@ namespace EduManage.Modules.Roles
                 createButton.Text = "Обновить";
             }
         }
+
+        private void saveToDocxButton_Click(object sender, EventArgs e)
+        {
+            _controller.ExportToDocx(rolesGrid);
+        }
     }
 }

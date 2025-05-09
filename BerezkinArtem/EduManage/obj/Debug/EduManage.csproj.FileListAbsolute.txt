@@ -51,3 +51,7 @@ C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\bin\Debug\Sy
 C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\obj\Debug\EduManage.csproj.Up2Date
 C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\obj\Debug\EduManage.exe
 C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\obj\Debug\EduManage.pdb
+C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\bin\Debug\DocumentFormat.OpenXml.Framework.dll
+C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\bin\Debug\DocumentFormat.OpenXml.xml
+C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\bin\Debug\DocumentFormat.OpenXml.Framework.xml

@@ -32,8 +32,8 @@ namespace EduManage.Modules.Inventory
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.inventoryGrid = new System.Windows.Forms.DataGridView();
             this.openCreateButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -63,6 +63,7 @@ namespace EduManage.Modules.Inventory
             this.сменитьСтатусToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripStatusBox = new System.Windows.Forms.ToolStripComboBox();
             this.updateStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToDocxButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryGrid)).BeginInit();
             this.createPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
@@ -72,8 +73,8 @@ namespace EduManage.Modules.Inventory
             // 
             // inventoryGrid
             // 
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.inventoryGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.inventoryGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.inventoryGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.inventoryGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.inventoryGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -83,8 +84,8 @@ namespace EduManage.Modules.Inventory
             this.inventoryGrid.Name = "inventoryGrid";
             this.inventoryGrid.ReadOnly = true;
             this.inventoryGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.inventoryGrid.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.inventoryGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.inventoryGrid.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.inventoryGrid.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.inventoryGrid.Size = new System.Drawing.Size(1155, 626);
@@ -385,6 +386,20 @@ namespace EduManage.Modules.Inventory
             this.updateStatusToolStripMenuItem.Text = "Сменить";
             this.updateStatusToolStripMenuItem.Click += new System.EventHandler(this.updateStatusToolStripMenuItem_Click);
             // 
+            // saveToDocxButton
+            // 
+            this.saveToDocxButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.saveToDocxButton.FlatAppearance.BorderSize = 0;
+            this.saveToDocxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveToDocxButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveToDocxButton.Location = new System.Drawing.Point(815, 14);
+            this.saveToDocxButton.Name = "saveToDocxButton";
+            this.saveToDocxButton.Size = new System.Drawing.Size(194, 27);
+            this.saveToDocxButton.TabIndex = 5;
+            this.saveToDocxButton.Text = "Сохранить данные";
+            this.saveToDocxButton.UseVisualStyleBackColor = false;
+            this.saveToDocxButton.Click += new System.EventHandler(this.saveToDocxButton_Click);
+            // 
             // InventoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -394,6 +409,7 @@ namespace EduManage.Modules.Inventory
             this.Controls.Add(this.createPanel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.searchButton);
+            this.Controls.Add(this.saveToDocxButton);
             this.Controls.Add(this.openCreateButton);
             this.Controls.Add(this.inventoryGrid);
             this.Controls.Add(this.searchBox);
@@ -444,5 +460,6 @@ namespace EduManage.Modules.Inventory
         private ComboBox statusBox;
         private NumericUpDown numericUpDown;
         private Label label8;
+        private Button saveToDocxButton;
     }
 }

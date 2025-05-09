@@ -116,6 +116,11 @@ namespace EduManage.Modules.Inventory
             _controller.ChangeStatus(Convert.ToInt32(_selectedId), status);
             _controller.GetInventory(inventoryGrid);
         }
+
+        private void saveToDocxButton_Click(object sender, EventArgs e)
+        {
+            _controller.ExportToDocx(inventoryGrid);
+        }
     }
 
 

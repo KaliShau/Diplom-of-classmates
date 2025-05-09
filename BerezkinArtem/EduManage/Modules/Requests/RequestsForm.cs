@@ -48,8 +48,8 @@ namespace EduManage.Modules.Requests
             if (_typeAction == Action.Create)
             {
 
-            _controller.CreateRequests(problemBox, inventoryBox);
-            _controller.GetRequests(requestsGrid);
+                _controller.CreateRequests(problemBox, inventoryBox);
+                _controller.GetRequests(requestsGrid);
             }
 
             if (_typeAction == Action.Update)
@@ -120,6 +120,11 @@ namespace EduManage.Modules.Requests
             {
                 _controller.GetRequestsSearch(requestsGrid, searchTerm);
             }
+        }
+
+        private void saveToDocxButton_Click(object sender, EventArgs e)
+        {
+            _controller.ExportToDocx(requestsGrid);
         }
     }
 }

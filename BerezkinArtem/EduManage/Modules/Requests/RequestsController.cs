@@ -1,9 +1,10 @@
-﻿using EduManage.Services.Inventory;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using EduManage.Modules.Inventory;
+using EduManage.Services.Inventory;
 using EduManage.Services.Request;
 using EduManage.Shared;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace EduManage.Modules.Requests
 {
@@ -12,11 +13,13 @@ namespace EduManage.Modules.Requests
         InventoryService _inventoryService;
         RequestService _requestService;
         Context _context;
+        DocumentGenerator _documentGenerator;
         public RequestsController(InventoryService inventoryService, Context context, RequestService requestService)
         {
             _inventoryService = inventoryService;
             _requestService = requestService;
             _context = context;
+            _documentGenerator = new DocumentGenerator();
         }
 
         public void AddInventoryToComboBox(ComboBox inventoruBox)
@@ -112,6 +115,30 @@ namespace EduManage.Modules.Requests
             }
 
             _requestService.UpdateRequest(id, problemBox.Text, Convert.ToInt32(inventoryBox.SelectedValue));
+        }
+
+        public void ExportToDocx(DataGridView grid)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "Word Documents (*.docx)|*.docx";
+                saveFileDialog.Title = "Сохранить заявки как DOCX";
+                saveFileDialog.FileName = $"Заявки_{DateTime.Now:yyyyMMdd}.docx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var dataSource = grid.DataSource as IEnumerable<InventoryDto>;
+                    if (dataSource != null)
+                    {
+                        string description = "Данный документ содержит полный перечень заявок образовательного учреждения.";
+                        _documentGenerator.SaveToDocx(
+                            saveFileDialog.FileName,
+                            "Список заявок",
+                            description,
+                            dataSource);
+                    }
+                }
+            }
         }
     }
 }

@@ -37,6 +37,8 @@ namespace EduManage.Modules.Staff
             this.searchBox = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeActiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label7 = new System.Windows.Forms.Label();
             this.drugPanel = new System.Windows.Forms.Panel();
             this.closeButton = new System.Windows.Forms.Button();
@@ -55,7 +57,7 @@ namespace EduManage.Modules.Staff
             this.label1 = new System.Windows.Forms.Label();
             this.openCreateButton = new System.Windows.Forms.Button();
             this.staffGrid = new System.Windows.Forms.DataGridView();
-            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToDocxButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.drugPanel.SuspendLayout();
             this.createPanel.SuspendLayout();
@@ -89,16 +91,31 @@ namespace EduManage.Modules.Staff
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem,
-            this.updateToolStripMenuItem});
+            this.updateToolStripMenuItem,
+            this.changeActiveToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(187, 70);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.deleteToolStripMenuItem.Text = "Удалить";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.updateToolStripMenuItem.Text = "Обновить";
+            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
+            // 
+            // changeActiveToolStripMenuItem
+            // 
+            this.changeActiveToolStripMenuItem.Name = "changeActiveToolStripMenuItem";
+            this.changeActiveToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.changeActiveToolStripMenuItem.Text = "Сменить активность";
+            this.changeActiveToolStripMenuItem.Click += new System.EventHandler(this.changeActiveToolStripMenuItem_Click);
             // 
             // label7
             // 
@@ -308,12 +325,19 @@ namespace EduManage.Modules.Staff
             this.staffGrid.TabIndex = 8;
             this.staffGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.staffGrid_MouseClick);
             // 
-            // updateToolStripMenuItem
+            // saveToDocxButton
             // 
-            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.updateToolStripMenuItem.Text = "Обновить";
-            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
+            this.saveToDocxButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.saveToDocxButton.FlatAppearance.BorderSize = 0;
+            this.saveToDocxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveToDocxButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveToDocxButton.Location = new System.Drawing.Point(815, 14);
+            this.saveToDocxButton.Name = "saveToDocxButton";
+            this.saveToDocxButton.Size = new System.Drawing.Size(194, 27);
+            this.saveToDocxButton.TabIndex = 23;
+            this.saveToDocxButton.Text = "Сохранить данные";
+            this.saveToDocxButton.UseVisualStyleBackColor = false;
+            this.saveToDocxButton.Click += new System.EventHandler(this.saveToDocxButton_Click);
             // 
             // StaffForm
             // 
@@ -321,6 +345,7 @@ namespace EduManage.Modules.Staff
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1155, 761);
+            this.Controls.Add(this.saveToDocxButton);
             this.Controls.Add(this.createPanel);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.searchBox);
@@ -366,5 +391,7 @@ namespace EduManage.Modules.Staff
         private TextBox departmentBox;
         private DateTimePicker hireDatePicker;
         private ToolStripMenuItem updateToolStripMenuItem;
+        private ToolStripMenuItem changeActiveToolStripMenuItem;
+        private Button saveToDocxButton;
     }
 }

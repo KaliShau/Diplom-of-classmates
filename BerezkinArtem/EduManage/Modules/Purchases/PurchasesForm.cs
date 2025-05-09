@@ -126,5 +126,10 @@ namespace EduManage.Modules.Purchases
             _controller.UpdateStatus(Convert.ToInt32(_selectedId), updateStatustoolStripComboBox);
             _controller.GetPurchases(purchasesGrid);
         }
+
+        private void saveToDocxButton_Click(object sender, EventArgs e)
+        {
+            _controller.ExportToDocx(purchasesGrid);
+        }
     }
 }

@@ -37,6 +37,12 @@
             WHERE id = @id;
         ";
 
+        public string UpdateIsActive = @"
+            UPDATE staff
+            SET is_active = @is_active
+            WHERE id = @id;
+        ";
+
         public string Delete = @"
             DELETE FROM staff
             WHERE id = @id;

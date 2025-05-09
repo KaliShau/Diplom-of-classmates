@@ -99,5 +99,10 @@ namespace EduManage.Modules.Users
                 createButton.Text = "Обновить";
             }
         }
+
+        private void saveToDocxButton_Click(object sender, EventArgs e)
+        {
+            _controller.ExportToDocx(usersGrid);
+        }
     }
 }

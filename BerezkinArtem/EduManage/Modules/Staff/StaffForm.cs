@@ -113,5 +113,16 @@ namespace EduManage.Modules.Staff
                 createButton.Text = "Обновить";
             }
         }
+
+        private void changeActiveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.ChangeActive(Convert.ToInt32(_selectedId));
+            _controller.GetStaff(staffGrid);
+        }
+
+        private void saveToDocxButton_Click(object sender, EventArgs e)
+        {
+            _controller.ExportToDocx(staffGrid);
+        }
     }
 }

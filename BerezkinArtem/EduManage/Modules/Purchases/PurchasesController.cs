@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using EduManage.Modules.Inventory;
 using EduManage.Services.Inventory;
 using EduManage.Services.Purchases;
 using EduManage.Services.Suppliers;
@@ -11,11 +13,13 @@ namespace EduManage.Modules.Purchases
         PurchaseService _purchaseService;
         SuppliersService _suppliersService;
         InventoryService _inventoryService;
+        DocumentGenerator _documentGenerator;
         public PurchasesController(PurchaseService purchaseService, SuppliersService suppliersService, InventoryService inventoryService)
         {
             _purchaseService = purchaseService;
             _suppliersService = suppliersService;
             _inventoryService = inventoryService;
+            _documentGenerator = new DocumentGenerator();
         }
 
         public void AddSuppliersToComboBox(ComboBox supplierBox)
@@ -75,7 +79,7 @@ namespace EduManage.Modules.Purchases
             }
             else
             {
-                _inventoryService.CreateInventiry(purchase.ItemName, "Закупка", purchase.Quantity, purchase.Unit, "Склад", "На складе");
+                _inventoryService.CreateInventiry(purchase.ItemName, "Закупка", purchase.Quantity, purchase.Unit, "Склад", "Новая");
             }
         }
 
@@ -109,6 +113,31 @@ namespace EduManage.Modules.Purchases
             }
 
             _purchaseService.UpdateStatus(id, statusBox.Text);
+        }
+
+        public void ExportToDocx(DataGridView grid)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "Word Documents (*.docx)|*.docx";
+                saveFileDialog.Title = "Сохранить закупки как DOCX";
+                saveFileDialog.FileName = $"Закупки_{DateTime.Now:yyyyMMdd}.docx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var dataSource = grid.DataSource as IEnumerable<InventoryDto>;
+                    if (dataSource != null)
+                    {
+                        string description = "Данный документ содержит полный перечень закупок образовательного учреждения.";
+
+                        _documentGenerator.SaveToDocx(
+                            saveFileDialog.FileName,
+                            "Список Закупок",
+                            description,
+                            dataSource);
+                    }
+                }
+            }
         }
     }
 }
