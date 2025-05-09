@@ -125,7 +125,7 @@ namespace EduManage.Modules.Purchases
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    var dataSource = grid.DataSource as IEnumerable<InventoryDto>;
+                    var dataSource = grid.DataSource as IEnumerable<PurchaseDto>;
                     if (dataSource != null)
                     {
                         string description = "Данный документ содержит полный перечень закупок образовательного учреждения.";

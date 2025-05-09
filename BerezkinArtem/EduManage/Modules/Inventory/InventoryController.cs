@@ -95,6 +95,7 @@ namespace EduManage.Modules.Inventory
                     if (dataSource != null)
                     {
                         string description = "Данный документ содержит полный перечень инвентаря образовательного учреждения.";
+
                         _documentGenerator.SaveToDocx(
                             saveFileDialog.FileName,
                             "Список инвентаря",

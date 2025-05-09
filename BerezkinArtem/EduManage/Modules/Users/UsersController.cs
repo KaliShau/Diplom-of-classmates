@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using EduManage.Modules.Inventory;
-using EduManage.Services.Inventory;
 using EduManage.Services.Role;
 using EduManage.Services.Staff;
 using EduManage.Services.User;
@@ -89,7 +88,7 @@ namespace EduManage.Modules.Users
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    var dataSource = grid.DataSource as IEnumerable<InventoryDto>;
+                    var dataSource = grid.DataSource as IEnumerable<UserDtoAll>;
                     if (dataSource != null)
                     {
                         string description = "Данный документ содержит полный перечень пользователей в этой ифнормационной системе.";

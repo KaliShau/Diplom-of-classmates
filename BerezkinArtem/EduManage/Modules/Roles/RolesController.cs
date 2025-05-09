@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using EduManage.Modules.Inventory;
-using EduManage.Services.Inventory;
 using EduManage.Services.Role;
 
 namespace EduManage.Modules.Roles
@@ -70,7 +69,7 @@ namespace EduManage.Modules.Roles
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    var dataSource = grid.DataSource as IEnumerable<InventoryDto>;
+                    var dataSource = grid.DataSource as IEnumerable<RoleDto>;
                     if (dataSource != null)
                     {
                         string description = "Данный документ содержит полный перечень ролей в этой информационной системе.";

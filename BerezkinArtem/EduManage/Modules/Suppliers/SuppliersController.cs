@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using EduManage.Modules.Inventory;
-using EduManage.Services.Inventory;
 using EduManage.Services.Suppliers;
 
 namespace EduManage.Modules.Suppliers
@@ -82,7 +81,7 @@ namespace EduManage.Modules.Suppliers
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    var dataSource = grid.DataSource as IEnumerable<InventoryDto>;
+                    var dataSource = grid.DataSource as IEnumerable<SupplierDto>;
                     if (dataSource != null)
                     {
                         string description = "Данный документ содержит полный перечень поставщиков образовательного учреждения.";

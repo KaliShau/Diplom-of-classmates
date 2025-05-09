@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using EduManage.Modules.Inventory;
-using EduManage.Services.Inventory;
 using EduManage.Services.Staff;
 using EduManage.Shared;
 
@@ -107,7 +106,7 @@ namespace EduManage.Modules.Staff
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    var dataSource = grid.DataSource as IEnumerable<InventoryDto>;
+                    var dataSource = grid.DataSource as IEnumerable<StaffDto>;
                     if (dataSource != null)
                     {
                         string description = "Данный документ содержит полный перечень персонала образовательного учреждения.";

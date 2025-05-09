@@ -127,7 +127,7 @@ namespace EduManage.Modules.Requests
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    var dataSource = grid.DataSource as IEnumerable<InventoryDto>;
+                    var dataSource = grid.DataSource as IEnumerable<RequestDto>;
                     if (dataSource != null)
                     {
                         string description = "Данный документ содержит полный перечень заявок образовательного учреждения.";
