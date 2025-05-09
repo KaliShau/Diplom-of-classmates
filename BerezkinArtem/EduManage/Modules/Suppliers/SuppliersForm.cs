@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using EduManage.Shared;
 
 namespace EduManage.Modules.Suppliers
 {
+    enum Action { Update, Create }
     public partial class SuppliersForm : Form
     {
         SuppliersController _controller;
         string _selectedId;
+        Action _typeAction;
+
         public SuppliersForm(SuppliersController controller)
         {
             InitializeComponent();
@@ -30,8 +25,16 @@ namespace EduManage.Modules.Suppliers
 
         private void createButton_Click(object sender, EventArgs e)
         {
-            _controller.CreateSupplier(nameBox.Text, contactBox.Text, phoneBox.Text);
-            _controller.GetSuppliers(suppliersGrid);
+            if (_typeAction == Action.Create)
+            {
+                _controller.CreateSupplier(nameBox.Text, contactBox.Text, phoneBox.Text);
+                _controller.GetSuppliers(suppliersGrid);
+            }
+            if (_typeAction == Action.Update)
+            {
+                _controller.UpdateSupplier(Convert.ToInt32(_selectedId), nameBox, contactBox, phoneBox);
+                _controller.GetSuppliers(suppliersGrid);
+            }
         }
 
         private void openCreateButton_Click(object sender, EventArgs e)
@@ -46,6 +49,7 @@ namespace EduManage.Modules.Suppliers
             }
             else
             {
+                _typeAction = Action.Create;
                 createPanel.Visible = true;
                 createButton.Text = "Добавить";
             }
@@ -69,7 +73,7 @@ namespace EduManage.Modules.Suppliers
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _controller.DeleteSuplier(Convert.ToInt32(_selectedId));
+            _controller.DeleteSupplier(Convert.ToInt32(_selectedId));
             _controller.GetSuppliers(suppliersGrid);
         }
 
@@ -85,6 +89,30 @@ namespace EduManage.Modules.Suppliers
             {
                 _controller.GetSuppliersSearch(suppliersGrid, searchTerm);
             }
+        }
+
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            nameBox.Clear();
+            contactBox.Clear();
+            phoneBox.Clear();
+
+            if (createPanel.Visible == true)
+            {
+                createPanel.Visible = false;
+            }
+            else
+            {
+                _controller.GetUpdatedSupplier(Convert.ToInt32(_selectedId), nameBox, contactBox, phoneBox);
+                _typeAction = Action.Update;
+                createPanel.Visible = true;
+                createButton.Text = "Обновить";
+            }
+        }
+
+        private void saveToDocxButton_Click(object sender, EventArgs e)
+        {
+            _controller.ExportToDocx(suppliersGrid);
         }
     }
 }

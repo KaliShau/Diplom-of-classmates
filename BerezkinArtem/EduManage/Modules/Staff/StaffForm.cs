@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EduManage.Modules.Staff
 {
+    enum Action { Update, Create }
     public partial class StaffForm : Form
     {
         StaffController _controller;
         string _selectedId;
+        Action _typeAction;
+
         public StaffForm(StaffController controller)
         {
             InitializeComponent();
@@ -29,6 +25,10 @@ namespace EduManage.Modules.Staff
 
         private void openCreateButton_Click(object sender, EventArgs e)
         {
+            nameBox.Clear();
+            positionBox.Clear();
+            departmentBox.Clear();
+            phoneBox.Clear();
 
             if (createPanel.Visible == true)
             {
@@ -36,6 +36,7 @@ namespace EduManage.Modules.Staff
             }
             else
             {
+                _typeAction = Action.Create;
                 createPanel.Visible = true;
                 createButton.Text = "Добавить";
             }
@@ -43,8 +44,16 @@ namespace EduManage.Modules.Staff
 
         private void createButton_Click(object sender, EventArgs e)
         {
-            _controller.CreateStaff(nameBox, positionBox, departmentBox, phoneBox, hireDatePicker);
-            _controller.GetStaff(staffGrid);
+            if (_typeAction == Action.Create)
+            {
+                _controller.CreateStaff(nameBox, positionBox, departmentBox, phoneBox, hireDatePicker);
+                _controller.GetStaff(staffGrid);
+            }
+            if (_typeAction == Action.Update)
+            {
+                _controller.UpdateStaff(Convert.ToInt32(_selectedId), nameBox, positionBox, departmentBox, phoneBox, hireDatePicker);
+                _controller.GetStaff(staffGrid);
+            }
         }
 
         private void staffGrid_MouseClick(object sender, MouseEventArgs e)
@@ -82,6 +91,38 @@ namespace EduManage.Modules.Staff
             {
                 _controller.GetStaffsSearch(staffGrid, searchTerm);
             }
+        }
+
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            nameBox.Clear();
+            positionBox.Clear();
+            departmentBox.Clear();
+            phoneBox.Clear();
+
+            if (createPanel.Visible == true)
+            {
+                createPanel.Visible = false;
+            }
+            else
+            {
+                _controller.GetUpdatedStaff(Convert.ToInt32(_selectedId), nameBox, positionBox, departmentBox, phoneBox, hireDatePicker);
+
+                _typeAction = Action.Update;
+                createPanel.Visible = true;
+                createButton.Text = "Обновить";
+            }
+        }
+
+        private void changeActiveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.ChangeActive(Convert.ToInt32(_selectedId));
+            _controller.GetStaff(staffGrid);
+        }
+
+        private void saveToDocxButton_Click(object sender, EventArgs e)
+        {
+            _controller.ExportToDocx(staffGrid);
         }
     }
 }

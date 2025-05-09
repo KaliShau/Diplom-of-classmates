@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using EduManage.Services.Inventory;
 
@@ -11,9 +8,12 @@ namespace EduManage.Modules.Inventory
     public class InventoryController
     {
         InventoryService _inventoryService;
+        DocumentGenerator _documentGenerator;
+
         public InventoryController(InventoryService inventoryService)
         {
             _inventoryService = inventoryService;
+            _documentGenerator = new DocumentGenerator();
         }
 
         public void GetInventory(DataGridView inventoryGrid)
@@ -37,8 +37,6 @@ namespace EduManage.Modules.Inventory
                 MessageBox.Show("Заполните поля!");
                 return;
             }
-
-
 
             _inventoryService.CreateInventiry(nameBox.Text, categortBox.Text, Convert.ToInt16(quantity.Value), unitBox.Text, roomBox.Text, statusBox.Text);
 
@@ -67,7 +65,7 @@ namespace EduManage.Modules.Inventory
 
         public void GetByIdToUpdate(int id, TextBox nameBox, TextBox categortBox, NumericUpDown quantity, TextBox unitBox, TextBox roomBox, ComboBox statusBox)
         {
-            var inventory = _inventoryService.GetById(id);  
+            var inventory = _inventoryService.GetById(id);
 
             nameBox.Text = inventory.Name;
             categortBox.Text = inventory.Category;
@@ -81,6 +79,31 @@ namespace EduManage.Modules.Inventory
         public void ChangeStatus(int id, string status)
         {
             _inventoryService.UpdateInventoryStatus(id, status);
+        }
+
+        public void ExportToDocx(DataGridView grid)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "Word Documents (*.docx)|*.docx";
+                saveFileDialog.Title = "Сохранить инвентарь как DOCX";
+                saveFileDialog.FileName = $"Инвентарь_{DateTime.Now:yyyyMMdd}.docx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var dataSource = grid.DataSource as IEnumerable<InventoryDto>;
+                    if (dataSource != null)
+                    {
+                        string description = "Данный документ содержит полный перечень инвентаря образовательного учреждения.";
+
+                        _documentGenerator.SaveToDocx(
+                            saveFileDialog.FileName,
+                            "Список инвентаря",
+                            description,
+                            dataSource);
+                    }
+                }
+            }
         }
     }
 }

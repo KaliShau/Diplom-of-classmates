@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 using EduManage.Shared.Main;
 using Npgsql;
-using System.Windows.Forms;
 
 namespace EduManage.Services.Purchases
 {
@@ -48,7 +45,34 @@ namespace EduManage.Services.Purchases
                 MessageBox.Show($"Ошибка при создании закупки: {ex.Message}");
             }
         }
+        public void UpdatePurchase(PurchaseDto purchase)
+        {
+            try
+            {
+                NpgsqlParameter[] parameters = {
+                    new NpgsqlParameter("@supplierId", purchase.SupplierId),
+                    new NpgsqlParameter("@itemName", purchase.ItemName),
+                    new NpgsqlParameter("@quantity", purchase.Quantity),
+                    new NpgsqlParameter("@unit", purchase.Unit),
+                    new NpgsqlParameter("@id", purchase.Id),
+                };
 
+                var rowsAffected = _repository.Execute(_sql.Update, parameters);
+
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show("Заявка обновлена!");
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при создании закупки: {ex.Message}");
+            }
+        }
         public void UpdateStatus(int id, string status)
         {
             try
@@ -119,8 +143,6 @@ namespace EduManage.Services.Purchases
                 Date = Convert.ToDateTime(reader["date"])
             }, new NpgsqlParameter("@searchTerm", searchTerm)).ToArray();
         }
-
-        
 
         public void DeletePurchase(int id)
         {

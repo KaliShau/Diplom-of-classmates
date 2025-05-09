@@ -1,28 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
+using EduManage.Services.Role;
+using EduManage.Services.Staff;
 using EduManage.Shared.Main;
 using Npgsql;
-using System.Windows.Forms;
-using EduManage.Services.Staff;
-using EduManage.Services.Role;
-using System.ComponentModel.DataAnnotations;
-
 
 namespace EduManage.Services.User
 {
-    public class UserService
+    public class UserService : IDisposable
     {
-        DatabaseRepository _repository;
-        UserSQL _sql;
-        StaffService _staffService;
+        private readonly DatabaseRepository _repository;
+        private readonly UserSQL _sql;
+        private readonly StaffService _staffService;
+        private bool _disposed = false;
+
         public UserService(DatabaseRepository databaseRepository, StaffService staffService)
         {
-            _repository = databaseRepository;
+            _repository = databaseRepository ?? throw new ArgumentNullException(nameof(databaseRepository));
             _sql = new UserSQL();
-            _staffService = staffService;
+            _staffService = staffService ?? throw new ArgumentNullException(nameof(staffService));
         }
 
         public UserWithStaffDto SignIn(string login, string password)
@@ -84,6 +82,7 @@ namespace EduManage.Services.User
                 {
                     Id = Convert.ToInt32(reader["id"]),
                     Login = reader["login"].ToString(),
+                    Password = reader["password"].ToString(),
                     RoleId = Convert.ToInt32(reader["role_id"]),
                     RoleName = reader["role_name"].ToString(),
                     StaffId = reader["staff_id"] != DBNull.Value ? Convert.ToInt32(reader["staff_id"]) : (int?)null,
@@ -102,33 +101,59 @@ namespace EduManage.Services.User
             }
         }
 
+        public UserDtoAll GetById(int id)
+        {
+            try
+            {
+                return _repository.Query<UserDtoAll>(_sql.GetById, reader => new UserDtoAll
+                {
+                    Id = Convert.ToInt32(reader["id"]),
+                    Login = reader["login"].ToString(),
+                    Password = reader["password"].ToString(),
+                    RoleId = Convert.ToInt32(reader["role_id"]),
+                    RoleName = reader["role_name"].ToString(),
+                    StaffId = reader["staff_id"] != DBNull.Value ? Convert.ToInt32(reader["staff_id"]) : (int?)null,
+                    StaffFullName = reader["full_name"]?.ToString(),
+                    StaffPosition = reader["position"]?.ToString(),
+                    StaffDepartment = reader["department"]?.ToString(),
+                    StaffPhone = reader["phone"]?.ToString(),
+                    StaffHireDate = reader["hire_date"] != DBNull.Value ? Convert.ToDateTime(reader["hire_date"]) : (DateTime?)null,
+                    StaffIsActive = reader["is_active"] != DBNull.Value ? Convert.ToBoolean(reader["is_active"]) : (bool?)null
+                }, new NpgsqlParameter("@id", id)).Single();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при получении пользователя: {ex.Message}");
+                return null;
+            }
+        }
 
-        public void CreateUser(UserCreateDto userDto)
+        public bool CreateUser(UserCreateDto userDto)
         {
             var transaction = _repository.BeginTransaction();
             try
             {
-                // Валидация
                 var validationContext = new ValidationContext(userDto);
                 Validator.ValidateObject(userDto, validationContext, true);
 
-                // 1. Создаем пользователя
                 var userParams = new NpgsqlParameter[]
                 {
-            new NpgsqlParameter("@login", userDto.Login),
-            new NpgsqlParameter("@password", userDto.Password),
-            new NpgsqlParameter("@roleId", userDto.RoleId)
+                    new NpgsqlParameter("@login", userDto.Login),
+                    new NpgsqlParameter("@password", userDto.Password),
+                    new NpgsqlParameter("@roleId", userDto.RoleId)
                 };
 
                 int userId = _repository.ExecuteScalar<int>(_sql.Create, transaction, userParams);
 
                 if (userId == 0)
-                    throw new Exception("Не удалось создать пользователя");
+                {
+                    _repository.RollbackTransaction();
+                    MessageBox.Show("Не удалось создать пользователя");
+                    return false;
+                }
 
-                // 2. Привязываем к сотруднику (если указано)
                 if (userDto.StaffId.HasValue)
                 {
-                    // Проверяем, не привязан ли уже сотрудник
                     bool staffHasUser = _repository.ExecuteScalar<bool>(
                         "SELECT EXISTS(SELECT 1 FROM staff WHERE id = @staffId AND user_id IS NOT NULL)",
                         transaction,
@@ -137,10 +162,11 @@ namespace EduManage.Services.User
 
                     if (staffHasUser)
                     {
-                        throw new Exception("Этот сотрудник уже привязан к другому пользователю");
+                        _repository.RollbackTransaction();
+                        MessageBox.Show("Этот сотрудник уже привязан к другому пользователю");
+                        return false;
                     }
 
-                    // Выполняем привязку
                     int staffUpdated = _repository.Execute(
                         _sql.UpdateStaffUserId,
                         transaction,
@@ -150,103 +176,148 @@ namespace EduManage.Services.User
 
                     if (staffUpdated == 0)
                     {
-                        throw new Exception("Сотрудник не найден");
+                        _repository.RollbackTransaction();
+                        MessageBox.Show("Сотрудник не найден");
+                        return false;
                     }
                 }
 
                 _repository.CommitTransaction();
                 MessageBox.Show("Пользователь успешно создан!");
+                return true;
             }
             catch (ValidationException ex)
             {
                 _repository.RollbackTransaction();
                 MessageBox.Show($"Ошибка валидации: {ex.Message}");
-            }
-            catch (PostgresException ex) when (ex.SqlState == "23505")
-            {
-                _repository.RollbackTransaction();
-                MessageBox.Show("Ошибка: логин уже занят");
+                return false;
             }
             catch (Exception ex)
             {
                 _repository.RollbackTransaction();
                 MessageBox.Show($"Ошибка при создании пользователя: {ex.Message}");
-            }
-            finally
-            {
-                _repository.Dispose();
+                return false;
             }
         }
 
-
-        public void UpdateUser(UserDto user)
+        public bool UpdateUser(UserUpdateDto userDto)
         {
+            var transaction = _repository.BeginTransaction();
             try
             {
-                NpgsqlParameter[] parameters = {
-                    new NpgsqlParameter("@id", user.Id),
-                    new NpgsqlParameter("@login", user.Login),
-                    new NpgsqlParameter("@password", user.Password),
-                    new NpgsqlParameter("@roleId", user.Role.Id)
+                var validationContext = new ValidationContext(userDto);
+                Validator.ValidateObject(userDto, validationContext, true);
+
+                var userParams = new NpgsqlParameter[]
+                {
+                    new NpgsqlParameter("@id", userDto.Id),
+                    new NpgsqlParameter("@login", userDto.Login),
+                    new NpgsqlParameter("@password", userDto.Password),
+                    new NpgsqlParameter("@roleId", userDto.RoleId),
+                    new NpgsqlParameter("@staffId", userDto.StaffId ?? (object)DBNull.Value)
                 };
 
-                int rowsAffected = _repository.Execute(_sql.Update, parameters);
-                if (rowsAffected > 0)
+                int rowsAffected = _repository.Execute(_sql.Update, transaction, userParams);
+
+                if (rowsAffected == 0)
                 {
-                    MessageBox.Show("Пользователь обновлен!");
+                    _repository.RollbackTransaction();
+                    MessageBox.Show("Пользователь не найден");
+                    return false;
                 }
-                else
+
+                if (userDto.StaffId.HasValue)
                 {
-                    MessageBox.Show("Ошибка!");
+                    bool staffHasOtherUser = _repository.ExecuteScalar<bool>(
+                        "SELECT EXISTS(SELECT 1 FROM staff WHERE id = @staffId AND user_id IS NOT NULL AND user_id != @userId)",
+                        transaction,
+                        new NpgsqlParameter("@staffId", userDto.StaffId.Value),
+                        new NpgsqlParameter("@userId", userDto.Id)
+                    );
+
+                    if (staffHasOtherUser)
+                    {
+                        _repository.RollbackTransaction();
+                        MessageBox.Show("Этот сотрудник уже привязан к другому пользователю");
+                        return false;
+                    }
                 }
+
+                _repository.CommitTransaction();
+                MessageBox.Show("Пользователь успешно обновлен!");
+                return true;
+            }
+            catch (ValidationException ex)
+            {
+                _repository.RollbackTransaction();
+                MessageBox.Show($"Ошибка валидации: {ex.Message}");
+                return false;
             }
             catch (Exception ex)
             {
+                _repository.RollbackTransaction();
                 MessageBox.Show($"Ошибка при обновлении пользователя: {ex.Message}");
+                return false;
             }
         }
 
-        public void DeleteUser(int id)
+        public bool DeleteUser(int id)
         {
-            using (var transaction = _repository.BeginTransaction())
+            var transaction = _repository.BeginTransaction();
+            try
             {
-                try
-                {
-                    // 1. Сначала обновляем связанного сотрудника (если есть)
-                    _repository.Execute(
-                        "UPDATE staff SET user_id = NULL WHERE user_id = @id",
-                        transaction,
-                        new NpgsqlParameter("@id", id)
-                    );
+                int staffUpdated = _repository.Execute(
+                    "UPDATE staff SET user_id = NULL WHERE user_id = @id",
+                    transaction,
+                    new NpgsqlParameter("@id", id)
+                );
 
-                    // 2. Затем удаляем пользователя
-                    int rowsAffected = _repository.Execute(
-                        _sql.Delete,
-                        transaction,
-                        new NpgsqlParameter("@id", id)
-                    );
+                int rowsAffected = _repository.Execute(
+                    _sql.Delete,
+                    transaction,
+                    new NpgsqlParameter("@id", id)
+                );
 
-                    if (rowsAffected > 0)
-                    {
-                        transaction.Commit();
-                        MessageBox.Show("Пользователь успешно удален!");
-                    }
-                    else
-                    {
-                        transaction.Rollback();
-                        MessageBox.Show("Пользователь не найден!");
-                    }
-                }
-                catch (PostgresException ex) when (ex.SqlState == "23503")
+                if (rowsAffected == 0)
                 {
-                    transaction.Rollback();
-                    MessageBox.Show("Нельзя удалить пользователя: имеются связанные записи в других таблицах");
+                    _repository.RollbackTransaction();
+                    MessageBox.Show("Пользователь не найден");
+                    return false;
                 }
-                catch (Exception ex)
+
+                _repository.CommitTransaction();
+                MessageBox.Show("Пользователь успешно удален!");
+                return true;
+            }
+            catch (PostgresException ex) when (ex.SqlState == "23503")
+            {
+                _repository.RollbackTransaction();
+                MessageBox.Show("Нельзя удалить пользователя: имеются связанные записи в других таблицах");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                _repository.RollbackTransaction();
+                MessageBox.Show($"Ошибка при удалении пользователя: {ex.Message}");
+                return false;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
                 {
-                    transaction.Rollback();
-                    MessageBox.Show($"Ошибка при удалении пользователя: {ex.Message}");
+                    _repository?.Dispose();
                 }
+                _disposed = true;
             }
         }
     }

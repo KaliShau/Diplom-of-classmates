@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 using EduManage.Shared.Main;
 using Npgsql;
-using System.Windows.Forms;
 
 namespace EduManage.Services.Request
 {
@@ -121,15 +118,42 @@ namespace EduManage.Services.Request
             try
             {
                 NpgsqlParameter[] parameters = {
-            new NpgsqlParameter("@requestId", requestId),
-            new NpgsqlParameter("@status", newStatus)
-        };
+                    new NpgsqlParameter("@requestId", requestId),
+                    new NpgsqlParameter("@status", newStatus)
+                };
 
                 int rowsAffected = _repository.Execute(_sql.UpdateStatus, parameters);
 
                 if (rowsAffected > 0)
                 {
                     MessageBox.Show("Статус обновлен!");
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating request status: {ex.Message}");
+            }
+        }
+
+        public void UpdateRequest(int requestId, string problem, int inventoryId)
+        {
+            try
+            {
+                NpgsqlParameter[] parameters = {
+                    new NpgsqlParameter("@requestId", requestId),
+                    new NpgsqlParameter("@problem", problem),
+                    new NpgsqlParameter("@inventory_id", inventoryId)
+                };
+
+                int rowsAffected = _repository.Execute(_sql.Update, parameters);
+
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show("Заявка обновлена!");
                 }
                 else
                 {

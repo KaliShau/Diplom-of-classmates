@@ -32,14 +32,18 @@ namespace EduManage.Modules.Purchases
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.searchButton = new System.Windows.Forms.Button();
             this.searchBox = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.addToInventoruToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.статусToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateStatustoolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.updateStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label7 = new System.Windows.Forms.Label();
             this.drugPanel = new System.Windows.Forms.Panel();
             this.closeButton = new System.Windows.Forms.Button();
@@ -56,6 +60,7 @@ namespace EduManage.Modules.Purchases
             this.label1 = new System.Windows.Forms.Label();
             this.openCreateButton = new System.Windows.Forms.Button();
             this.purchasesGrid = new System.Windows.Forms.DataGridView();
+            this.saveToDocxButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.drugPanel.SuspendLayout();
             this.createPanel.SuspendLayout();
@@ -90,10 +95,12 @@ namespace EduManage.Modules.Purchases
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem,
+            this.updateToolStripMenuItem,
             this.toolStripSeparator1,
-            this.addToInventoruToolStripMenuItem});
+            this.addToInventoruToolStripMenuItem,
+            this.статусToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(196, 54);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(196, 98);
             // 
             // deleteToolStripMenuItem
             // 
@@ -101,6 +108,13 @@ namespace EduManage.Modules.Purchases
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.deleteToolStripMenuItem.Text = "Удалить";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.updateToolStripMenuItem.Text = "Обновить";
+            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -113,6 +127,32 @@ namespace EduManage.Modules.Purchases
             this.addToInventoruToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.addToInventoruToolStripMenuItem.Text = "Добавить в инвентарь";
             this.addToInventoruToolStripMenuItem.Click += new System.EventHandler(this.addToInventoruToolStripMenuItem_Click);
+            // 
+            // статусToolStripMenuItem
+            // 
+            this.статусToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.updateStatustoolStripComboBox,
+            this.updateStatusToolStripMenuItem});
+            this.статусToolStripMenuItem.Name = "статусToolStripMenuItem";
+            this.статусToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.статусToolStripMenuItem.Text = "Статус";
+            // 
+            // updateStatustoolStripComboBox
+            // 
+            this.updateStatustoolStripComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.updateStatustoolStripComboBox.Items.AddRange(new object[] {
+            "Новая",
+            "Отклонена",
+            "Отправлено на склад"});
+            this.updateStatustoolStripComboBox.Name = "updateStatustoolStripComboBox";
+            this.updateStatustoolStripComboBox.Size = new System.Drawing.Size(121, 23);
+            // 
+            // updateStatusToolStripMenuItem
+            // 
+            this.updateStatusToolStripMenuItem.Name = "updateStatusToolStripMenuItem";
+            this.updateStatusToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.updateStatusToolStripMenuItem.Text = "Обновить";
+            this.updateStatusToolStripMenuItem.Click += new System.EventHandler(this.updateStatusToolStripMenuItem_Click);
             // 
             // label7
             // 
@@ -185,7 +225,7 @@ namespace EduManage.Modules.Purchases
             this.createPanel.Controls.Add(this.createButton);
             this.createPanel.Controls.Add(this.label2);
             this.createPanel.Controls.Add(this.nameBox);
-            this.createPanel.Location = new System.Drawing.Point(16, 40);
+            this.createPanel.Location = new System.Drawing.Point(20, 47);
             this.createPanel.Name = "createPanel";
             this.createPanel.Size = new System.Drawing.Size(1127, 291);
             this.createPanel.TabIndex = 14;
@@ -273,7 +313,7 @@ namespace EduManage.Modules.Purchases
             this.openCreateButton.FlatAppearance.BorderSize = 0;
             this.openCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.openCreateButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openCreateButton.Location = new System.Drawing.Point(1014, 11);
+            this.openCreateButton.Location = new System.Drawing.Point(1015, 14);
             this.openCreateButton.Name = "openCreateButton";
             this.openCreateButton.Size = new System.Drawing.Size(128, 27);
             this.openCreateButton.TabIndex = 12;
@@ -283,8 +323,8 @@ namespace EduManage.Modules.Purchases
             // 
             // purchasesGrid
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.purchasesGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.purchasesGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.purchasesGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.purchasesGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.purchasesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -294,13 +334,27 @@ namespace EduManage.Modules.Purchases
             this.purchasesGrid.Name = "purchasesGrid";
             this.purchasesGrid.ReadOnly = true;
             this.purchasesGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.purchasesGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.purchasesGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.purchasesGrid.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.purchasesGrid.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.purchasesGrid.Size = new System.Drawing.Size(1155, 626);
             this.purchasesGrid.TabIndex = 8;
             this.purchasesGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.purchasesGrid_MouseClick);
+            // 
+            // saveToDocxButton
+            // 
+            this.saveToDocxButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.saveToDocxButton.FlatAppearance.BorderSize = 0;
+            this.saveToDocxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveToDocxButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveToDocxButton.Location = new System.Drawing.Point(815, 14);
+            this.saveToDocxButton.Name = "saveToDocxButton";
+            this.saveToDocxButton.Size = new System.Drawing.Size(194, 27);
+            this.saveToDocxButton.TabIndex = 15;
+            this.saveToDocxButton.Text = "Сохранить данные";
+            this.saveToDocxButton.UseVisualStyleBackColor = false;
+            this.saveToDocxButton.Click += new System.EventHandler(this.saveToDocxButton_Click);
             // 
             // PurchasesForm
             // 
@@ -308,6 +362,7 @@ namespace EduManage.Modules.Purchases
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1155, 761);
+            this.Controls.Add(this.saveToDocxButton);
             this.Controls.Add(this.createPanel);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.searchBox);
@@ -358,5 +413,10 @@ namespace EduManage.Modules.Purchases
         private Label label3;
         private TextBox unitBox;
         private ToolStripMenuItem addToInventoruToolStripMenuItem;
+        private ToolStripMenuItem updateToolStripMenuItem;
+        private ToolStripMenuItem статусToolStripMenuItem;
+        private ToolStripComboBox updateStatustoolStripComboBox;
+        private ToolStripMenuItem updateStatusToolStripMenuItem;
+        private Button saveToDocxButton;
     }
 }

@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using System;
+﻿using System;
+using System.ComponentModel;
 
 namespace EduManage.Services.Staff
 {
@@ -26,7 +26,7 @@ namespace EduManage.Services.Staff
         [DisplayName("Дата приема")]
         public DateTime HireDate { get; set; }
 
-        [DisplayName("Активный")]
+        [DisplayName("Роботает")]
         public bool IsActive { get; set; }
     }
 }

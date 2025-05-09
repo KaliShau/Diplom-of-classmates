@@ -1,8 +1,10 @@
-﻿using EduManage.Services.Inventory;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using EduManage.Modules.Inventory;
+using EduManage.Services.Inventory;
 using EduManage.Services.Request;
 using EduManage.Shared;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace EduManage.Modules.Requests
 {
@@ -11,11 +13,13 @@ namespace EduManage.Modules.Requests
         InventoryService _inventoryService;
         RequestService _requestService;
         Context _context;
+        DocumentGenerator _documentGenerator;
         public RequestsController(InventoryService inventoryService, Context context, RequestService requestService)
         {
             _inventoryService = inventoryService;
             _requestService = requestService;
             _context = context;
+            _documentGenerator = new DocumentGenerator();
         }
 
         public void AddInventoryToComboBox(ComboBox inventoruBox)
@@ -25,9 +29,16 @@ namespace EduManage.Modules.Requests
             inventoruBox.ValueMember = "id";
         }
 
-        public void CreateRequests(int inventoryId, string problem)
+        public void CreateRequests(TextBox problemBox, ComboBox inventoryBox)
         {
-            _requestService.CreateRequest(inventoryId, _context.User.Id, problem);
+            if (string.IsNullOrEmpty(problemBox.Text) || string.IsNullOrEmpty(inventoryBox.Text))
+            {
+                MessageBox.Show("Заполните поля!");
+                return;
+
+            }
+
+            _requestService.CreateRequest(Convert.ToInt32(inventoryBox.SelectedValue), _context.User.Id, problemBox.Text);
         }
 
         public void GetRequests(DataGridView requestsGrid)
@@ -86,6 +97,48 @@ namespace EduManage.Modules.Requests
             };
             statusMenu.DropDownItems.Add(changeStatusItem);
 
+        }
+
+        public void GetUpdatedRequest(int id, TextBox problemBox, ComboBox inventoryBox)
+        {
+            var request = _requestService.GetById(id);
+
+            problemBox.Text = request.Problem;
+            inventoryBox.SelectedValue = request.InventoryId;
+        }
+
+        public void UpdateRequest(int id, TextBox problemBox, ComboBox inventoryBox)
+        {
+            if (string.IsNullOrEmpty(problemBox.Text) || string.IsNullOrEmpty(inventoryBox.Text))
+            {
+                MessageBox.Show("Заполните поля!");
+            }
+
+            _requestService.UpdateRequest(id, problemBox.Text, Convert.ToInt32(inventoryBox.SelectedValue));
+        }
+
+        public void ExportToDocx(DataGridView grid)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "Word Documents (*.docx)|*.docx";
+                saveFileDialog.Title = "Сохранить заявки как DOCX";
+                saveFileDialog.FileName = $"Заявки_{DateTime.Now:yyyyMMdd}.docx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var dataSource = grid.DataSource as IEnumerable<RequestDto>;
+                    if (dataSource != null)
+                    {
+                        string description = "Данный документ содержит полный перечень заявок образовательного учреждения.";
+                        _documentGenerator.SaveToDocx(
+                            saveFileDialog.FileName,
+                            "Список заявок",
+                            description,
+                            dataSource);
+                    }
+                }
+            }
         }
     }
 }

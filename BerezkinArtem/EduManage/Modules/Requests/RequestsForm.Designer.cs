@@ -36,6 +36,7 @@ namespace EduManage.Modules.Requests
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.closeButton = new System.Windows.Forms.Button();
@@ -49,6 +50,7 @@ namespace EduManage.Modules.Requests
             this.label1 = new System.Windows.Forms.Label();
             this.openCreateButton = new System.Windows.Forms.Button();
             this.requestsGrid = new System.Windows.Forms.DataGridView();
+            this.saveToDocxButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.createPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.requestsGrid)).BeginInit();
@@ -57,15 +59,22 @@ namespace EduManage.Modules.Requests
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteToolStripMenuItem});
+            this.deleteToolStripMenuItem,
+            this.updateToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(119, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(129, 48);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.deleteToolStripMenuItem.Text = "Удалить";
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.updateToolStripMenuItem.Text = "Обновить";
             // 
             // searchButton
             // 
@@ -147,7 +156,7 @@ namespace EduManage.Modules.Requests
             this.createPanel.Controls.Add(this.createButton);
             this.createPanel.Controls.Add(this.label3);
             this.createPanel.Controls.Add(this.label2);
-            this.createPanel.Location = new System.Drawing.Point(16, 50);
+            this.createPanel.Location = new System.Drawing.Point(16, 47);
             this.createPanel.Name = "createPanel";
             this.createPanel.Size = new System.Drawing.Size(1127, 290);
             this.createPanel.TabIndex = 14;
@@ -199,7 +208,7 @@ namespace EduManage.Modules.Requests
             this.openCreateButton.FlatAppearance.BorderSize = 0;
             this.openCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.openCreateButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openCreateButton.Location = new System.Drawing.Point(1015, 18);
+            this.openCreateButton.Location = new System.Drawing.Point(1015, 14);
             this.openCreateButton.Name = "openCreateButton";
             this.openCreateButton.Size = new System.Drawing.Size(128, 27);
             this.openCreateButton.TabIndex = 12;
@@ -228,12 +237,27 @@ namespace EduManage.Modules.Requests
             this.requestsGrid.TabIndex = 8;
             this.requestsGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.requestsGrid_MouseClick);
             // 
+            // saveToDocxButton
+            // 
+            this.saveToDocxButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.saveToDocxButton.FlatAppearance.BorderSize = 0;
+            this.saveToDocxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveToDocxButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveToDocxButton.Location = new System.Drawing.Point(815, 14);
+            this.saveToDocxButton.Name = "saveToDocxButton";
+            this.saveToDocxButton.Size = new System.Drawing.Size(194, 27);
+            this.saveToDocxButton.TabIndex = 16;
+            this.saveToDocxButton.Text = "Сохранить данные";
+            this.saveToDocxButton.UseVisualStyleBackColor = false;
+            this.saveToDocxButton.Click += new System.EventHandler(this.saveToDocxButton_Click);
+            // 
             // RequestsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1155, 761);
+            this.Controls.Add(this.saveToDocxButton);
             this.Controls.Add(this.createPanel);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.label7);
@@ -269,5 +293,7 @@ namespace EduManage.Modules.Requests
         private ComboBox inventoryBox;
         private Label label3;
         private TextBox problemBox;
+        private ToolStripMenuItem updateToolStripMenuItem;
+        private Button saveToDocxButton;
     }
 }

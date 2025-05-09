@@ -49,8 +49,11 @@
         ";
 
         public string GetById = @"
-            SELECT u.id, u.login, u.role_id, r.name as role_name,
-                   s.id as staff_id, s.full_name, s.position, s.department
+            SELECT 
+                u.id, u.login, u.password,
+                r.id as role_id, r.name as role_name,
+                s.id as staff_id, s.full_name, s.position, 
+                s.department, s.phone, s.hire_date, s.is_active
             FROM users u
             JOIN roles r ON u.role_id = r.id
             LEFT JOIN staff s ON u.id = s.user_id
@@ -64,7 +67,17 @@
                 password = @password,
                 role_id = @roleId
             WHERE id = @id;
+    
+            UPDATE staff
+            SET user_id = NULL
+            WHERE user_id = @id;
+    
+            UPDATE staff
+            SET user_id = @id
+            WHERE id = @staffId AND (user_id IS NULL OR user_id = @id);
         ";
+
+
 
         public string Delete = @"
             DELETE FROM users

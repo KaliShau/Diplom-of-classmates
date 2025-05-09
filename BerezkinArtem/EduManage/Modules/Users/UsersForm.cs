@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using EduManage.Shared;
 
 namespace EduManage.Modules.Users
 {
+    enum Action { Update, Create }
     public partial class UsersForm : Form
     {
         UsersController _controller;
         string _selectedId;
+        Action _typeAction;
+
         public UsersForm(UsersController controller)
         {
             InitializeComponent();
@@ -27,8 +22,17 @@ namespace EduManage.Modules.Users
 
         private void createButton_Click(object sender, EventArgs e)
         {
-            _controller.CreateUser(loginBox, passwordBox, roleBox, staffBox);
-            _controller.GetUsers(usersGrid);
+            if (_typeAction == Action.Create)
+            {
+
+                _controller.CreateUser(loginBox, passwordBox, roleBox, staffBox);
+                _controller.GetUsers(usersGrid);
+            }
+            if (_typeAction == Action.Update)
+            {
+                _controller.UpdateUser(Convert.ToInt32(_selectedId), loginBox, passwordBox, roleBox, staffBox);
+                _controller.GetUsers(usersGrid);
+            }
         }
 
         private void usersGrid_MouseClick(object sender, MouseEventArgs e)
@@ -56,12 +60,16 @@ namespace EduManage.Modules.Users
 
         private void openCreateButton_Click(object sender, EventArgs e)
         {
+            loginBox.Clear();
+            passwordBox.Clear();
+
             if (createPanel.Visible == true)
             {
                 createPanel.Visible = false;
             }
             else
             {
+                _typeAction = Action.Create;
                 createPanel.Visible = true;
                 createButton.Text = "Добавить";
             }
@@ -71,6 +79,30 @@ namespace EduManage.Modules.Users
         {
             _controller.DeleteRequest(Convert.ToInt32(_selectedId));
             _controller.GetUsers(usersGrid);
+        }
+
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            loginBox.Clear();
+            passwordBox.Clear();
+
+            if (createPanel.Visible == true)
+            {
+                createPanel.Visible = false;
+            }
+            else
+            {
+                _controller.GetUpdatedUser(Convert.ToInt16(_selectedId), loginBox, passwordBox, roleBox, staffBox);
+
+                _typeAction = Action.Update;
+                createPanel.Visible = true;
+                createButton.Text = "Обновить";
+            }
+        }
+
+        private void saveToDocxButton_Click(object sender, EventArgs e)
+        {
+            _controller.ExportToDocx(usersGrid);
         }
     }
 }

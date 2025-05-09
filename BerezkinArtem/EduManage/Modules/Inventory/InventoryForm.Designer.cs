@@ -63,6 +63,7 @@ namespace EduManage.Modules.Inventory
             this.сменитьСтатусToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripStatusBox = new System.Windows.Forms.ToolStripComboBox();
             this.updateStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToDocxButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryGrid)).BeginInit();
             this.createPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
@@ -132,7 +133,7 @@ namespace EduManage.Modules.Inventory
             this.createPanel.Controls.Add(this.unitBox);
             this.createPanel.Controls.Add(this.categoryBox);
             this.createPanel.Controls.Add(this.nameBox);
-            this.createPanel.Location = new System.Drawing.Point(675, 44);
+            this.createPanel.Location = new System.Drawing.Point(675, 47);
             this.createPanel.Name = "createPanel";
             this.createPanel.Size = new System.Drawing.Size(468, 546);
             this.createPanel.TabIndex = 7;
@@ -189,7 +190,7 @@ namespace EduManage.Modules.Inventory
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(19, 261);
+            this.label6.Location = new System.Drawing.Point(19, 263);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 19);
             this.label6.TabIndex = 5;
@@ -199,7 +200,7 @@ namespace EduManage.Modules.Inventory
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(19, 206);
+            this.label5.Location = new System.Drawing.Point(19, 207);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 19);
             this.label5.TabIndex = 5;
@@ -209,7 +210,7 @@ namespace EduManage.Modules.Inventory
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(19, 146);
+            this.label8.Location = new System.Drawing.Point(19, 147);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(89, 19);
             this.label8.TabIndex = 5;
@@ -219,7 +220,7 @@ namespace EduManage.Modules.Inventory
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(229, 144);
+            this.label4.Location = new System.Drawing.Point(229, 146);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(145, 19);
             this.label4.TabIndex = 5;
@@ -243,7 +244,7 @@ namespace EduManage.Modules.Inventory
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(19, 83);
+            this.label3.Location = new System.Drawing.Point(19, 85);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(79, 19);
             this.label3.TabIndex = 5;
@@ -253,7 +254,7 @@ namespace EduManage.Modules.Inventory
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(19, 25);
+            this.label2.Location = new System.Drawing.Point(19, 27);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 19);
             this.label2.TabIndex = 5;
@@ -385,6 +386,20 @@ namespace EduManage.Modules.Inventory
             this.updateStatusToolStripMenuItem.Text = "Сменить";
             this.updateStatusToolStripMenuItem.Click += new System.EventHandler(this.updateStatusToolStripMenuItem_Click);
             // 
+            // saveToDocxButton
+            // 
+            this.saveToDocxButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.saveToDocxButton.FlatAppearance.BorderSize = 0;
+            this.saveToDocxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveToDocxButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveToDocxButton.Location = new System.Drawing.Point(815, 14);
+            this.saveToDocxButton.Name = "saveToDocxButton";
+            this.saveToDocxButton.Size = new System.Drawing.Size(194, 27);
+            this.saveToDocxButton.TabIndex = 5;
+            this.saveToDocxButton.Text = "Сохранить данные";
+            this.saveToDocxButton.UseVisualStyleBackColor = false;
+            this.saveToDocxButton.Click += new System.EventHandler(this.saveToDocxButton_Click);
+            // 
             // InventoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -394,6 +409,7 @@ namespace EduManage.Modules.Inventory
             this.Controls.Add(this.createPanel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.searchButton);
+            this.Controls.Add(this.saveToDocxButton);
             this.Controls.Add(this.openCreateButton);
             this.Controls.Add(this.inventoryGrid);
             this.Controls.Add(this.searchBox);
@@ -444,5 +460,6 @@ namespace EduManage.Modules.Inventory
         private ComboBox statusBox;
         private NumericUpDown numericUpDown;
         private Label label8;
+        private Button saveToDocxButton;
     }
 }

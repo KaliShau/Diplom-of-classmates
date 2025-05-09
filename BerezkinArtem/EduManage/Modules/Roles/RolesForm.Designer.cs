@@ -45,9 +45,10 @@ namespace EduManage.Modules.Roles
             this.descriptionBox = new System.Windows.Forms.TextBox();
             this.nameBox = new System.Windows.Forms.TextBox();
             this.openCreateButton = new System.Windows.Forms.Button();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToDocxButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.rolesGrid)).BeginInit();
             this.createPanel.SuspendLayout();
             this.drugPanel.SuspendLayout();
@@ -94,7 +95,7 @@ namespace EduManage.Modules.Roles
             this.createPanel.Controls.Add(this.label2);
             this.createPanel.Controls.Add(this.descriptionBox);
             this.createPanel.Controls.Add(this.nameBox);
-            this.createPanel.Location = new System.Drawing.Point(820, 42);
+            this.createPanel.Location = new System.Drawing.Point(820, 47);
             this.createPanel.Name = "createPanel";
             this.createPanel.Size = new System.Drawing.Size(323, 445);
             this.createPanel.TabIndex = 21;
@@ -182,7 +183,7 @@ namespace EduManage.Modules.Roles
             this.openCreateButton.FlatAppearance.BorderSize = 0;
             this.openCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.openCreateButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openCreateButton.Location = new System.Drawing.Point(1015, 13);
+            this.openCreateButton.Location = new System.Drawing.Point(1015, 14);
             this.openCreateButton.Name = "openCreateButton";
             this.openCreateButton.Size = new System.Drawing.Size(128, 27);
             this.openCreateButton.TabIndex = 19;
@@ -190,15 +191,10 @@ namespace EduManage.Modules.Roles
             this.openCreateButton.UseVisualStyleBackColor = false;
             this.openCreateButton.Click += new System.EventHandler(this.openCreateButton_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(115, 6);
-            // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.deleteToolStripMenuItem.Text = "Удалить";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -206,9 +202,30 @@ namespace EduManage.Modules.Roles
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem,
-            this.toolStripSeparator1});
+            this.updateToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(119, 32);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(129, 48);
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.updateToolStripMenuItem.Text = "Обновить";
+            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
+            // 
+            // saveToDocxButton
+            // 
+            this.saveToDocxButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.saveToDocxButton.FlatAppearance.BorderSize = 0;
+            this.saveToDocxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveToDocxButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveToDocxButton.Location = new System.Drawing.Point(815, 14);
+            this.saveToDocxButton.Name = "saveToDocxButton";
+            this.saveToDocxButton.Size = new System.Drawing.Size(194, 27);
+            this.saveToDocxButton.TabIndex = 22;
+            this.saveToDocxButton.Text = "Сохранить данные";
+            this.saveToDocxButton.UseVisualStyleBackColor = false;
+            this.saveToDocxButton.Click += new System.EventHandler(this.saveToDocxButton_Click);
             // 
             // RolesForm
             // 
@@ -216,6 +233,7 @@ namespace EduManage.Modules.Roles
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1155, 761);
+            this.Controls.Add(this.saveToDocxButton);
             this.Controls.Add(this.createPanel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rolesGrid);
@@ -246,8 +264,9 @@ namespace EduManage.Modules.Roles
         private TextBox descriptionBox;
         private TextBox nameBox;
         private Button openCreateButton;
-        private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem deleteToolStripMenuItem;
         private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem updateToolStripMenuItem;
+        private Button saveToDocxButton;
     }
 }

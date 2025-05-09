@@ -94,7 +94,8 @@ namespace EduManage.Services.Suppliers
                 NpgsqlParameter[] parameters = {
                     new NpgsqlParameter("@name", supplier.Name),
                     new NpgsqlParameter("@contact", supplier.Contact ?? (object)DBNull.Value),
-                    new NpgsqlParameter("@phone", supplier.Phone ?? (object)DBNull.Value)
+                    new NpgsqlParameter("@phone", supplier.Phone ?? (object)DBNull.Value),
+                    new NpgsqlParameter("@id", supplier.Id)
                 };
 
                 int rowsAffected = _repository.Execute(_sql.Update, parameters);

@@ -56,5 +56,12 @@
         WHERE id = @requestId
         RETURNING id;
        ";
+
+        public string Update = @"
+        UPDATE requests 
+        SET problem = @problem, inventory_id = @inventory_id
+        WHERE id = @requestId
+        RETURNING id;
+       ";
     }
 }
