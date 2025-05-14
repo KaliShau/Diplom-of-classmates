@@ -171,6 +171,13 @@
     <Compile Include="Modules\Users\UsersForm.Designer.cs">
       <DependentUpon>UsersForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\WorkSchedule\WorkScheduleController.cs" />
+    <Compile Include="Modules\WorkSchedule\WorkScheduleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\WorkSchedule\WorkScheduleForm.Designer.cs">
+      <DependentUpon>WorkScheduleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Inventory\InventoryDTO.cs" />
@@ -194,10 +201,15 @@
     <Compile Include="Services\User\UserDTO.cs" />
     <Compile Include="Services\User\UserService.cs" />
     <Compile Include="Services\User\UserSQL.cs" />
+    <Compile Include="Services\WorkSchedule\WorkScheduleDTO.cs" />
+    <Compile Include="Services\WorkSchedule\WorkScheduleService.cs" />
+    <Compile Include="Services\WorkSchedule\WorkScheduleSQL.cs" />
     <Compile Include="Shared\Context.cs" />
     <Compile Include="Shared\Main\DatabaseRepository.cs" />
     <Compile Include="Shared\Main\FormManager.cs" />
-    <Compile Include="Shared\Utils\DocumentGenerator.cs" />
+    <Compile Include="Shared\Utils\Documents\DocumentGenerator.cs" />
+    <Compile Include="Shared\Utils\Documents\Documents.cs" />
+    <Compile Include="Shared\Utils\Documents\DocumentsDTO.cs" />
     <EmbeddedResource Include="Modules\Home\HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -224,6 +236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Users\UsersForm.resx">
       <DependentUpon>UsersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\WorkSchedule\WorkScheduleForm.resx">
+      <DependentUpon>WorkScheduleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

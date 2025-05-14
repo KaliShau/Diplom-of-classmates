@@ -29,9 +29,9 @@ namespace EduManage.Modules.Purchases
             supplierBox.ValueMember = "id";
         }
 
-        public void CreatePurchases(TextBox nameBox, NumericUpDown quantitu, TextBox unit, ComboBox supplierBox)
+        public void CreatePurchases(TextBox nameBox, NumericUpDown quantitu, TextBox unit, ComboBox supplierBox, TextBox priceBox)
         {
-            if (string.IsNullOrEmpty(nameBox.Text) || string.IsNullOrEmpty(unit.Text) || string.IsNullOrEmpty(supplierBox.Text))
+            if (string.IsNullOrEmpty(nameBox.Text) || string.IsNullOrEmpty(unit.Text) || string.IsNullOrEmpty(supplierBox.Text) || string.IsNullOrEmpty(priceBox.Text))
             {
                 MessageBox.Show("Заполните поля!");
                 return;
@@ -43,7 +43,8 @@ namespace EduManage.Modules.Purchases
                 Unit = unit.Text,
                 Quantity = Convert.ToInt32(quantitu.Value),
                 SupplierId = Convert.ToInt16(supplierBox.SelectedValue),
-                Status = "Новая"
+                Status = "Новая",
+                Price = priceBox.Text
             });
         }
         public void GetPurchases(DataGridView purchasesGrid)
@@ -83,7 +84,7 @@ namespace EduManage.Modules.Purchases
             }
         }
 
-        public void GetUpdatedPurchase(int id, TextBox nameBox, NumericUpDown quantitu, TextBox unit, ComboBox supplierBox)
+        public void GetUpdatedPurchase(int id, TextBox nameBox, NumericUpDown quantitu, TextBox unit, ComboBox supplierBox, TextBox priceBox)
         {
             var purchase = _purchaseService.GetPurchase(id);
 
@@ -91,17 +92,18 @@ namespace EduManage.Modules.Purchases
             quantitu.Value = purchase.Quantity;
             unit.Text = purchase.Unit;
             supplierBox.SelectedValue = purchase.SupplierId;
+            priceBox.Text = purchase.Price;
         }
 
-        public void UpdatePurchase(int id, TextBox nameBox, NumericUpDown quantitu, TextBox unit, ComboBox supplierBox)
+        public void UpdatePurchase(int id, TextBox nameBox, NumericUpDown quantitu, TextBox unit, ComboBox supplierBox, TextBox priceBox)
         {
-            if (string.IsNullOrEmpty(nameBox.Text) || string.IsNullOrEmpty(unit.Text) || string.IsNullOrEmpty(supplierBox.Text))
+            if (string.IsNullOrEmpty(nameBox.Text) || string.IsNullOrEmpty(unit.Text) || string.IsNullOrEmpty(supplierBox.Text) || string.IsNullOrEmpty(priceBox.Text))
             {
                 MessageBox.Show("Заполните поля!");
                 return;
             }
 
-            _purchaseService.UpdatePurchase(new PurchaseDto { ItemName = nameBox.Text, Quantity = Convert.ToInt32(quantitu.Value), Unit = unit.Text, SupplierId = Convert.ToInt32(supplierBox.SelectedValue), Id = id });
+            _purchaseService.UpdatePurchase(new PurchaseDto { ItemName = nameBox.Text, Quantity = Convert.ToInt32(quantitu.Value), Unit = unit.Text, SupplierId = Convert.ToInt32(supplierBox.SelectedValue), Id = id, Price = priceBox.Text });
         }
 
         public void UpdateStatus(int id, ToolStripComboBox statusBox)

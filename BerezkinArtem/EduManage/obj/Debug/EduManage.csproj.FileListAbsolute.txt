@@ -55,3 +55,4 @@ C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\bin\Debug\Do
 C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\bin\Debug\DocumentFormat.OpenXml.Framework.dll
 C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\bin\Debug\DocumentFormat.OpenXml.xml
 C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\bin\Debug\DocumentFormat.OpenXml.Framework.xml
+C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\obj\Debug\EduManage.Modules.WorkSchedule.WorkScheduleForm.resources

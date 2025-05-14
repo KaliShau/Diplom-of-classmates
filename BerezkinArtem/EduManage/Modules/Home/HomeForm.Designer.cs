@@ -39,10 +39,10 @@ namespace EduManage
             this.accountantBox = new System.Windows.Forms.GroupBox();
             this.openStaffButton = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.openPurchasesButton = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.openSuppliersButton = new System.Windows.Forms.Button();
             this.staffBox = new System.Windows.Forms.GroupBox();
+            this.openPurchasesButton = new System.Windows.Forms.Button();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.openRequestsButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
@@ -52,6 +52,8 @@ namespace EduManage
             this.panel2 = new System.Windows.Forms.Panel();
             this.childrenPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.openBusesButton = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.adminBox.SuspendLayout();
             this.accountantBox.SuspendLayout();
@@ -81,7 +83,7 @@ namespace EduManage
             this.adminBox.Controls.Add(this.openRolesButton);
             this.adminBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.adminBox.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.adminBox.Location = new System.Drawing.Point(0, 376);
+            this.adminBox.Location = new System.Drawing.Point(0, 430);
             this.adminBox.Name = "adminBox";
             this.adminBox.Size = new System.Drawing.Size(217, 104);
             this.adminBox.TabIndex = 4;
@@ -131,19 +133,19 @@ namespace EduManage
             // 
             // accountantBox
             // 
-            this.accountantBox.Controls.Add(this.openStaffButton);
-            this.accountantBox.Controls.Add(this.panel6);
-            this.accountantBox.Controls.Add(this.openPurchasesButton);
+            this.accountantBox.Controls.Add(this.openBusesButton);
             this.accountantBox.Controls.Add(this.panel5);
             this.accountantBox.Controls.Add(this.openSuppliersButton);
+            this.accountantBox.Controls.Add(this.panel6);
+            this.accountantBox.Controls.Add(this.openStaffButton);
             this.accountantBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.accountantBox.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.accountantBox.Location = new System.Drawing.Point(0, 229);
+            this.accountantBox.Location = new System.Drawing.Point(0, 276);
             this.accountantBox.Name = "accountantBox";
-            this.accountantBox.Size = new System.Drawing.Size(217, 147);
+            this.accountantBox.Size = new System.Drawing.Size(217, 154);
             this.accountantBox.TabIndex = 3;
             this.accountantBox.TabStop = false;
-            this.accountantBox.Text = "Бухгалтерия";
+            this.accountantBox.Text = "Общие";
             this.accountantBox.Visible = false;
             // 
             // openStaffButton
@@ -153,7 +155,7 @@ namespace EduManage
             this.openStaffButton.FlatAppearance.BorderSize = 0;
             this.openStaffButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.openStaffButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openStaffButton.Location = new System.Drawing.Point(3, 111);
+            this.openStaffButton.Location = new System.Drawing.Point(3, 25);
             this.openStaffButton.Name = "openStaffButton";
             this.openStaffButton.Size = new System.Drawing.Size(211, 34);
             this.openStaffButton.TabIndex = 4;
@@ -165,34 +167,10 @@ namespace EduManage
             // panel6
             // 
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(3, 102);
+            this.panel6.Location = new System.Drawing.Point(3, 59);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(211, 9);
             this.panel6.TabIndex = 3;
-            // 
-            // openPurchasesButton
-            // 
-            this.openPurchasesButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.openPurchasesButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.openPurchasesButton.FlatAppearance.BorderSize = 0;
-            this.openPurchasesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.openPurchasesButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openPurchasesButton.Location = new System.Drawing.Point(3, 68);
-            this.openPurchasesButton.Name = "openPurchasesButton";
-            this.openPurchasesButton.Size = new System.Drawing.Size(211, 34);
-            this.openPurchasesButton.TabIndex = 2;
-            this.openPurchasesButton.Text = "Закупки";
-            this.openPurchasesButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openPurchasesButton.UseVisualStyleBackColor = false;
-            this.openPurchasesButton.Click += new System.EventHandler(this.openPurchasesButton_Click);
-            // 
-            // panel5
-            // 
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(3, 59);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(211, 9);
-            this.panel5.TabIndex = 1;
             // 
             // openSuppliersButton
             // 
@@ -201,7 +179,7 @@ namespace EduManage
             this.openSuppliersButton.FlatAppearance.BorderSize = 0;
             this.openSuppliersButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.openSuppliersButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openSuppliersButton.Location = new System.Drawing.Point(3, 25);
+            this.openSuppliersButton.Location = new System.Drawing.Point(3, 68);
             this.openSuppliersButton.Name = "openSuppliersButton";
             this.openSuppliersButton.Size = new System.Drawing.Size(211, 34);
             this.openSuppliersButton.TabIndex = 0;
@@ -212,6 +190,8 @@ namespace EduManage
             // 
             // staffBox
             // 
+            this.staffBox.Controls.Add(this.openPurchasesButton);
+            this.staffBox.Controls.Add(this.panel7);
             this.staffBox.Controls.Add(this.openRequestsButton);
             this.staffBox.Controls.Add(this.panel3);
             this.staffBox.Controls.Add(this.button1);
@@ -219,11 +199,35 @@ namespace EduManage
             this.staffBox.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.staffBox.Location = new System.Drawing.Point(0, 124);
             this.staffBox.Name = "staffBox";
-            this.staffBox.Size = new System.Drawing.Size(217, 105);
+            this.staffBox.Size = new System.Drawing.Size(217, 152);
             this.staffBox.TabIndex = 2;
             this.staffBox.TabStop = false;
-            this.staffBox.Text = "Техперсонал";
+            this.staffBox.Text = "Инвентарь";
             this.staffBox.Visible = false;
+            // 
+            // openPurchasesButton
+            // 
+            this.openPurchasesButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.openPurchasesButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.openPurchasesButton.FlatAppearance.BorderSize = 0;
+            this.openPurchasesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.openPurchasesButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openPurchasesButton.Location = new System.Drawing.Point(3, 111);
+            this.openPurchasesButton.Name = "openPurchasesButton";
+            this.openPurchasesButton.Size = new System.Drawing.Size(211, 34);
+            this.openPurchasesButton.TabIndex = 4;
+            this.openPurchasesButton.Text = "Закупки";
+            this.openPurchasesButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openPurchasesButton.UseVisualStyleBackColor = false;
+            this.openPurchasesButton.Click += new System.EventHandler(this.openPurchasesButton_Click);
+            // 
+            // panel7
+            // 
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(3, 102);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(211, 9);
+            this.panel7.TabIndex = 3;
             // 
             // openRequestsButton
             // 
@@ -236,7 +240,7 @@ namespace EduManage
             this.openRequestsButton.Name = "openRequestsButton";
             this.openRequestsButton.Size = new System.Drawing.Size(211, 34);
             this.openRequestsButton.TabIndex = 2;
-            this.openRequestsButton.Text = "Заявки";
+            this.openRequestsButton.Text = "Заметки";
             this.openRequestsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.openRequestsButton.UseVisualStyleBackColor = false;
             this.openRequestsButton.Click += new System.EventHandler(this.openRequestsButton_Click);
@@ -330,6 +334,29 @@ namespace EduManage
             this.label1.TabIndex = 0;
             this.label1.Text = "Для продолжения войдите в систему!";
             // 
+            // openBusesButton
+            // 
+            this.openBusesButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.openBusesButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.openBusesButton.FlatAppearance.BorderSize = 0;
+            this.openBusesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.openBusesButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openBusesButton.Location = new System.Drawing.Point(3, 111);
+            this.openBusesButton.Name = "openBusesButton";
+            this.openBusesButton.Size = new System.Drawing.Size(211, 34);
+            this.openBusesButton.TabIndex = 5;
+            this.openBusesButton.Text = "Автобусы";
+            this.openBusesButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openBusesButton.UseVisualStyleBackColor = false;
+            // 
+            // panel5
+            // 
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(3, 102);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(211, 9);
+            this.panel5.TabIndex = 6;
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -366,8 +393,6 @@ namespace EduManage
         private Button openRequestsButton;
         private Panel panel3;
         private GroupBox accountantBox;
-        private Button openPurchasesButton;
-        private Panel panel5;
         private Button openSuppliersButton;
         private Button openStaffButton;
         private Panel panel6;
@@ -375,5 +400,9 @@ namespace EduManage
         private Button openUsersButton;
         private Panel panel8;
         private Button openRolesButton;
+        private Button openPurchasesButton;
+        private Panel panel7;
+        private Button openBusesButton;
+        private Panel panel5;
     }
 }

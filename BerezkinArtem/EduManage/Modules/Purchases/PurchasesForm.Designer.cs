@@ -61,6 +61,8 @@ namespace EduManage.Modules.Purchases
             this.openCreateButton = new System.Windows.Forms.Button();
             this.purchasesGrid = new System.Windows.Forms.DataGridView();
             this.saveToDocxButton = new System.Windows.Forms.Button();
+            this.priceBox = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.drugPanel.SuspendLayout();
             this.createPanel.SuspendLayout();
@@ -218,8 +220,10 @@ namespace EduManage.Modules.Purchases
             this.createPanel.Controls.Add(this.numericUpDown);
             this.createPanel.Controls.Add(this.supplierBox);
             this.createPanel.Controls.Add(this.label8);
+            this.createPanel.Controls.Add(this.label9);
             this.createPanel.Controls.Add(this.label3);
             this.createPanel.Controls.Add(this.label4);
+            this.createPanel.Controls.Add(this.priceBox);
             this.createPanel.Controls.Add(this.unitBox);
             this.createPanel.Controls.Add(this.drugPanel);
             this.createPanel.Controls.Add(this.createButton);
@@ -246,7 +250,7 @@ namespace EduManage.Modules.Purchases
             this.supplierBox.FormattingEnabled = true;
             this.supplierBox.Location = new System.Drawing.Point(19, 172);
             this.supplierBox.Name = "supplierBox";
-            this.supplierBox.Size = new System.Drawing.Size(1083, 31);
+            this.supplierBox.Size = new System.Drawing.Size(489, 31);
             this.supplierBox.TabIndex = 9;
             // 
             // label8
@@ -273,7 +277,7 @@ namespace EduManage.Modules.Purchases
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(19, 144);
+            this.label4.Location = new System.Drawing.Point(19, 146);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(84, 19);
             this.label4.TabIndex = 8;
@@ -356,6 +360,25 @@ namespace EduManage.Modules.Purchases
             this.saveToDocxButton.UseVisualStyleBackColor = false;
             this.saveToDocxButton.Click += new System.EventHandler(this.saveToDocxButton_Click);
             // 
+            // priceBox
+            // 
+            this.priceBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.priceBox.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.priceBox.Location = new System.Drawing.Point(585, 171);
+            this.priceBox.Name = "priceBox";
+            this.priceBox.Size = new System.Drawing.Size(517, 32);
+            this.priceBox.TabIndex = 15;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(581, 147);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(122, 19);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Цена за единицу";
+            // 
             // PurchasesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -418,5 +441,7 @@ namespace EduManage.Modules.Purchases
         private ToolStripComboBox updateStatustoolStripComboBox;
         private ToolStripMenuItem updateStatusToolStripMenuItem;
         private Button saveToDocxButton;
+        private Label label9;
+        private TextBox priceBox;
     }
 }

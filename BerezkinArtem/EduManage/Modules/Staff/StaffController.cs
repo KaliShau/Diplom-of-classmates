@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using EduManage.Modules.Inventory;
+using EduManage.Modules.WorkSchedule;
 using EduManage.Services.Staff;
 using EduManage.Shared;
+using EduManage.Shared.Main;
 
 namespace EduManage.Modules.Staff
 {
@@ -12,11 +14,19 @@ namespace EduManage.Modules.Staff
         StaffService _staffService;
         Context _context;
         DocumentGenerator _documentGenerator;
-        public StaffController(StaffService staffService, Context context)
+        FormManager _formManager;
+        public StaffController(StaffService staffService, Context context, FormManager formManager)
         {
             _staffService = staffService;
             _context = context;
+            _formManager = formManager;
             _documentGenerator = new DocumentGenerator();
+        }
+
+        public void OpenWorkScheduleForm(int id)
+        {
+            _context.staff_id = id;
+            _formManager.OpenChidrenForm<WorkScheduleForm>(_context.childrenPanel);
         }
 
         public void GetStaff(DataGridView staffGrid)

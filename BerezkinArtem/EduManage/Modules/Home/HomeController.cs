@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using EduManage.Modules.Inventory;
 using EduManage.Modules.Purchases;
 using EduManage.Modules.Requests;
@@ -12,7 +7,6 @@ using EduManage.Modules.SignIn;
 using EduManage.Modules.Staff;
 using EduManage.Modules.Suppliers;
 using EduManage.Modules.Users;
-using EduManage.Services.User;
 using EduManage.Shared;
 using EduManage.Shared.Main;
 
@@ -74,23 +68,16 @@ namespace EduManage.Modules.Home
             if (role == "Admin")
             {
                 authBox.Visible = false;
+                adminBox.Visible = true;
                 staffBox.Visible = true;
                 accountantBox.Visible = true;
-                adminBox.Visible = true;
-            } 
+            }
             if (role == "Accountant")
             {
                 authBox.Visible = false;
+                adminBox.Visible = false;
                 staffBox.Visible = true;
                 accountantBox.Visible = true;
-                adminBox.Visible= false;
-            }
-            if (role == "Staff")
-            {
-                authBox.Visible = false;
-                staffBox.Visible = true;
-                accountantBox.Visible = false;
-                adminBox.Visible= false;
             }
 
         }

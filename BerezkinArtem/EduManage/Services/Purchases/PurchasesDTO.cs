@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EduManage.Services.Purchases
 {
@@ -26,7 +21,10 @@ namespace EduManage.Services.Purchases
         public int Quantity { get; set; }
 
         [DisplayName("Единица измерения")]
-        public string Unit{ get; set; }
+        public string Unit { get; set; }
+
+        [DisplayName("Цена за единицу")]
+        public string Price { get; set; }
 
         [DisplayName("Статус")]
         public string Status { get; set; }

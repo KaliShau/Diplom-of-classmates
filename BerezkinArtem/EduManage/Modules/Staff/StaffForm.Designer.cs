@@ -58,6 +58,8 @@ namespace EduManage.Modules.Staff
             this.openCreateButton = new System.Windows.Forms.Button();
             this.staffGrid = new System.Windows.Forms.DataGridView();
             this.saveToDocxButton = new System.Windows.Forms.Button();
+            this.workScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip1.SuspendLayout();
             this.drugPanel.SuspendLayout();
             this.createPanel.SuspendLayout();
@@ -92,9 +94,11 @@ namespace EduManage.Modules.Staff
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem,
             this.updateToolStripMenuItem,
-            this.changeActiveToolStripMenuItem});
+            this.changeActiveToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.workScheduleToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(187, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(187, 120);
             // 
             // deleteToolStripMenuItem
             // 
@@ -157,9 +161,9 @@ namespace EduManage.Modules.Staff
             this.label6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(19, 263);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 19);
+            this.label6.Size = new System.Drawing.Size(95, 19);
             this.label6.TabIndex = 5;
-            this.label6.Text = "Статус";
+            this.label6.Text = "Дата приема";
             // 
             // label5
             // 
@@ -339,6 +343,18 @@ namespace EduManage.Modules.Staff
             this.saveToDocxButton.UseVisualStyleBackColor = false;
             this.saveToDocxButton.Click += new System.EventHandler(this.saveToDocxButton_Click);
             // 
+            // workScheduleToolStripMenuItem
+            // 
+            this.workScheduleToolStripMenuItem.Name = "workScheduleToolStripMenuItem";
+            this.workScheduleToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.workScheduleToolStripMenuItem.Text = "График работы";
+            this.workScheduleToolStripMenuItem.Click += new System.EventHandler(this.workScheduleToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(183, 6);
+            // 
             // StaffForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -393,5 +409,7 @@ namespace EduManage.Modules.Staff
         private ToolStripMenuItem updateToolStripMenuItem;
         private ToolStripMenuItem changeActiveToolStripMenuItem;
         private Button saveToDocxButton;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem workScheduleToolStripMenuItem;
     }
 }
