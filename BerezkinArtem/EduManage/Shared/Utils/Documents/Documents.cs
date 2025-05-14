@@ -15,10 +15,10 @@ public enum DocumentTemplateType
     GeneralInventory // Общий инвентарный документ
 }
 
-public class DocumentGenerator
+public class Documents
 {
     public void SaveToDocx<T>(string filePath, DocumentTemplateType templateType,
-                            string title, string description, IEnumerable<T> data,
+                            string title, IEnumerable<T> data,
                             Dictionary<string, string> additionalFields = null)
     {
         try
@@ -30,19 +30,22 @@ public class DocumentGenerator
                 mainPart.Document = new Document();
                 Body body = mainPart.Document.AppendChild(new Body());
 
+                // Добавляем стандартную шапку для всех документов
+                AddStandardHeader(body, additionalFields);
+
                 switch (templateType)
                 {
                     case DocumentTemplateType.DefectReport:
-                        GenerateDefectReport(body, title, data, additionalFields);
+                        GenerateDefectReport(body, data, additionalFields);
                         break;
                     case DocumentTemplateType.PartsInstallationAct:
-                        GeneratePartsInstallationAct(body, title, data, additionalFields);
+                        GeneratePartsInstallationAct(body, data, additionalFields);
                         break;
                     case DocumentTemplateType.ExpenseEstimate:
-                        GenerateExpenseEstimate(body, title, data, additionalFields);
+                        GenerateExpenseEstimate(body, data, additionalFields);
                         break;
                     default:
-                        GenerateGeneralDocument(body, title, description, data);
+                        GenerateGeneralDocument(body, title, data);
                         break;
                 }
 
@@ -59,385 +62,261 @@ public class DocumentGenerator
         }
     }
 
-    private void GenerateDefectReport<T>(Body body, string title, IEnumerable<T> data,
-                                       Dictionary<string, string> additionalFields)
+    private void AddStandardHeader(Body body, Dictionary<string, string> additionalFields)
     {
-        // Шапка документа
-        AddOrganizationHeader(body, "МБОУ СОШ № 9");
+        // Директор и утверждение
+        Paragraph directorParagraph = body.AppendChild(new Paragraph());
+        Run directorRun = directorParagraph.AppendChild(new Run());
+        directorRun.AppendChild(new Text("Директор МБОУ СОШ № 9"));
+
+        Paragraph nameParagraph = body.AppendChild(new Paragraph());
+        Run nameRun = nameParagraph.AppendChild(new Run());
+        nameRun.AppendChild(new Text("Р.А.Мамишев"));
+
+        Paragraph dateParagraph = body.AppendChild(new Paragraph());
+        Run dateRun = dateParagraph.AppendChild(new Run());
+        dateRun.AppendChild(new Text($"«___» ______ {DateTime.Now.Year} г."));
+
+        // Стиль для шапки
+        RunProperties headerProperties = new RunProperties(
+            new RunFonts() { Ascii = "Times New Roman" },
+            new FontSize() { Val = "22" }
+        );
+
+        directorRun.PrependChild(new RunProperties(headerProperties.CloneNode(true)));
+        nameRun.PrependChild(new RunProperties(headerProperties.CloneNode(true)));
+        dateRun.PrependChild(new RunProperties(headerProperties.CloneNode(true)));
+
+        // Выравнивание по правому краю
+        directorParagraph.ParagraphProperties = new ParagraphProperties(
+            new Justification() { Val = JustificationValues.Right }
+        );
+        nameParagraph.ParagraphProperties = new ParagraphProperties(
+            new Justification() { Val = JustificationValues.Right }
+        );
+        dateParagraph.ParagraphProperties = new ParagraphProperties(
+            new Justification() { Val = JustificationValues.Right }
+        );
+    }
+
+    private void GenerateDefectReport<T>(Body body, IEnumerable<T> data, Dictionary<string, string> additionalFields)
+    {
+        // Название документа
         AddDocumentTitle(body, "ДЕФЕКТНАЯ ВЕДОМОСТЬ");
 
         // Состав комиссии
         Paragraph commissionParagraph = body.AppendChild(new Paragraph());
         Run commissionRun = commissionParagraph.AppendChild(new Run());
-        commissionRun.AppendChild(new Text("Мы комиссия в составе Председателя комиссии ______ члены комиссии:"));
+        commissionRun.AppendChild(new Text("Мы комиссия в составе:"));
 
-        // Добавляем строки для подписей членов комиссии
-        for (int i = 0; i < 4; i++)
+        Paragraph chairmanParagraph = body.AppendChild(new Paragraph());
+        Run chairmanRun = chairmanParagraph.AppendChild(new Run());
+        chairmanRun.AppendChild(new Text("Председатель комиссии: ______"));
+
+        Paragraph membersParagraph = body.AppendChild(new Paragraph());
+        Run membersRun = membersParagraph.AppendChild(new Run());
+        membersRun.AppendChild(new Text("Члены комиссии:"));
+
+        for (int i = 0; i < 3; i++)
         {
-            body.AppendChild(new Paragraph(new Run(new Text("______"))));
+            body.AppendChild(new Paragraph(new Run(new Text($"{i + 1}. ______"))));
         }
+
+        Paragraph driverParagraph = body.AppendChild(new Paragraph());
+        Run driverRun = driverParagraph.AppendChild(new Run());
+        driverRun.AppendChild(new Text("В присутствии водителя: ______"));
 
         // Информация об автобусе
-        if (additionalFields != null)
-        {
-            body.AppendChild(new Paragraph(new Run(new Text(
-                $"Осмотрев автобус {additionalFields.GetValueOrDefault("BusModel", "______")} " +
-                $"гос номер {additionalFields.GetValueOrDefault("LicensePlate", "______")} " +
-                "были обнаружены дефекты запасных частей"))));
-        }
+        string busModel = (additionalFields != null && additionalFields.ContainsKey("BusModel")) ? additionalFields["BusModel"] : "______";
+        string licensePlate = (additionalFields != null && additionalFields.ContainsKey("LicensePlate")) ? additionalFields["LicensePlate"] : "______";
+
+        Paragraph busParagraph = body.AppendChild(new Paragraph());
+        Run busRun = busParagraph.AppendChild(new Run());
+        busRun.AppendChild(new Text($"Осмотрев автобус {busModel} гос. номер {licensePlate}, были обнаружены дефекты запасных частей:"));
 
         // Таблица дефектов
-        Table table = new Table();
-        TableProperties tableProperties = new TableProperties(
-            new TableBorders(
-                new TopBorder() { Val = BorderValues.Single, Size = 4 },
-                new BottomBorder() { Val = BorderValues.Single, Size = 4 },
-                new LeftBorder() { Val = BorderValues.Single, Size = 4 },
-                new RightBorder() { Val = BorderValues.Single, Size = 4 },
-                new InsideHorizontalBorder() { Val = BorderValues.Single, Size = 2 },
-                new InsideVerticalBorder() { Val = BorderValues.Single, Size = 2 }
-            ),
-            new TableWidth() { Width = "100%", Type = TableWidthUnitValues.Pct }
-        );
-        table.AppendChild(tableProperties);
+        CreateTable(body, data, new[] { "№ п/п", "Наименование запасных частей", "Ед.изм.", "Количество", "Причина" });
 
-        // Заголовки таблицы
-        TableRow headerRow = new TableRow();
-        string[] headers = { "№ п/п", "Наименование запасных частей", "Ед.изм.", "Количество", "Причина" };
+        // Заключение
+        Paragraph conclusionParagraph = body.AppendChild(new Paragraph());
+        Run conclusionRun = conclusionParagraph.AppendChild(new Run());
+        conclusionRun.AppendChild(new Text("Заключение: Для устранения выявленных дефектов необходима замена запасных частей."));
 
-        foreach (var header in headers)
-        {
-            TableCell cell = new TableCell(new Paragraph(new Run(new Text(header))));
-            cell.TableCellProperties = new TableCellProperties(
-                new Shading() { Fill = "D9E2F3" },
-                new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center }
-            );
-            headerRow.AppendChild(cell);
-        }
-        table.AppendChild(headerRow);
-
-        // Добавление данных
-        if (data != null)
-        {
-            int rowNum = 1;
-            foreach (var item in data)
-            {
-                TableRow row = new TableRow();
-
-                // № п/п
-                row.AppendChild(CreateTableCell(rowNum.ToString()));
-                rowNum++;
-
-                // Остальные ячейки заполняются данными
-                var properties = typeof(T).GetProperties();
-                for (int i = 0; i < 4; i++) // 4 колонки данных
-                {
-                    var prop = properties[i];
-                    object value = prop.GetValue(item);
-                    row.AppendChild(CreateTableCell(value?.ToString() ?? ""));
-                }
-
-                table.AppendChild(row);
-            }
-        }
-
-        body.AppendChild(table);
-
-        // Заключение и подписи
-        body.AppendChild(new Paragraph(new Run(new Text(
-            "Заключение: Для устранения выявленных дефектов необходима замена запасных частей."))));
-
-        AddSignatures(body, "Председатель комиссии", 4);
+        // Подписи
+        AddStandardSignatures(body, 4);
     }
 
-    private void GeneratePartsInstallationAct<T>(Body body, string title, IEnumerable<T> data,
-                                              Dictionary<string, string> additionalFields)
+    private void GeneratePartsInstallationAct<T>(Body body, IEnumerable<T> data, Dictionary<string, string> additionalFields)
     {
-        // Шапка документа
-        AddOrganizationHeader(body, "МБОУ СОШ № 9");
+        // Название документа
         AddDocumentTitle(body, "АКТ УСТАНОВКИ ЗАПАСНЫХ ЧАСТЕЙ");
 
         // Информация об автобусе
-        if (additionalFields != null)
-        {
-            body.AppendChild(new Paragraph(new Run(new Text(
-                $"Автобус {additionalFields.GetValueOrDefault("BusModel", "______")} " +
-                $"регистр. знак {additionalFields.GetValueOrDefault("LicensePlate", "______")}"))));
+        string busModel = (additionalFields != null && additionalFields.ContainsKey("BusModel")) ? additionalFields["BusModel"] : "______";
+        string licensePlate = (additionalFields != null && additionalFields.ContainsKey("LicensePlate")) ? additionalFields["LicensePlate"] : "______";
+        string mileage = (additionalFields != null && additionalFields.ContainsKey("Mileage")) ? additionalFields["Mileage"] : "______";
 
-            body.AppendChild(new Paragraph(new Run(new Text(
-                $"Показание спидометра {additionalFields.GetValueOrDefault("Mileage", "______")} " +
-                $"от «__» ______ 20__ года."))));
-        }
+        Paragraph busParagraph = body.AppendChild(new Paragraph());
+        Run busRun = busParagraph.AppendChild(new Run());
+        busRun.AppendChild(new Text($"Автобус: {busModel}"));
+
+        Paragraph plateParagraph = body.AppendChild(new Paragraph());
+        Run plateRun = plateParagraph.AppendChild(new Run());
+        plateRun.AppendChild(new Text($"Регистрационный знак: {licensePlate}"));
+
+        Paragraph mileageParagraph = body.AppendChild(new Paragraph());
+        Run mileageRun = mileageParagraph.AppendChild(new Run());
+        mileageRun.AppendChild(new Text($"Показание спидометра: {mileage} от «___» ______ {DateTime.Now.Year} г."));
 
         // Состав комиссии
-        body.AppendChild(new Paragraph(new Run(new Text("Комиссия в составе:"))));
-        body.AppendChild(new Paragraph(new Run(new Text("Председатель комиссии ______"))));
-        for (int i = 1; i <= 3; i++)
+        Paragraph commissionParagraph = body.AppendChild(new Paragraph());
+        Run commissionRun = commissionParagraph.AppendChild(new Run());
+        commissionRun.AppendChild(new Text("Комиссия в составе:"));
+
+        Paragraph chairmanParagraph = body.AppendChild(new Paragraph());
+        Run chairmanRun = chairmanParagraph.AppendChild(new Run());
+        chairmanRun.AppendChild(new Text("Председатель комиссии: ______"));
+
+        for (int i = 0; i < 3; i++)
         {
-            body.AppendChild(new Paragraph(new Run(new Text($"{i}. ______"))));
+            body.AppendChild(new Paragraph(new Run(new Text($"Член комиссии {i + 1}: ______"))));
         }
 
-        body.AppendChild(new Paragraph(new Run(new Text(
-            "Составили настоящий акт о том, что приобретенные запасные части установлены на автобус."))));
+        Paragraph actParagraph = body.AppendChild(new Paragraph());
+        Run actRun = actParagraph.AppendChild(new Run());
+        actRun.AppendChild(new Text("Составили настоящий акт о том, что приобретенные запасные части установлены на автобус:"));
 
         // Таблица установленных частей
-        Table table = new Table();
-        TableProperties tableProperties = new TableProperties(
-            new TableBorders(
-                new TopBorder() { Val = BorderValues.Single, Size = 4 },
-                new BottomBorder() { Val = BorderValues.Single, Size = 4 },
-                new LeftBorder() { Val = BorderValues.Single, Size = 4 },
-                new RightBorder() { Val = BorderValues.Single, Size = 4 },
-                new InsideHorizontalBorder() { Val = BorderValues.Single, Size = 2 },
-                new InsideVerticalBorder() { Val = BorderValues.Single, Size = 2 }
-            ),
-            new TableWidth() { Width = "100%", Type = TableWidthUnitValues.Pct }
-        );
-        table.AppendChild(tableProperties);
-
-        // Заголовки таблицы
-        TableRow headerRow = new TableRow();
-        string[] headers = { "№ п/п", "Наименование запасных частей", "Цена", "Примечание" };
-
-        foreach (var header in headers)
-        {
-            TableCell cell = new TableCell(new Paragraph(new Run(new Text(header))));
-            cell.TableCellProperties = new TableCellProperties(
-                new Shading() { Fill = "D9E2F3" },
-                new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center }
-            );
-            headerRow.AppendChild(cell);
-        }
-        table.AppendChild(headerRow);
-
-        // Добавление данных
-        if (data != null)
-        {
-            int rowNum = 1;
-            foreach (var item in data)
-            {
-                TableRow row = new TableRow();
-
-                // № п/п
-                row.AppendChild(CreateTableCell(rowNum.ToString()));
-                rowNum++;
-
-                // Остальные ячейки заполняются данными
-                var properties = typeof(T).GetProperties();
-                for (int i = 0; i < 3; i++) // 3 колонки данных
-                {
-                    var prop = properties[i];
-                    object value = prop.GetValue(item);
-                    row.AppendChild(CreateTableCell(value?.ToString() ?? ""));
-                }
-
-                table.AppendChild(row);
-            }
-        }
-
-        body.AppendChild(table);
+        CreateTable(body, data, new[] { "№ п/п", "Наименование запасных частей", "Цена", "Примечание" });
 
         // Подписи
-        AddSignatures(body, "Председатель комиссии", 3);
-        body.AppendChild(new Paragraph(new Run(new Text("Водитель ______ (подпись) (фамилия)"))));
+        AddStandardSignatures(body, 3);
+
+        Paragraph driverParagraph = body.AppendChild(new Paragraph());
+        Run driverRun = driverParagraph.AppendChild(new Run());
+        driverRun.AppendChild(new Text("Водитель: ______ (подпись) (Ф.И.О.)"));
     }
 
-    private void GenerateExpenseEstimate<T>(Body body, string title, IEnumerable<T> data,
-                                          Dictionary<string, string> additionalFields)
+    private void GenerateExpenseEstimate<T>(Body body, IEnumerable<T> data, Dictionary<string, string> additionalFields)
     {
-        // Шапка документа
-        AddOrganizationHeader(body, "МБОУ СОШ № 9");
-        body.AppendChild(new Paragraph(new Run(new Text("Утверждаю"))));
-        body.AppendChild(new Paragraph(new Run(new Text("Директор МБОУ СОШ № 9"))));
-        body.AppendChild(new Paragraph(new Run(new Text("______ Мамишев Р.А."))));
-        body.AppendChild(new Paragraph(new Run(new Text("\"______\"______ 20__г."))));
-
+        // Название документа
         AddDocumentTitle(body, "СМЕТА РАСХОДОВ");
 
         // Состав комиссии
-        body.AppendChild(new Paragraph(new Run(new Text("Комиссия в составе:"))));
-        body.AppendChild(new Paragraph(new Run(new Text("Председателя комиссии – Пилипенко И.С. - заведующей библиотекой"))));
-        body.AppendChild(new Paragraph(new Run(new Text("Членов комиссии:"))));
-        body.AppendChild(new Paragraph(new Run(new Text("Вороковой Н.А. – председателя профкома"))));
-        body.AppendChild(new Paragraph(new Run(new Text("Середа И.М. – учителя информатики"))));
+        Paragraph commissionParagraph = body.AppendChild(new Paragraph());
+        Run commissionRun = commissionParagraph.AppendChild(new Run());
+        commissionRun.AppendChild(new Text("Комиссия в составе:"));
+
+        Paragraph chairmanParagraph = body.AppendChild(new Paragraph());
+        Run chairmanRun = chairmanParagraph.AppendChild(new Run());
+        chairmanRun.AppendChild(new Text("Председатель комиссии: Пилипенко И.С. - заведующая библиотекой"));
+
+        Paragraph member1Paragraph = body.AppendChild(new Paragraph());
+        Run member1Run = member1Paragraph.AppendChild(new Run());
+        member1Run.AppendChild(new Text("Член комиссии: Ворокова Н.А. - председатель профкома"));
+
+        Paragraph member2Paragraph = body.AppendChild(new Paragraph());
+        Run member2Run = member2Paragraph.AppendChild(new Run());
+        member2Run.AppendChild(new Text("Член комиссии: Середа И.М. - учитель информатики"));
 
         // Таблица расходов
-        Table table = new Table();
-        TableProperties tableProperties = new TableProperties(
-            new TableBorders(
-                new TopBorder() { Val = BorderValues.Single, Size = 4 },
-                new BottomBorder() { Val = BorderValues.Single, Size = 4 },
-                new LeftBorder() { Val = BorderValues.Single, Size = 4 },
-                new RightBorder() { Val = BorderValues.Single, Size = 4 },
-                new InsideHorizontalBorder() { Val = BorderValues.Single, Size = 2 },
-                new InsideVerticalBorder() { Val = BorderValues.Single, Size = 2 }
-            ),
-            new TableWidth() { Width = "100%", Type = TableWidthUnitValues.Pct }
-        );
-        table.AppendChild(tableProperties);
-
-        // Заголовки таблицы
-        TableRow headerRow = new TableRow();
-        string[] headers = { "№ п/п", "Наименование расходов", "Количество", "Цена", "Сумма" };
-
-        foreach (var header in headers)
-        {
-            TableCell cell = new TableCell(new Paragraph(new Run(new Text(header))));
-            cell.TableCellProperties = new TableCellProperties(
-                new Shading() { Fill = "D9E2F3" },
-                new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center }
-            );
-            headerRow.AppendChild(cell);
-        }
-        table.AppendChild(headerRow);
-
-        // Добавление данных
-        if (data != null)
-        {
-            int rowNum = 1;
-            foreach (var item in data)
-            {
-                TableRow row = new TableRow();
-
-                // № п/п
-                row.AppendChild(CreateTableCell(rowNum.ToString()));
-                rowNum++;
-
-                // Остальные ячейки заполняются данными
-                var properties = typeof(T).GetProperties();
-                for (int i = 0; i < 4; i++) // 4 колонки данных
-                {
-                    var prop = properties[i];
-                    object value = prop.GetValue(item);
-                    row.AppendChild(CreateTableCell(value?.ToString() ?? ""));
-                }
-
-                table.AppendChild(row);
-            }
-        }
-
-        body.AppendChild(table);
+        CreateTable(body, data, new[] { "№ п/п", "Наименование расходов", "Количество", "Цена", "Сумма" });
 
         // Подписи
-        body.AppendChild(new Paragraph(new Run(new Text("Председатель комиссии – зав. библиотекой ______"))));
-        body.AppendChild(new Paragraph(new Run(new Text("Члены комиссии:"))));
-        body.AppendChild(new Paragraph(new Run(new Text("председатель профкома ______"))));
-        body.AppendChild(new Paragraph(new Run(new Text("учитель информатики ______"))));
-        body.AppendChild(new Paragraph(new Run(new Text("Смету составил зам.директора по АХЧ ______"))));
+        Paragraph sign1Paragraph = body.AppendChild(new Paragraph());
+        Run sign1Run = sign1Paragraph.AppendChild(new Run());
+        sign1Run.AppendChild(new Text("Председатель комиссии - зав. библиотекой: ______"));
+
+        Paragraph sign2Paragraph = body.AppendChild(new Paragraph());
+        Run sign2Run = sign2Paragraph.AppendChild(new Run());
+        sign2Run.AppendChild(new Text("Члены комиссии:"));
+
+        Paragraph sign3Paragraph = body.AppendChild(new Paragraph());
+        Run sign3Run = sign3Paragraph.AppendChild(new Run());
+        sign3Run.AppendChild(new Text("председатель профкома: ______"));
+
+        Paragraph sign4Paragraph = body.AppendChild(new Paragraph());
+        Run sign4Run = sign4Paragraph.AppendChild(new Run());
+        sign4Run.AppendChild(new Text("учитель информатики: ______"));
+
+        Paragraph sign5Paragraph = body.AppendChild(new Paragraph());
+        Run sign5Run = sign5Paragraph.AppendChild(new Run());
+        sign5Run.AppendChild(new Text("Смету составил зам.директора по АХЧ: ______"));
     }
 
-    private void GenerateGeneralDocument<T>(Body body, string title, string description, IEnumerable<T> data)
+    private void GenerateGeneralDocument<T>(Body body, string title, IEnumerable<T> data)
     {
-        // Общая реализация для других типов документов
-        AddOrganizationHeader(body, "ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ");
         AddDocumentTitle(body, title);
-        AddDocumentDescription(body, description);
-        AddDataTable(body, data);
+        CreateTable(body, data);
         AddDocumentDate(body);
-    }
-
-    private void AddOrganizationHeader(Body body, string organizationName)
-    {
-        Paragraph orgParagraph = body.AppendChild(new Paragraph());
-        Run orgRun = orgParagraph.AppendChild(new Run());
-        orgRun.AppendChild(new Text(organizationName));
-
-        RunProperties orgProperties = orgRun.AppendChild(new RunProperties());
-        orgProperties.AppendChild(new Bold());
-        orgProperties.AppendChild(new FontSize() { Val = "22" });
-        orgProperties.AppendChild(new RunFonts() { Ascii = "Times New Roman" });
-        orgProperties.AppendChild(new Color() { Val = "2F5496" });
-
-        orgParagraph.ParagraphProperties = new ParagraphProperties(
-            new Justification() { Val = JustificationValues.Center },
-            new SpacingBetweenLines() { After = "100" }
-        );
     }
 
     private void AddDocumentTitle(Body body, string title)
     {
         Paragraph titleParagraph = body.AppendChild(new Paragraph());
         Run titleRun = titleParagraph.AppendChild(new Run());
-        titleRun.AppendChild(new Text(title.ToUpper()));
+        titleRun.AppendChild(new Text(title));
 
-        RunProperties titleProperties = titleRun.AppendChild(new RunProperties());
-        titleProperties.AppendChild(new Bold());
-        titleProperties.AppendChild(new FontSize() { Val = "28" });
-        titleProperties.AppendChild(new RunFonts() { Ascii = "Times New Roman" });
-        titleProperties.AppendChild(new Color() { Val = "1F3864" });
+        RunProperties titleProperties = new RunProperties(
+            new Bold(),
+            new RunFonts() { Ascii = "Times New Roman" },
+            new FontSize() { Val = "24" },
+            new Color() { Val = "000000" }
+        );
+
+        titleRun.PrependChild(titleProperties);
 
         titleParagraph.ParagraphProperties = new ParagraphProperties(
             new Justification() { Val = JustificationValues.Center },
-            new SpacingBetweenLines() { After = "200" },
-            new Shading() { Fill = "D9E2F3" }
+            new SpacingBetweenLines() { After = "200" }
         );
+
+        // Добавляем пустую строку после заголовка
+        body.AppendChild(new Paragraph(new Run(new Text(""))));
     }
 
-    private void AddDocumentDescription(Body body, string description)
+    private void CreateTable<T>(Body body, IEnumerable<T> data, string[] customHeaders = null)
     {
-        if (string.IsNullOrWhiteSpace(description))
-            return;
-
-        Paragraph descParagraph = body.AppendChild(new Paragraph());
-        Run descRun = descParagraph.AppendChild(new Run());
-        descRun.AppendChild(new Text(description));
-
-        RunProperties descProperties = descRun.AppendChild(new RunProperties());
-        descProperties.AppendChild(new Italic());
-        descProperties.AppendChild(new FontSize() { Val = "20" });
-        descProperties.AppendChild(new RunFonts() { Ascii = "Times New Roman" });
-
-        descParagraph.ParagraphProperties = new ParagraphProperties(
-            new Justification() { Val = JustificationValues.Both },
-            new SpacingBetweenLines() { Before = "200", After = "200" },
-            new Indentation() { FirstLine = "567" }
-        );
-    }
-
-    private void AddDataTable<T>(Body body, IEnumerable<T> data)
-    {
-        if (data == null || !data.Any())
-            return;
+        if (data == null) return;
 
         Table table = new Table();
 
+        // Настройки таблицы
         TableProperties tableProperties = new TableProperties(
             new TableBorders(
-                new TopBorder() { Val = BorderValues.Single, Size = 8, Color = "1F3864" },
-                new BottomBorder() { Val = BorderValues.Single, Size = 8, Color = "1F3864" },
-                new LeftBorder() { Val = BorderValues.Single, Size = 8, Color = "1F3864" },
-                new RightBorder() { Val = BorderValues.Single, Size = 8, Color = "1F3864" },
-                new InsideHorizontalBorder() { Val = BorderValues.Single, Size = 4, Color = "1F3864" },
-                new InsideVerticalBorder() { Val = BorderValues.Single, Size = 4, Color = "1F3864" }
+                new TopBorder() { Val = BorderValues.Single, Size = 4, Color = "000000" },
+                new BottomBorder() { Val = BorderValues.Single, Size = 4, Color = "000000" },
+                new LeftBorder() { Val = BorderValues.Single, Size = 4, Color = "000000" },
+                new RightBorder() { Val = BorderValues.Single, Size = 4, Color = "000000" },
+                new InsideHorizontalBorder() { Val = BorderValues.Single, Size = 2, Color = "000000" },
+                new InsideVerticalBorder() { Val = BorderValues.Single, Size = 2, Color = "000000" }
             ),
             new TableWidth() { Width = "100%", Type = TableWidthUnitValues.Pct },
-            new TableLayout() { Type = TableLayoutValues.Fixed },
-            new TableLook() { Val = "04A0" }
+            new TableLayout() { Type = TableLayoutValues.Fixed }
         );
         table.AppendChild(tableProperties);
 
-        var properties = typeof(T).GetProperties();
-
+        // Заголовки таблицы
         TableRow headerRow = new TableRow();
-
-        foreach (var prop in properties)
+        var properties = typeof(T).GetProperties();
+        string[] headers = customHeaders ?? properties.Select(p =>
         {
-            var displayNameAttr = prop.GetCustomAttributes(typeof(DisplayNameAttribute), false)
-                                .FirstOrDefault() as DisplayNameAttribute;
-            string columnName = displayNameAttr?.DisplayName ?? prop.Name;
+            var attr = p.GetCustomAttributes(typeof(DisplayNameAttribute), false)
+                      .FirstOrDefault() as DisplayNameAttribute;
+            return attr?.DisplayName ?? p.Name;
+        }).ToArray();
 
-            TableCell cell = new TableCell(new Paragraph(new Run(new Text(columnName))));
-
+        foreach (var header in headers)
+        {
+            TableCell cell = new TableCell(new Paragraph(new Run(new Text(header))));
             cell.TableCellProperties = new TableCellProperties(
-                new Shading() { Fill = "D9E2F3" },
-                new TableCellWidth() { Width = "2000", Type = TableWidthUnitValues.Dxa },
+                new Shading() { Fill = "D9D9D9" },
                 new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center }
             );
 
             RunProperties runProperties = new RunProperties(
                 new Bold(),
                 new RunFonts() { Ascii = "Times New Roman" },
-                new Color() { Val = "1F3864" },
                 new FontSize() { Val = "20" }
             );
 
@@ -448,21 +327,30 @@ public class DocumentGenerator
 
             headerRow.AppendChild(cell);
         }
-
         table.AppendChild(headerRow);
 
+        // Данные таблицы
+        int rowNum = 1;
         foreach (var item in data)
         {
             TableRow row = new TableRow();
 
-            foreach (var prop in properties)
+            // Добавляем номер строки
+            TableCell numberCell = new TableCell(new Paragraph(new Run(new Text(rowNum.ToString()))));
+            numberCell.TableCellProperties = new TableCellProperties(
+                new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center }
+            );
+            row.AppendChild(numberCell);
+
+            // Остальные данные
+            for (int i = 0; i < properties.Length && i < headers.Length - 1; i++)
             {
+                var prop = properties[i];
                 object value = prop.GetValue(item);
                 string text = value?.ToString() ?? string.Empty;
 
                 TableCell cell = new TableCell(new Paragraph(new Run(new Text(text))));
                 cell.TableCellProperties = new TableCellProperties(
-                    new TableCellWidth() { Width = "2000", Type = TableWidthUnitValues.Dxa },
                     new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center }
                 );
 
@@ -480,48 +368,59 @@ public class DocumentGenerator
             }
 
             table.AppendChild(row);
+            rowNum++;
         }
 
         body.AppendChild(table);
+    }
+
+    private void AddStandardSignatures(Body body, int membersCount)
+    {
+        // Пустая строка перед подписями
+        body.AppendChild(new Paragraph(new Run(new Text(""))));
+
+        // Председатель
+        Paragraph chairmanParagraph = body.AppendChild(new Paragraph());
+        Run chairmanRun = chairmanParagraph.AppendChild(new Run());
+        chairmanRun.AppendChild(new Text("Председатель комиссии: ______ ______"));
+
+        Paragraph chairmanSignParagraph = body.AppendChild(new Paragraph());
+        Run chairmanSignRun = chairmanSignParagraph.AppendChild(new Run());
+        chairmanSignRun.AppendChild(new Text("(подпись) (Ф.И.О.)"));
+
+        // Члены комиссии
+        Paragraph membersParagraph = body.AppendChild(new Paragraph());
+        Run membersRun = membersParagraph.AppendChild(new Run());
+        membersRun.AppendChild(new Text("Члены комиссии:"));
+
+        for (int i = 1; i <= membersCount; i++)
+        {
+            Paragraph memberParagraph = body.AppendChild(new Paragraph());
+            Run memberRun = memberParagraph.AppendChild(new Run());
+            memberRun.AppendChild(new Text($"{i}. ______ ______"));
+
+            Paragraph memberSignParagraph = body.AppendChild(new Paragraph());
+            Run memberSignRun = memberSignParagraph.AppendChild(new Run());
+            memberSignRun.AppendChild(new Text("(подпись) (Ф.И.О.)"));
+        }
     }
 
     private void AddDocumentDate(Body body)
     {
         Paragraph dateParagraph = body.AppendChild(new Paragraph());
         Run dateRun = dateParagraph.AppendChild(new Run());
-        dateRun.AppendChild(new Text($"Дата формирования: {DateTime.Now:dd.MM.yyyy}"));
+        dateRun.AppendChild(new Text($"Дата составления: {DateTime.Now:dd.MM.yyyy}"));
 
-        RunProperties dateProperties = dateRun.AppendChild(new RunProperties());
-        dateProperties.AppendChild(new Italic());
-        dateProperties.AppendChild(new FontSize() { Val = "18" });
-        dateProperties.AppendChild(new RunFonts() { Ascii = "Times New Roman" });
+        RunProperties dateProperties = new RunProperties(
+            new RunFonts() { Ascii = "Times New Roman" },
+            new FontSize() { Val = "18" }
+        );
+
+        dateRun.PrependChild(dateProperties);
 
         dateParagraph.ParagraphProperties = new ParagraphProperties(
             new Justification() { Val = JustificationValues.Right },
-            new SpacingBetweenLines() { Before = "400" }
+            new SpacingBetweenLines() { Before = "200" }
         );
-    }
-
-    private TableCell CreateTableCell(string text)
-    {
-        TableCell cell = new TableCell(new Paragraph(new Run(new Text(text))));
-        cell.TableCellProperties = new TableCellProperties(
-            new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center }
-        );
-        return cell;
-    }
-
-    private void AddSignatures(Body body, string title, int count)
-    {
-        body.AppendChild(new Paragraph(new Run(new Text($"{title} ______ ______"))));
-        body.AppendChild(new Paragraph(new Run(new Text("(подпись) (фамилия)"))));
-
-        body.AppendChild(new Paragraph(new Run(new Text("Члены комиссии:"))));
-
-        for (int i = 1; i <= count; i++)
-        {
-            body.AppendChild(new Paragraph(new Run(new Text($"{i}. ______ ______"))));
-            body.AppendChild(new Paragraph(new Run(new Text("(подписи) (фамилии)"))));
-        }
     }
 }

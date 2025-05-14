@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using EduManage.Modules.Inventory;
 using EduManage.Services.Suppliers;
 
 namespace EduManage.Modules.Suppliers
@@ -9,11 +8,11 @@ namespace EduManage.Modules.Suppliers
     public class SuppliersController
     {
         SuppliersService _suppliersService;
-        DocumentGenerator _documentGenerator;
+        Documents _documents;
         public SuppliersController(SuppliersService suppliersService)
         {
             _suppliersService = suppliersService;
-            _documentGenerator = new DocumentGenerator();
+            _documents = new Documents();
         }
 
         public void CreateSupplier(string name, string contact, string phone)
@@ -84,11 +83,10 @@ namespace EduManage.Modules.Suppliers
                     var dataSource = grid.DataSource as IEnumerable<SupplierDto>;
                     if (dataSource != null)
                     {
-                        string description = "Данный документ содержит полный перечень поставщиков образовательного учреждения.";
-                        _documentGenerator.SaveToDocx(
+                        _documents.SaveToDocx(
                             saveFileDialog.FileName,
+                            DocumentTemplateType.GeneralInventory,
                             "Список поставщиков",
-                            description,
                             dataSource);
                     }
                 }

@@ -76,5 +76,10 @@ namespace EduManage.Modules.WorkSchedule
         {
             _controller.GetWorkScheduleToDate(workScheduleGrid, searchPicker);
         }
+
+        private void saveToDocxButton_Click(object sender, EventArgs e)
+        {
+            _controller.ExportToDocx(workScheduleGrid);
+        }
     }
 }

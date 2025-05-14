@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using EduManage.Modules.Inventory;
 using EduManage.Services.Inventory;
 using EduManage.Services.Purchases;
 using EduManage.Services.Suppliers;
@@ -13,13 +12,13 @@ namespace EduManage.Modules.Purchases
         PurchaseService _purchaseService;
         SuppliersService _suppliersService;
         InventoryService _inventoryService;
-        DocumentGenerator _documentGenerator;
+        Documents _documents;
         public PurchasesController(PurchaseService purchaseService, SuppliersService suppliersService, InventoryService inventoryService)
         {
             _purchaseService = purchaseService;
             _suppliersService = suppliersService;
             _inventoryService = inventoryService;
-            _documentGenerator = new DocumentGenerator();
+            _documents = new Documents();
         }
 
         public void AddSuppliersToComboBox(ComboBox supplierBox)
@@ -130,12 +129,11 @@ namespace EduManage.Modules.Purchases
                     var dataSource = grid.DataSource as IEnumerable<PurchaseDto>;
                     if (dataSource != null)
                     {
-                        string description = "Данный документ содержит полный перечень закупок образовательного учреждения.";
 
-                        _documentGenerator.SaveToDocx(
+                        _documents.SaveToDocx(
                             saveFileDialog.FileName,
+                            DocumentTemplateType.GeneralInventory,
                             "Список Закупок",
-                            description,
                             dataSource);
                     }
                 }

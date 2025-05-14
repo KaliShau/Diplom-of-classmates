@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using EduManage.Modules.Inventory;
 using EduManage.Services.Inventory;
 using EduManage.Services.Request;
 using EduManage.Shared;
@@ -13,13 +12,13 @@ namespace EduManage.Modules.Requests
         InventoryService _inventoryService;
         RequestService _requestService;
         Context _context;
-        DocumentGenerator _documentGenerator;
+        Documents _documents;
         public RequestsController(InventoryService inventoryService, Context context, RequestService requestService)
         {
             _inventoryService = inventoryService;
             _requestService = requestService;
             _context = context;
-            _documentGenerator = new DocumentGenerator();
+            _documents = new Documents();
         }
 
         public void AddInventoryToComboBox(ComboBox inventoruBox)
@@ -130,11 +129,10 @@ namespace EduManage.Modules.Requests
                     var dataSource = grid.DataSource as IEnumerable<RequestDto>;
                     if (dataSource != null)
                     {
-                        string description = "Данный документ содержит полный перечень заявок образовательного учреждения.";
-                        _documentGenerator.SaveToDocx(
+                        _documents.SaveToDocx(
                             saveFileDialog.FileName,
+                            DocumentTemplateType.GeneralInventory,
                             "Список заявок",
-                            description,
                             dataSource);
                     }
                 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using EduManage.Modules.Inventory;
 using EduManage.Services.Role;
 
 namespace EduManage.Modules.Roles
@@ -9,11 +8,11 @@ namespace EduManage.Modules.Roles
     public class RolesController
     {
         RoleService _roleService;
-        DocumentGenerator _documentGenerator;
+        Documents _documents;
         public RolesController(RoleService roleService)
         {
             _roleService = roleService;
-            _documentGenerator = new DocumentGenerator();
+            _documents = new Documents();
         }
 
         public void GetRoles(DataGridView roleGrid)
@@ -72,11 +71,10 @@ namespace EduManage.Modules.Roles
                     var dataSource = grid.DataSource as IEnumerable<RoleDto>;
                     if (dataSource != null)
                     {
-                        string description = "Данный документ содержит полный перечень ролей в этой информационной системе.";
-                        _documentGenerator.SaveToDocx(
+                        _documents.SaveToDocx(
                             saveFileDialog.FileName,
+                            DocumentTemplateType.GeneralInventory,
                             "Список ролей",
-                            description,
                             dataSource);
                     }
                 }

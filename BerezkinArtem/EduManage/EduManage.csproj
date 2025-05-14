@@ -207,7 +207,6 @@
     <Compile Include="Shared\Context.cs" />
     <Compile Include="Shared\Main\DatabaseRepository.cs" />
     <Compile Include="Shared\Main\FormManager.cs" />
-    <Compile Include="Shared\Utils\Documents\DocumentGenerator.cs" />
     <Compile Include="Shared\Utils\Documents\Documents.cs" />
     <Compile Include="Shared\Utils\Documents\DocumentsDTO.cs" />
     <EmbeddedResource Include="Modules\Home\HomeForm.resx">

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using EduManage.Modules.Inventory;
 using EduManage.Modules.WorkSchedule;
 using EduManage.Services.Staff;
 using EduManage.Shared;
@@ -13,14 +12,14 @@ namespace EduManage.Modules.Staff
     {
         StaffService _staffService;
         Context _context;
-        DocumentGenerator _documentGenerator;
+        Documents _documents;
         FormManager _formManager;
         public StaffController(StaffService staffService, Context context, FormManager formManager)
         {
             _staffService = staffService;
             _context = context;
             _formManager = formManager;
-            _documentGenerator = new DocumentGenerator();
+            _documents = new Documents();
         }
 
         public void OpenWorkScheduleForm(int id)
@@ -119,11 +118,10 @@ namespace EduManage.Modules.Staff
                     var dataSource = grid.DataSource as IEnumerable<StaffDto>;
                     if (dataSource != null)
                     {
-                        string description = "Данный документ содержит полный перечень персонала образовательного учреждения.";
-                        _documentGenerator.SaveToDocx(
+                        _documents.SaveToDocx(
                             saveFileDialog.FileName,
+                            DocumentTemplateType.GeneralInventory,
                             "Список персонала",
-                            description,
                             dataSource);
                     }
                 }

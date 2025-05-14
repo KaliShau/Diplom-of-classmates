@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using EduManage.Services.Staff;
 using EduManage.Services.WorkSchedule;
@@ -11,11 +12,13 @@ namespace EduManage.Modules.WorkSchedule
         Context _context;
         WorkScheduleService _workScheduleService;
         StaffService _staffService;
+        Documents _documents;
         public WorkScheduleController(Context context, WorkScheduleService workScheduleService, StaffService staffService)
         {
             _context = context;
             _staffService = staffService;
             _workScheduleService = workScheduleService;
+            _documents = new Documents();
         }
 
         public void initName(Label label)
@@ -75,6 +78,30 @@ namespace EduManage.Modules.WorkSchedule
         {
             _workScheduleService.DeleteSchedule(id);
 
+        }
+
+        public void ExportToDocx(DataGridView grid)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                var staff = _staffService.GetStaffById(_context.staff_id);
+                saveFileDialog.Filter = "Word Documents (*.docx)|*.docx";
+                saveFileDialog.Title = "Сохранить роли как DOCX";
+                saveFileDialog.FileName = $"График_работы_{staff.FullName}_{DateTime.Now:yyyyMMdd}.docx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var dataSource = grid.DataSource as IEnumerable<WorkScheduleDto>;
+                    if (dataSource != null)
+                    {
+                        _documents.SaveToDocx(
+                            saveFileDialog.FileName,
+                            DocumentTemplateType.GeneralInventory,
+                            $"График работы сотрудника {staff.FullName}",
+                            dataSource);
+                    }
+                }
+            }
         }
     }
 }

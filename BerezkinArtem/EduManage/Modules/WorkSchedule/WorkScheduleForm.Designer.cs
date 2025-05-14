@@ -42,18 +42,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.typeBox = new System.Windows.Forms.TextBox();
             this.createPanel = new System.Windows.Forms.Panel();
+            this.dateWorkPicker = new System.Windows.Forms.DateTimePicker();
+            this.endTimeBox = new System.Windows.Forms.ComboBox();
+            this.startTimeBox = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.zoneBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.openCreateButton = new System.Windows.Forms.Button();
             this.workScheduleGrid = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.searchPicker = new System.Windows.Forms.DateTimePicker();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.startTimeBox = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.endTimeBox = new System.Windows.Forms.ComboBox();
-            this.dateWorkPicker = new System.Windows.Forms.DateTimePicker();
             this.contextMenuStrip1.SuspendLayout();
             this.drugPanel.SuspendLayout();
             this.createPanel.SuspendLayout();
@@ -140,6 +140,7 @@
             this.saveToDocxButton.TabIndex = 12;
             this.saveToDocxButton.Text = "Сохранить данные";
             this.saveToDocxButton.UseVisualStyleBackColor = false;
+            this.saveToDocxButton.Click += new System.EventHandler(this.saveToDocxButton_Click);
             // 
             // label2
             // 
@@ -180,6 +181,64 @@
             this.createPanel.Size = new System.Drawing.Size(468, 546);
             this.createPanel.TabIndex = 15;
             this.createPanel.Visible = false;
+            // 
+            // dateWorkPicker
+            // 
+            this.dateWorkPicker.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.dateWorkPicker.Location = new System.Drawing.Point(23, 234);
+            this.dateWorkPicker.Name = "dateWorkPicker";
+            this.dateWorkPicker.Size = new System.Drawing.Size(427, 26);
+            this.dateWorkPicker.TabIndex = 16;
+            // 
+            // endTimeBox
+            // 
+            this.endTimeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.endTimeBox.Font = new System.Drawing.Font("Times New Roman", 15.75F);
+            this.endTimeBox.FormattingEnabled = true;
+            this.endTimeBox.Location = new System.Drawing.Point(261, 173);
+            this.endTimeBox.Name = "endTimeBox";
+            this.endTimeBox.Size = new System.Drawing.Size(189, 31);
+            this.endTimeBox.TabIndex = 10;
+            // 
+            // startTimeBox
+            // 
+            this.startTimeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.startTimeBox.Font = new System.Drawing.Font("Times New Roman", 15.75F);
+            this.startTimeBox.FormattingEnabled = true;
+            this.startTimeBox.Location = new System.Drawing.Point(19, 173);
+            this.startTimeBox.Name = "startTimeBox";
+            this.startTimeBox.Size = new System.Drawing.Size(189, 31);
+            this.startTimeBox.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(261, 151);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(105, 19);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Конец работы";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(19, 151);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(110, 19);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Начало работы";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(19, 212);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(94, 19);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Дата работы";
             // 
             // zoneBox
             // 
@@ -257,64 +316,6 @@
             this.searchPicker.Size = new System.Drawing.Size(264, 26);
             this.searchPicker.TabIndex = 16;
             this.searchPicker.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(19, 212);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(94, 19);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Дата работы";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(19, 151);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(110, 19);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Начало работы";
-            // 
-            // startTimeBox
-            // 
-            this.startTimeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.startTimeBox.Font = new System.Drawing.Font("Times New Roman", 15.75F);
-            this.startTimeBox.FormattingEnabled = true;
-            this.startTimeBox.Location = new System.Drawing.Point(19, 173);
-            this.startTimeBox.Name = "startTimeBox";
-            this.startTimeBox.Size = new System.Drawing.Size(189, 31);
-            this.startTimeBox.TabIndex = 10;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(261, 151);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(105, 19);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Конец работы";
-            // 
-            // endTimeBox
-            // 
-            this.endTimeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.endTimeBox.Font = new System.Drawing.Font("Times New Roman", 15.75F);
-            this.endTimeBox.FormattingEnabled = true;
-            this.endTimeBox.Location = new System.Drawing.Point(261, 173);
-            this.endTimeBox.Name = "endTimeBox";
-            this.endTimeBox.Size = new System.Drawing.Size(189, 31);
-            this.endTimeBox.TabIndex = 10;
-            // 
-            // dateWorkPicker
-            // 
-            this.dateWorkPicker.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.dateWorkPicker.Location = new System.Drawing.Point(23, 234);
-            this.dateWorkPicker.Name = "dateWorkPicker";
-            this.dateWorkPicker.Size = new System.Drawing.Size(427, 26);
-            this.dateWorkPicker.TabIndex = 16;
             // 
             // WorkScheduleForm
             // 
