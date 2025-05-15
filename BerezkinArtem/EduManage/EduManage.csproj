@@ -108,6 +108,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\Buses\BusesController.cs" />
+    <Compile Include="Modules\Buses\BusesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Buses\BusesForm.Designer.cs">
+      <DependentUpon>BusesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Home\HomeController.cs" />
     <Compile Include="Modules\Home\HomeForm.cs">
       <SubType>Form</SubType>
@@ -209,6 +216,9 @@
     <Compile Include="Shared\Main\FormManager.cs" />
     <Compile Include="Shared\Utils\Documents\Documents.cs" />
     <Compile Include="Shared\Utils\Documents\DocumentsDTO.cs" />
+    <EmbeddedResource Include="Modules\Buses\BusesForm.resx">
+      <DependentUpon>BusesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Home\HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </EmbeddedResource>

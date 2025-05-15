@@ -14,7 +14,7 @@ namespace EduManage.Modules.WorkSchedule
 
             _controller.initTimeComboBox(startTimeBox, endTimeBox);
             _controller.GetWorkSchedule(workScheduleGrid);
-            _controller.initName(label1);
+            _controller.initName(label1, positionBox, departmentBox);
         }
 
         private void closeButton_Click(object sender, EventArgs e)

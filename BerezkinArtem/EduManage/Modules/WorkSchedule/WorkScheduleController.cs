@@ -21,10 +21,12 @@ namespace EduManage.Modules.WorkSchedule
             _documents = new Documents();
         }
 
-        public void initName(Label label)
+        public void initName(Label label, TextBox positionBox, TextBox departmentBox)
         {
             var staff = _staffService.GetStaffById(_context.staff_id);
             label.Text = "График работы сотрудника " + staff.FullName;
+            positionBox.Text = staff.Position;
+            departmentBox.Text = staff.Department;
         }
 
         public void initTimeComboBox(ComboBox startTime, ComboBox endTime)

@@ -54,6 +54,10 @@
             this.workScheduleGrid = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.searchPicker = new System.Windows.Forms.DateTimePicker();
+            this.positionBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.departmentBox = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1.SuspendLayout();
             this.drugPanel.SuspendLayout();
             this.createPanel.SuspendLayout();
@@ -282,7 +286,7 @@
             this.workScheduleGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.workScheduleGrid.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.workScheduleGrid.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.workScheduleGrid.Location = new System.Drawing.Point(0, 135);
+            this.workScheduleGrid.Location = new System.Drawing.Point(0, 174);
             this.workScheduleGrid.Name = "workScheduleGrid";
             this.workScheduleGrid.ReadOnly = true;
             this.workScheduleGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -290,7 +294,7 @@
             this.workScheduleGrid.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.workScheduleGrid.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.workScheduleGrid.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.workScheduleGrid.Size = new System.Drawing.Size(1155, 626);
+            this.workScheduleGrid.Size = new System.Drawing.Size(1155, 587);
             this.workScheduleGrid.TabIndex = 8;
             this.workScheduleGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.workScheduleGrid_MouseClick);
             // 
@@ -300,7 +304,7 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(16, 95);
+            this.button1.Location = new System.Drawing.Point(16, 142);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(109, 26);
             this.button1.TabIndex = 12;
@@ -311,11 +315,51 @@
             // searchPicker
             // 
             this.searchPicker.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.searchPicker.Location = new System.Drawing.Point(131, 95);
+            this.searchPicker.Location = new System.Drawing.Point(131, 142);
             this.searchPicker.Name = "searchPicker";
             this.searchPicker.Size = new System.Drawing.Size(264, 26);
             this.searchPicker.TabIndex = 16;
             this.searchPicker.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // positionBox
+            // 
+            this.positionBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.positionBox.Enabled = false;
+            this.positionBox.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.positionBox.Location = new System.Drawing.Point(16, 71);
+            this.positionBox.Name = "positionBox";
+            this.positionBox.Size = new System.Drawing.Size(359, 32);
+            this.positionBox.TabIndex = 4;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(16, 47);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(85, 19);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Должность";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(381, 47);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(51, 19);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "Отдел";
+            // 
+            // departmentBox
+            // 
+            this.departmentBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.departmentBox.Enabled = false;
+            this.departmentBox.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.departmentBox.Location = new System.Drawing.Point(381, 71);
+            this.departmentBox.Name = "departmentBox";
+            this.departmentBox.Size = new System.Drawing.Size(359, 32);
+            this.departmentBox.TabIndex = 4;
             // 
             // WorkScheduleForm
             // 
@@ -330,6 +374,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.openCreateButton);
             this.Controls.Add(this.workScheduleGrid);
+            this.Controls.Add(this.departmentBox);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.positionBox);
+            this.Controls.Add(this.label7);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "WorkScheduleForm";
             this.Text = "WorkScheduleForm";
@@ -368,5 +416,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dateWorkPicker;
+        private System.Windows.Forms.TextBox positionBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox departmentBox;
     }
 }

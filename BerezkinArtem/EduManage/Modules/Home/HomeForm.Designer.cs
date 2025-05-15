@@ -31,15 +31,18 @@ namespace EduManage
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.adminBox = new System.Windows.Forms.GroupBox();
             this.openUsersButton = new System.Windows.Forms.Button();
             this.panel8 = new System.Windows.Forms.Panel();
             this.openRolesButton = new System.Windows.Forms.Button();
             this.accountantBox = new System.Windows.Forms.GroupBox();
-            this.openStaffButton = new System.Windows.Forms.Button();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.openBusesButton = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.openSuppliersButton = new System.Windows.Forms.Button();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.openStaffButton = new System.Windows.Forms.Button();
             this.staffBox = new System.Windows.Forms.GroupBox();
             this.openPurchasesButton = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -51,9 +54,12 @@ namespace EduManage
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.childrenPanel = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.openBusesButton = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.adminBox.SuspendLayout();
             this.accountantBox.SuspendLayout();
@@ -148,29 +154,28 @@ namespace EduManage
             this.accountantBox.Text = "Общие";
             this.accountantBox.Visible = false;
             // 
-            // openStaffButton
+            // openBusesButton
             // 
-            this.openStaffButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.openStaffButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.openStaffButton.FlatAppearance.BorderSize = 0;
-            this.openStaffButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.openStaffButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openStaffButton.Location = new System.Drawing.Point(3, 25);
-            this.openStaffButton.Name = "openStaffButton";
-            this.openStaffButton.Size = new System.Drawing.Size(211, 34);
-            this.openStaffButton.TabIndex = 4;
-            this.openStaffButton.Text = "Персонал";
-            this.openStaffButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openStaffButton.UseVisualStyleBackColor = false;
-            this.openStaffButton.Click += new System.EventHandler(this.openStaffButton_Click);
+            this.openBusesButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.openBusesButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.openBusesButton.FlatAppearance.BorderSize = 0;
+            this.openBusesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.openBusesButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openBusesButton.Location = new System.Drawing.Point(3, 111);
+            this.openBusesButton.Name = "openBusesButton";
+            this.openBusesButton.Size = new System.Drawing.Size(211, 34);
+            this.openBusesButton.TabIndex = 5;
+            this.openBusesButton.Text = "Автобусы";
+            this.openBusesButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openBusesButton.UseVisualStyleBackColor = false;
             // 
-            // panel6
+            // panel5
             // 
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(3, 59);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(211, 9);
-            this.panel6.TabIndex = 3;
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(3, 102);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(211, 9);
+            this.panel5.TabIndex = 6;
             // 
             // openSuppliersButton
             // 
@@ -187,6 +192,30 @@ namespace EduManage
             this.openSuppliersButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.openSuppliersButton.UseVisualStyleBackColor = false;
             this.openSuppliersButton.Click += new System.EventHandler(this.openSuppliersButton_Click);
+            // 
+            // panel6
+            // 
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(3, 59);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(211, 9);
+            this.panel6.TabIndex = 3;
+            // 
+            // openStaffButton
+            // 
+            this.openStaffButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.openStaffButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.openStaffButton.FlatAppearance.BorderSize = 0;
+            this.openStaffButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.openStaffButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openStaffButton.Location = new System.Drawing.Point(3, 25);
+            this.openStaffButton.Name = "openStaffButton";
+            this.openStaffButton.Size = new System.Drawing.Size(211, 34);
+            this.openStaffButton.TabIndex = 4;
+            this.openStaffButton.Text = "Персонал";
+            this.openStaffButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openStaffButton.UseVisualStyleBackColor = false;
+            this.openStaffButton.Click += new System.EventHandler(this.openStaffButton_Click);
             // 
             // staffBox
             // 
@@ -317,6 +346,11 @@ namespace EduManage
             // childrenPanel
             // 
             this.childrenPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.childrenPanel.Controls.Add(this.label6);
+            this.childrenPanel.Controls.Add(this.label4);
+            this.childrenPanel.Controls.Add(this.label2);
+            this.childrenPanel.Controls.Add(this.label5);
+            this.childrenPanel.Controls.Add(this.label3);
             this.childrenPanel.Controls.Add(this.label1);
             this.childrenPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.childrenPanel.Location = new System.Drawing.Point(229, 0);
@@ -324,38 +358,68 @@ namespace EduManage
             this.childrenPanel.Size = new System.Drawing.Size(1155, 761);
             this.childrenPanel.TabIndex = 2;
             // 
+            // label6
+            // 
+            this.label6.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label6.Location = new System.Drawing.Point(7, 394);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(798, 117);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "    1. Авторизуйтесь, используя свой логин и пароль.\r\n\r\n    2. Выберите нужный ра" +
+    "здел в меню.\r\n\r\n    3. Для быстрого поиска используйте поле «Найти» в верхней ча" +
+    "сти экрана.\r\n";
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label4.Location = new System.Drawing.Point(7, 156);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(798, 200);
+            this.label4.TabIndex = 1;
+            this.label4.Text = resources.GetString("label4.Text");
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label2.Location = new System.Drawing.Point(7, 62);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(797, 62);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Ваш надежный инструмент для учета инвентаря, управления закупками, контроля транс" +
+    "порта и автоматизации рабочих процессов.";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(6, 361);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(224, 26);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Как начать работу?";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(6, 124);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(279, 26);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Основные возможности:";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(5, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(503, 32);
+            this.label1.Size = new System.Drawing.Size(259, 32);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Для продолжения войдите в систему!";
-            // 
-            // openBusesButton
-            // 
-            this.openBusesButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.openBusesButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.openBusesButton.FlatAppearance.BorderSize = 0;
-            this.openBusesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.openBusesButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openBusesButton.Location = new System.Drawing.Point(3, 111);
-            this.openBusesButton.Name = "openBusesButton";
-            this.openBusesButton.Size = new System.Drawing.Size(211, 34);
-            this.openBusesButton.TabIndex = 5;
-            this.openBusesButton.Text = "Автобусы";
-            this.openBusesButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openBusesButton.UseVisualStyleBackColor = false;
-            // 
-            // panel5
-            // 
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(3, 102);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(211, 9);
-            this.panel5.TabIndex = 6;
+            this.label1.Text = "Добро пожаловать!";
             // 
             // HomeForm
             // 
@@ -404,5 +468,10 @@ namespace EduManage
         private Panel panel7;
         private Button openBusesButton;
         private Panel panel5;
+        private Label label2;
+        private Label label6;
+        private Label label4;
+        private Label label5;
+        private Label label3;
     }
 }
