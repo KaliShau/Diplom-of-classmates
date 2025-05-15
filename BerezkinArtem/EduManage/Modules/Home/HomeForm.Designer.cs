@@ -168,6 +168,7 @@ namespace EduManage
             this.openBusesButton.Text = "Автобусы";
             this.openBusesButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.openBusesButton.UseVisualStyleBackColor = false;
+            this.openBusesButton.Click += new System.EventHandler(this.openBusesButton_Click);
             // 
             // panel5
             // 

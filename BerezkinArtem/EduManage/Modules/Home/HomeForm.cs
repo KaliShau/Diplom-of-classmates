@@ -1,7 +1,6 @@
-using EduManage.Modules.Home;
-using EduManage.Shared.Main;
 using System;
 using System.Windows.Forms;
+using EduManage.Modules.Home;
 
 namespace EduManage
 {
@@ -60,6 +59,11 @@ namespace EduManage
         private void openUsersButton_Click(object sender, EventArgs e)
         {
             _controller.OpenUsers(childrenPanel);
+        }
+
+        private void openBusesButton_Click(object sender, EventArgs e)
+        {
+            _controller.OpenBuses(childrenPanel);
         }
     }
 }

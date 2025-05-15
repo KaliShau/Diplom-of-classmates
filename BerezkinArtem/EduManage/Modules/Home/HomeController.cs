@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using EduManage.Modules.Buses;
 using EduManage.Modules.Inventory;
 using EduManage.Modules.Purchases;
 using EduManage.Modules.Requests;
@@ -31,6 +32,10 @@ namespace EduManage.Modules.Home
         public void OpenInventory(Panel childrenPanel)
         {
             _formManger.OpenChidrenForm<InventoryForm>(childrenPanel);
+        }
+        public void OpenBuses(Panel childrenPanel)
+        {
+            _formManger.OpenChidrenForm<BusesForm>(childrenPanel);
         }
 
         public void OpenSuppliers(Panel childrenPanel)

@@ -10,5 +10,8 @@ namespace EduManage.Shared
 
         // users
         public int staff_id { get; set; }
+
+        // buses
+        public int bus_id { get; set; }
     }
 }

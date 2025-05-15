@@ -30,7 +30,6 @@ public class Documents
                 mainPart.Document = new Document();
                 Body body = mainPart.Document.AppendChild(new Body());
 
-                // Добавляем стандартную шапку для всех документов
                 AddStandardHeader(body, additionalFields);
 
                 switch (templateType)
@@ -64,20 +63,18 @@ public class Documents
 
     private void AddStandardHeader(Body body, Dictionary<string, string> additionalFields)
     {
-        // Директор и утверждение
         Paragraph directorParagraph = body.AppendChild(new Paragraph());
         Run directorRun = directorParagraph.AppendChild(new Run());
         directorRun.AppendChild(new Text("Директор МБОУ СОШ № 9"));
 
         Paragraph nameParagraph = body.AppendChild(new Paragraph());
         Run nameRun = nameParagraph.AppendChild(new Run());
-        nameRun.AppendChild(new Text("Р.А.Мамишев"));
+        nameRun.AppendChild(new Text("Р.А.Мамишев ____________"));
 
         Paragraph dateParagraph = body.AppendChild(new Paragraph());
         Run dateRun = dateParagraph.AppendChild(new Run());
         dateRun.AppendChild(new Text($"«___» ______ {DateTime.Now.Year} г."));
 
-        // Стиль для шапки
         RunProperties headerProperties = new RunProperties(
             new RunFonts() { Ascii = "Times New Roman" },
             new FontSize() { Val = "22" }
@@ -117,32 +114,108 @@ public class Documents
         Run membersRun = membersParagraph.AppendChild(new Run());
         membersRun.AppendChild(new Text("Члены комиссии:"));
 
-        for (int i = 0; i < 3; i++)
+        // Три члена комиссии с нумерацией
+        for (int i = 1; i <= 3; i++)
         {
-            body.AppendChild(new Paragraph(new Run(new Text($"{i + 1}. ______"))));
+            Paragraph memberParagraph = body.AppendChild(new Paragraph());
+            Run memberRun = memberParagraph.AppendChild(new Run());
+            memberRun.AppendChild(new Text($"{i}. _________________________________________"));
         }
 
         Paragraph driverParagraph = body.AppendChild(new Paragraph());
         Run driverRun = driverParagraph.AppendChild(new Run());
         driverRun.AppendChild(new Text("В присутствии водителя: ______"));
 
+        // Пустая строка
+        body.AppendChild(new Paragraph(new Run(new Text(""))));
+
         // Информация об автобусе
-        string busModel = (additionalFields != null && additionalFields.ContainsKey("BusModel")) ? additionalFields["BusModel"] : "______";
-        string licensePlate = (additionalFields != null && additionalFields.ContainsKey("LicensePlate")) ? additionalFields["LicensePlate"] : "______";
+        string busModel = additionalFields != null && additionalFields.ContainsKey("BusModel")
+            ? additionalFields["BusModel"]
+            : "______";
+
+        string licensePlate = additionalFields != null && additionalFields.ContainsKey("LicensePlate")
+            ? additionalFields["LicensePlate"]
+            : "______";
 
         Paragraph busParagraph = body.AppendChild(new Paragraph());
         Run busRun = busParagraph.AppendChild(new Run());
         busRun.AppendChild(new Text($"Осмотрев автобус {busModel} гос. номер {licensePlate}, были обнаружены дефекты запасных частей:"));
 
-        // Таблица дефектов
-        CreateTable(body, data, new[] { "№ п/п", "Наименование запасных частей", "Ед.изм.", "Количество", "Причина" });
+        // Пустая строка перед таблицей
+        body.AppendChild(new Paragraph(new Run(new Text(""))));
+
+        // Таблица дефектов (23 строки)
+        Table table = new Table();
+        TableProperties tableProperties = new TableProperties(
+            new TableBorders(
+                new TopBorder() { Val = BorderValues.Single, Size = 4 },
+                new BottomBorder() { Val = BorderValues.Single, Size = 4 },
+                new LeftBorder() { Val = BorderValues.Single, Size = 4 },
+                new RightBorder() { Val = BorderValues.Single, Size = 4 },
+                new InsideHorizontalBorder() { Val = BorderValues.Single, Size = 2 },
+                new InsideVerticalBorder() { Val = BorderValues.Single, Size = 2 }
+            ),
+            new TableWidth() { Width = "100%", Type = TableWidthUnitValues.Pct }
+        );
+        table.AppendChild(tableProperties);
+
+        // Заголовки таблицы
+        TableRow headerRow = new TableRow();
+        string[] headers = { "№ п/п", "Наименование запасных частей", "Ед.изм.", "Количество", "Причина" };
+
+        foreach (var header in headers)
+        {
+            TableCell cell = new TableCell(new Paragraph(new Run(new Text(header))));
+            cell.TableCellProperties = new TableCellProperties(
+                new Shading() { Fill = "D9D9D9" },
+                new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center }
+            );
+            headerRow.AppendChild(cell);
+        }
+        table.AppendChild(headerRow);
+
+        // Заполнение данных
+        int rowNumber = 1;
+        foreach (var item in data.Take(23)) // Ограничение 23 строки как в образце
+        {
+            TableRow row = new TableRow();
+
+            // Номер строки
+            row.AppendChild(CreateTableCell(rowNumber.ToString(), center: true));
+            rowNumber++;
+
+            // Остальные данные
+            var props = typeof(T).GetProperties();
+            for (int i = 0; i < 4; i++) // 4 столбца данных
+            {
+                string value = props[i].GetValue(item)?.ToString() ?? "";
+                row.AppendChild(CreateTableCell(value, center: true));
+            }
+
+            table.AppendChild(row);
+        }
+
+        // Добавляем пустые строки, если данных меньше 23
+        for (int i = rowNumber; i <= 23; i++)
+        {
+            TableRow emptyRow = new TableRow();
+            emptyRow.AppendChild(CreateTableCell(i.ToString(), center: true));
+            for (int j = 0; j < 4; j++)
+            {
+                emptyRow.AppendChild(CreateTableCell("", center: true));
+            }
+            table.AppendChild(emptyRow);
+        }
+
+        body.AppendChild(table);
 
         // Заключение
         Paragraph conclusionParagraph = body.AppendChild(new Paragraph());
         Run conclusionRun = conclusionParagraph.AppendChild(new Run());
         conclusionRun.AppendChild(new Text("Заключение: Для устранения выявленных дефектов необходима замена запасных частей."));
 
-        // Подписи
+        // Подписи (4 члена комиссии как в образце)
         AddStandardSignatures(body, 4);
     }
 
@@ -382,7 +455,7 @@ public class Documents
         // Председатель
         Paragraph chairmanParagraph = body.AppendChild(new Paragraph());
         Run chairmanRun = chairmanParagraph.AppendChild(new Run());
-        chairmanRun.AppendChild(new Text("Председатель комиссии: ______ ______"));
+        chairmanRun.AppendChild(new Text("Председатель комиссии: ______ ___________________________________"));
 
         Paragraph chairmanSignParagraph = body.AppendChild(new Paragraph());
         Run chairmanSignRun = chairmanSignParagraph.AppendChild(new Run());
@@ -397,7 +470,7 @@ public class Documents
         {
             Paragraph memberParagraph = body.AppendChild(new Paragraph());
             Run memberRun = memberParagraph.AppendChild(new Run());
-            memberRun.AppendChild(new Text($"{i}. ______ ______"));
+            memberRun.AppendChild(new Text($"{i}. ______ ___________________________________"));
 
             Paragraph memberSignParagraph = body.AppendChild(new Paragraph());
             Run memberSignRun = memberSignParagraph.AppendChild(new Run());
@@ -423,4 +496,20 @@ public class Documents
             new SpacingBetweenLines() { Before = "200" }
         );
     }
+    private TableCell CreateTableCell(string text, bool center = false)
+    {
+        TableCell cell = new TableCell(new Paragraph(new Run(new Text(text))));
+        cell.TableCellProperties = new TableCellProperties(
+            new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center }
+        );
+
+        if (center)
+        {
+            cell.Elements<Paragraph>().First().ParagraphProperties =
+                new ParagraphProperties(new Justification() { Val = JustificationValues.Center });
+        }
+
+        return cell;
+    }
+
 }
