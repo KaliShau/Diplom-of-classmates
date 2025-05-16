@@ -13,5 +13,6 @@ namespace EduManage.Shared
 
         // buses
         public int bus_id { get; set; }
+        public string type_operation { get; set; }
     }
 }

@@ -67,12 +67,12 @@ namespace EduManage.Modules.BusParts
         {
             if (_typeAction == Action.Create)
             {
-                _controller.CreateBusPart(partTypeBox, serialBox, statusBox, quantityUpDown, unitBox, installationDatePicker, defectTimePicker, defectBox, defeCtcheckBox);
+                _controller.CreateBusPart(partTypeBox, statusBox, quantityUpDown, unitBox, installationDatePicker, defectTimePicker, defectBox, defeCtcheckBox);
                 _controller.GetBusParts(busPartsGrid);
             }
             if (_typeAction == Action.Update)
             {
-                _controller.UpdateBusPart(Convert.ToInt32(_selectedId), partTypeBox, serialBox, statusBox, quantityUpDown, unitBox, installationDatePicker, defectTimePicker, defectBox, defeCtcheckBox);
+                _controller.UpdateBusPart(Convert.ToInt32(_selectedId), partTypeBox, statusBox, quantityUpDown, unitBox, installationDatePicker, defectTimePicker, defectBox, defeCtcheckBox);
                 _controller.GetBusParts(busPartsGrid);
             }
 
@@ -91,7 +91,7 @@ namespace EduManage.Modules.BusParts
             }
             else
             {
-                _controller.GetUpdatedPartType(Convert.ToInt32(_selectedId), partTypeBox, serialBox, statusBox, quantityUpDown, unitBox, installationDatePicker, defectTimePicker, defectBox, defeCtcheckBox);
+                _controller.GetUpdatedPartType(Convert.ToInt32(_selectedId), partTypeBox, statusBox, quantityUpDown, unitBox, installationDatePicker, defectTimePicker, defectBox, defeCtcheckBox);
                 _typeAction = Action.Update;
                 createPanel.Visible = true;
                 createButton.Text = "Обновить";
@@ -147,6 +147,21 @@ namespace EduManage.Modules.BusParts
         private void createDefectButton_Click(object sender, EventArgs e)
         {
             _controller.createDefectStatement(busPartsGrid);
+        }
+
+        private void buyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.OpenOperation("Закупка");
+        }
+
+        private void delToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.OpenOperation("Списание");
+        }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.OpenOperation("Установка");
         }
     }
 }

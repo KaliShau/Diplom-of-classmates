@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using EduManage.Modules.Buses;
+using EduManage.Modules.PartOperations;
 using EduManage.Services.Buses;
 using EduManage.Services.BusParts;
 using EduManage.Services.Parts;
@@ -37,6 +38,12 @@ namespace EduManage.Modules.BusParts
             serialBox.Text = bus.LicensePlate;
         }
 
+        public void OpenOperation(string type)
+        {
+            _context.type_operation = type;
+            _formManager.OpenChidrenForm<PartOperationsForm>(_context.childrenPanel);
+        }
+
         public void GetPartTypes(ComboBox partTypeBox)
         {
             var partTypes = _partTypeService.GetAllPartTypes();
@@ -52,7 +59,7 @@ namespace EduManage.Modules.BusParts
 
         public void GetBusParts(DataGridView busPartGrid)
         {
-            var busParts = _busPartService.GetAllBusParts();
+            var busParts = _busPartService.GetBusPartsByBusId(_context.bus_id);
             busPartGrid.AutoGenerateColumns = true;
             busPartGrid.DataSource = busParts;
         }
@@ -64,11 +71,11 @@ namespace EduManage.Modules.BusParts
             partTypesGrid.DataSource = buses;
         }
 
-        public void CreateBusPart(ComboBox partTypeBox, TextBox serialNumberBox, ComboBox statusBox, NumericUpDown quantityUpDown, TextBox unitBox, DateTimePicker installationDatePickerm, DateTimePicker defectDatePicker, TextBox defectBox, CheckBox defectCheckBox)
+        public void CreateBusPart(ComboBox partTypeBox, ComboBox statusBox, NumericUpDown quantityUpDown, TextBox unitBox, DateTimePicker installationDatePickerm, DateTimePicker defectDatePicker, TextBox defectBox, CheckBox defectCheckBox)
         {
             if (defectCheckBox.Checked)
             {
-                if (string.IsNullOrEmpty(partTypeBox.Text) || string.IsNullOrEmpty(serialNumberBox.Text) || string.IsNullOrEmpty(statusBox.Text) || string.IsNullOrEmpty(quantityUpDown.Text) || string.IsNullOrEmpty(unitBox.Text) || string.IsNullOrEmpty(installationDatePickerm.Text) || string.IsNullOrEmpty(defectDatePicker.Text) || string.IsNullOrEmpty(defectBox.Text))
+                if (string.IsNullOrEmpty(partTypeBox.Text) || string.IsNullOrEmpty(statusBox.Text) || string.IsNullOrEmpty(quantityUpDown.Text) || string.IsNullOrEmpty(unitBox.Text) || string.IsNullOrEmpty(installationDatePickerm.Text) || string.IsNullOrEmpty(defectDatePicker.Text) || string.IsNullOrEmpty(defectBox.Text))
                 {
                     MessageBox.Show("Заполните поля!");
                     return;
@@ -76,26 +83,27 @@ namespace EduManage.Modules.BusParts
             }
             else
             {
-                if (string.IsNullOrEmpty(partTypeBox.Text) || string.IsNullOrEmpty(serialNumberBox.Text) || string.IsNullOrEmpty(statusBox.Text) || string.IsNullOrEmpty(quantityUpDown.Text) || string.IsNullOrEmpty(unitBox.Text) || string.IsNullOrEmpty(installationDatePickerm.Text))
+                if (string.IsNullOrEmpty(partTypeBox.Text) || string.IsNullOrEmpty(statusBox.Text) || string.IsNullOrEmpty(quantityUpDown.Text) || string.IsNullOrEmpty(unitBox.Text) || string.IsNullOrEmpty(installationDatePickerm.Text))
                 {
                     MessageBox.Show("Заполните поля!");
                     return;
                 }
             }
 
-            _busPartService.CreateBusPart(Convert.ToInt32(partTypeBox.SelectedValue), _context.bus_id, serialNumberBox.Text, statusBox.Text, Convert.ToInt32(quantityUpDown.Value), unitBox.Text, installationDatePickerm.Value, defectCheckBox.Checked ? defectDatePicker.Value : (DateTime?)null, defectCheckBox.Checked ? defectBox.Text : null);
+            string searial = this.GenerateSerialNumber(Convert.ToInt32(partTypeBox.SelectedValue), _context.bus_id);
+
+            _busPartService.CreateBusPart(Convert.ToInt32(partTypeBox.SelectedValue), _context.bus_id, searial, statusBox.Text, Convert.ToInt32(quantityUpDown.Value), unitBox.Text, installationDatePickerm.Value, defectCheckBox.Checked ? defectDatePicker.Value : (DateTime?)null, defectCheckBox.Checked ? defectBox.Text : null);
         }
         public void DeleteBusPart(int id)
         {
             _busPartService.DeleteBusPart(id);
         }
 
-        public void UpdateBusPart(int id, ComboBox partTypeBox, TextBox serialNumberBox, ComboBox statusBox, NumericUpDown quantityUpDown, TextBox unitBox, DateTimePicker installationDatePickerm, DateTimePicker defectDatePicker, TextBox defectBox, CheckBox defectCheckBox)
+        public void UpdateBusPart(int id, ComboBox partTypeBox, ComboBox statusBox, NumericUpDown quantityUpDown, TextBox unitBox, DateTimePicker installationDatePickerm, DateTimePicker defectDatePicker, TextBox defectBox, CheckBox defectCheckBox)
         {
-
             if (defectCheckBox.Checked)
             {
-                if (string.IsNullOrEmpty(partTypeBox.Text) || string.IsNullOrEmpty(serialNumberBox.Text) || string.IsNullOrEmpty(statusBox.Text) || string.IsNullOrEmpty(quantityUpDown.Text) || string.IsNullOrEmpty(unitBox.Text) || string.IsNullOrEmpty(installationDatePickerm.Text) || string.IsNullOrEmpty(defectDatePicker.Text) || string.IsNullOrEmpty(defectBox.Text))
+                if (string.IsNullOrEmpty(partTypeBox.Text) || string.IsNullOrEmpty(statusBox.Text) || string.IsNullOrEmpty(quantityUpDown.Text) || string.IsNullOrEmpty(unitBox.Text) || string.IsNullOrEmpty(installationDatePickerm.Text) || string.IsNullOrEmpty(defectDatePicker.Text) || string.IsNullOrEmpty(defectBox.Text))
                 {
                     MessageBox.Show("Заполните поля!");
                     return;
@@ -103,22 +111,22 @@ namespace EduManage.Modules.BusParts
             }
             else
             {
-                if (string.IsNullOrEmpty(partTypeBox.Text) || string.IsNullOrEmpty(serialNumberBox.Text) || string.IsNullOrEmpty(statusBox.Text) || string.IsNullOrEmpty(quantityUpDown.Text) || string.IsNullOrEmpty(unitBox.Text) || string.IsNullOrEmpty(installationDatePickerm.Text))
+                if (string.IsNullOrEmpty(partTypeBox.Text) || string.IsNullOrEmpty(statusBox.Text) || string.IsNullOrEmpty(quantityUpDown.Text) || string.IsNullOrEmpty(unitBox.Text) || string.IsNullOrEmpty(installationDatePickerm.Text))
                 {
                     MessageBox.Show("Заполните поля!");
                     return;
                 }
             }
 
-            _busPartService.UpdateBusPart(id, Convert.ToInt32(partTypeBox.SelectedValue), _context.bus_id, serialNumberBox.Text, statusBox.Text, Convert.ToInt32(quantityUpDown.Value), unitBox.Text, installationDatePickerm.Value, defectCheckBox.Checked ? defectDatePicker.Value : (DateTime?)null, defectCheckBox.Checked ? defectBox.Text : null);
+
+            _busPartService.UpdateBusPart(id, Convert.ToInt32(partTypeBox.SelectedValue), _context.bus_id, statusBox.Text, Convert.ToInt32(quantityUpDown.Value), unitBox.Text, installationDatePickerm.Value, defectCheckBox.Checked ? defectDatePicker.Value : (DateTime?)null, defectCheckBox.Checked ? defectBox.Text : null);
         }
 
-        public void GetUpdatedPartType(int id, ComboBox partTypeBox, TextBox serialNumberBox, ComboBox statusBox, NumericUpDown quantityUpDown, TextBox unitBox, DateTimePicker installationDatePickerm, DateTimePicker defectDatePicker, TextBox defectBox, CheckBox defectCheckBox)
+        public void GetUpdatedPartType(int id, ComboBox partTypeBox, ComboBox statusBox, NumericUpDown quantityUpDown, TextBox unitBox, DateTimePicker installationDatePickerm, DateTimePicker defectDatePicker, TextBox defectBox, CheckBox defectCheckBox)
         {
             var busPart = _busPartService.GetBusPartById(id);
 
             partTypeBox.SelectedValue = busPart.PartTypeId;
-            serialNumberBox.Text = busPart.SerialNumber;
             statusBox.Text = busPart.Status;
             quantityUpDown.Value = busPart.Quantity ?? 0;
             unitBox.Text = busPart.Unit;
@@ -207,6 +215,12 @@ namespace EduManage.Modules.BusParts
                     }
                 }
             }
+        }
+
+        public string GenerateSerialNumber(int partTypeId, int busId)
+        {
+            DateTime now = DateTime.Now;
+            return $"BP-{partTypeId}-{busId}-{now:yyyyMMdd}-{now:HHmmss}";
         }
     }
 }

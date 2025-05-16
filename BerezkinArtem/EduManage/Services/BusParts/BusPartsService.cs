@@ -88,7 +88,8 @@ namespace EduManage.Services.BusParts
                 InstallationDate = reader["installation_date"] as DateTime?,
                 DefectDate = reader["defect_date"] as DateTime?,
                 DefectDescription = reader["defect_description"]?.ToString(),
-                PartTypeName = reader["part_type_name"]?.ToString()
+                PartTypeName = reader["part_type_name"]?.ToString(),
+                BusInfo = reader["bus_info"]?.ToString()
             }, new NpgsqlParameter("busId", busId)).ToArray();
         }
 
@@ -148,7 +149,7 @@ namespace EduManage.Services.BusParts
             }
         }
 
-        public void UpdateBusPart(int id, int partTypeId, int busId, string serialNumber, string status,
+        public void UpdateBusPart(int id, int partTypeId, int busId, string status,
                                 int? quantity, string unit, DateTime? installationDate,
                                 DateTime? defectDate, string defectDescription)
         {
@@ -157,7 +158,6 @@ namespace EduManage.Services.BusParts
                 new NpgsqlParameter("@id", id),
                 new NpgsqlParameter("@partTypeId", partTypeId),
                 new NpgsqlParameter("@busId", busId),
-                new NpgsqlParameter("@serialNumber", serialNumber ?? (object)DBNull.Value),
                 new NpgsqlParameter("@status", status),
                 new NpgsqlParameter("@quantity", quantity ?? (object)DBNull.Value),
                 new NpgsqlParameter("@unit", unit ?? (object)DBNull.Value),

@@ -248,11 +248,11 @@ public class Documents
 
         Paragraph chairmanParagraph = body.AppendChild(new Paragraph());
         Run chairmanRun = chairmanParagraph.AppendChild(new Run());
-        chairmanRun.AppendChild(new Text("Председатель комиссии: ______"));
+        chairmanRun.AppendChild(new Text("Председатель комиссии: ____________________"));
 
         for (int i = 0; i < 3; i++)
         {
-            body.AppendChild(new Paragraph(new Run(new Text($"Член комиссии {i + 1}: ______"))));
+            body.AppendChild(new Paragraph(new Run(new Text($"Член комиссии {i + 1}: ____________________"))));
         }
 
         Paragraph actParagraph = body.AppendChild(new Paragraph());
@@ -260,14 +260,14 @@ public class Documents
         actRun.AppendChild(new Text("Составили настоящий акт о том, что приобретенные запасные части установлены на автобус:"));
 
         // Таблица установленных частей
-        CreateTable(body, data, new[] { "№ п/п", "Наименование запасных частей", "Цена", "Примечание" });
+        CreateTable(body, data, new[] { "№ п/п", "Наименование запасных частей", "Примечание" });
 
         // Подписи
         AddStandardSignatures(body, 3);
 
         Paragraph driverParagraph = body.AppendChild(new Paragraph());
         Run driverRun = driverParagraph.AppendChild(new Run());
-        driverRun.AppendChild(new Text("Водитель: ______ (подпись) (Ф.И.О.)"));
+        driverRun.AppendChild(new Text("Водитель: ____________________ (подпись) (Ф.И.О.)"));
     }
 
     private void GenerateExpenseEstimate<T>(Body body, IEnumerable<T> data, Dictionary<string, string> additionalFields)

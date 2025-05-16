@@ -59,3 +59,4 @@ C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\obj\Debug\Ed
 C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\obj\Debug\EduManage.Modules.Buses.BusesForm.resources
 C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\obj\Debug\EduManage.Modules.PartTypes.PartTypesForm.resources
 C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\obj\Debug\EduManage.Modules.BusParts.BusPartsForm.resources
+C:\Users\admin\Desktop\Diplom-of-classmates\BerezkinArtem\EduManage\obj\Debug\EduManage.Modules.PartOperations.PartOperationsForm.resources
