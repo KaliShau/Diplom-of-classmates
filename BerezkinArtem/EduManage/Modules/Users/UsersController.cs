@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using EduManage.Modules.Inventory;
 using EduManage.Services.Role;
 using EduManage.Services.Staff;
 using EduManage.Services.User;
@@ -13,13 +12,13 @@ namespace EduManage.Modules.Users
         UserService _userService;
         RoleService _roleService;
         StaffService _staffService;
-        DocumentGenerator _documentGenerator;
+        Documents _documents;
         public UsersController(UserService userService, RoleService roleService, StaffService staffService)
         {
             _userService = userService;
             _roleService = roleService;
             _staffService = staffService;
-            _documentGenerator = new DocumentGenerator();
+            _documents = new Documents();
         }
 
         public void AddRolesToComboBox(ComboBox rolesBox)
@@ -91,11 +90,10 @@ namespace EduManage.Modules.Users
                     var dataSource = grid.DataSource as IEnumerable<UserDtoAll>;
                     if (dataSource != null)
                     {
-                        string description = "Данный документ содержит полный перечень пользователей в этой ифнормационной системе.";
-                        _documentGenerator.SaveToDocx(
+                        _documents.SaveToDocx(
                             saveFileDialog.FileName,
+                            DocumentTemplateType.GeneralInventory,
                             "Список пользователей",
-                            description,
                             dataSource);
                     }
                 }

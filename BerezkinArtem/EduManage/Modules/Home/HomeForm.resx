@@ -117,4 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label4.Text" xml:space="preserve">
+    <value>    - Управление инвентарем — учет предметов, категорий, статусов и мест хранения.
+
+    - Работа с поставщиками — база контрагентов и история закупок.
+
+    - Транспортный модуль — учет автобусов, запчастей и графика техобслуживания.
+
+    - Персонал и роли — гибкое распределение доступа для сотрудников.
+
+    - Заявки на ремонт — отслеживание проблем и статусов их решения.
+</value>
+  </data>
 </root>

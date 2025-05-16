@@ -124,5 +124,10 @@ namespace EduManage.Modules.Staff
         {
             _controller.ExportToDocx(staffGrid);
         }
+
+        private void workScheduleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _controller.OpenWorkScheduleForm(Convert.ToInt32(_selectedId));
+        }
     }
 }

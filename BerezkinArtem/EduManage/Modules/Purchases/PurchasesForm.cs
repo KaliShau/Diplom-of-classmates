@@ -22,13 +22,13 @@ namespace EduManage.Modules.Purchases
         private void closeButton_Click(object sender, EventArgs e)
         {
             createPanel.Visible = false;
-
         }
 
         private void openCreateButton_Click(object sender, EventArgs e)
         {
             nameBox.Clear();
             unitBox.Clear();
+            priceBox.Clear();
             numericUpDown.Value = 0;
 
             if (createPanel.Visible == true)
@@ -61,13 +61,12 @@ namespace EduManage.Modules.Purchases
         {
             if (_typeAction == Action.Create)
             {
-
-                _controller.CreatePurchases(nameBox, numericUpDown, unitBox, supplierBox);
+                _controller.CreatePurchases(nameBox, numericUpDown, unitBox, supplierBox, priceBox);
                 _controller.GetPurchases(purchasesGrid);
             }
             if (_typeAction == Action.Update)
             {
-                _controller.UpdatePurchase(Convert.ToInt32(_selectedId), nameBox, numericUpDown, unitBox, supplierBox);
+                _controller.UpdatePurchase(Convert.ToInt32(_selectedId), nameBox, numericUpDown, unitBox, supplierBox, priceBox);
                 _controller.GetPurchases(purchasesGrid);
             }
         }
@@ -105,6 +104,7 @@ namespace EduManage.Modules.Purchases
         {
             nameBox.Clear();
             unitBox.Clear();
+            priceBox.Clear();
             numericUpDown.Value = 0;
 
             if (createPanel.Visible == true)
@@ -113,7 +113,7 @@ namespace EduManage.Modules.Purchases
             }
             else
             {
-                _controller.GetUpdatedPurchase(Convert.ToInt32(_selectedId), nameBox, numericUpDown, unitBox, supplierBox);
+                _controller.GetUpdatedPurchase(Convert.ToInt32(_selectedId), nameBox, numericUpDown, unitBox, supplierBox, priceBox);
 
                 _typeAction = Action.Update;
                 createPanel.Visible = true;

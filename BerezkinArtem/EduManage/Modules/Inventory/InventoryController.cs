@@ -8,12 +8,12 @@ namespace EduManage.Modules.Inventory
     public class InventoryController
     {
         InventoryService _inventoryService;
-        DocumentGenerator _documentGenerator;
+        Documents _documents;
 
         public InventoryController(InventoryService inventoryService)
         {
             _inventoryService = inventoryService;
-            _documentGenerator = new DocumentGenerator();
+            _documents = new Documents();
         }
 
         public void GetInventory(DataGridView inventoryGrid)
@@ -94,12 +94,11 @@ namespace EduManage.Modules.Inventory
                     var dataSource = grid.DataSource as IEnumerable<InventoryDto>;
                     if (dataSource != null)
                     {
-                        string description = "Данный документ содержит полный перечень инвентаря образовательного учреждения.";
 
-                        _documentGenerator.SaveToDocx(
+                        _documents.SaveToDocx(
                             saveFileDialog.FileName,
+                            DocumentTemplateType.GeneralInventory,
                             "Список инвентаря",
-                            description,
                             dataSource);
                     }
                 }

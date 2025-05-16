@@ -27,6 +27,7 @@ namespace EduManage.Services.Purchases
                     new NpgsqlParameter("@quantity", purchase.Quantity),
                     new NpgsqlParameter("@unit", purchase.Unit),
                     new NpgsqlParameter("@status", purchase.Status),
+                    new NpgsqlParameter("@price", purchase.Price),
                 };
 
                 var rowsAffected = _repository.Execute(_sql.Create, parameters);
@@ -55,6 +56,7 @@ namespace EduManage.Services.Purchases
                     new NpgsqlParameter("@quantity", purchase.Quantity),
                     new NpgsqlParameter("@unit", purchase.Unit),
                     new NpgsqlParameter("@id", purchase.Id),
+                    new NpgsqlParameter("@price", purchase.Price),
                 };
 
                 var rowsAffected = _repository.Execute(_sql.Update, parameters);
@@ -109,6 +111,7 @@ namespace EduManage.Services.Purchases
                 ItemName = reader["item_name"].ToString(),
                 Quantity = Convert.ToInt16(reader["quantity"]),
                 Unit = Convert.ToString(reader["unit"]),
+                Price = Convert.ToString(reader["price"]),
                 Status = Convert.ToString(reader["status"]),
                 Date = Convert.ToDateTime(reader["date"])
             }, new NpgsqlParameter("@id", id)).SingleOrDefault();
@@ -124,6 +127,7 @@ namespace EduManage.Services.Purchases
                 ItemName = reader["item_name"].ToString(),
                 Quantity = Convert.ToInt16(reader["quantity"]),
                 Unit = Convert.ToString(reader["unit"]),
+                Price = Convert.ToString(reader["price"]),
                 Status = Convert.ToString(reader["status"]),
                 Date = Convert.ToDateTime(reader["date"])
             }).ToArray();
@@ -139,6 +143,7 @@ namespace EduManage.Services.Purchases
                 ItemName = reader["item_name"].ToString(),
                 Quantity = Convert.ToInt16(reader["quantity"]),
                 Unit = Convert.ToString(reader["unit"]),
+                Price = Convert.ToString(reader["price"]),
                 Status = Convert.ToString(reader["status"]),
                 Date = Convert.ToDateTime(reader["date"])
             }, new NpgsqlParameter("@searchTerm", searchTerm)).ToArray();
