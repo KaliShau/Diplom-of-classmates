@@ -13,7 +13,7 @@ namespace EduManage.Shared.Main
 
     public class DatabaseRepository : IDisposable
     {
-        private string _connectionString = "Server=localhost; port=5432; User Id=postgres; Password=root; database=EduManage;";
+        private string _connectionString = "Server=195.133.30.143; port=5432; User Id=artem; Password=ATx7(}wZxqw+mL; database=EduManage;";
         private NpgsqlConnection _connection;
         private NpgsqlTransaction _transaction;
 
