@@ -20,3 +20,9 @@
 
 1. **Березкин Артем** - Edu manage ([EduManage](./BerezkinArtem/README.md))
    ![Screenshot](./BerezkinArtem/assets/start-form.png)
+
+## Веб приложение
+
+1. **Подолянов Глеб** - MCU-UKH ([MCU-UKH](./PodolyanovGleb/Подолянов%20Глеб/Diplom%20(Подолянов%20Глеб).md)), ([Backup](https://github.com/KaliShau/Backup-MCU-UKH))
+   ![Screenshot](./PodolyanovGleb/Подолянов%20Глеб/screens/Home.png)
+
